@@ -19,7 +19,6 @@ import tqdm
 import warnings
 from collections import Counter
 from quimb.tensor.tensor_2d import *
-#from tensor_3d import *
 from quimb.tensor.tensor_3d import *
 import torch
 import os, sys

@@ -1,3 +1,4 @@
+import warnings
 from matplotlib import pyplot as plt
 
 
@@ -38,13 +39,19 @@ def vis_contract_around(
     progbar=True,
     figsize=(5, 5),
     edge_color=(0.85, 0.85, 0.85),
+    color_compress='#e69f00',
+    color_contract='#009e73',
     show_tags=False,
-    draw_opts=(),
-    **kwargs
+    draw_opts=None,
+    contract_compressed_opts=None,
 ):
     import math
     import ipywidgets as widgets
     from autoray import lazy as lz
+
+    draw_opts = {} if draw_opts is None else dict(draw_opts)
+    contract_compressed_opts = ({} if contract_compressed_opts is None else
+                                dict(contract_compressed_opts))
 
     tids = tn._get_tids_from_tags(tags, which)
     fix = tn.draw(fix=fix, get='pos')
@@ -66,7 +73,7 @@ def vis_contract_around(
         'xlims': xlims,
         'ylims': ylims,
         'return_fig': True,
-        **dict(draw_opts),
+        **draw_opts
     }
 
     plots = [
@@ -93,6 +100,7 @@ def vis_contract_around(
             tids,
             span=sub_span,
             highlight_tids=ctids,
+            highlight_tids_color=color_contract,
             colormap='Blues',
             title=f'pre-contract {s1:.2f} {s2:.2f}',
             **draw_opts
@@ -111,6 +119,7 @@ def vis_contract_around(
             tids,
             span=sub_span,
             highlight_tids=[tid],
+            highlight_tids_color=color_contract,
             colormap='Blues',
             title=f'post-contract {s1}',
             **draw_opts
@@ -122,11 +131,12 @@ def vis_contract_around(
         s2 = math.log2(tn.tensor_map[tids[1]].size)
         plots.append(tn._draw_tree_span_tids(
             tids,
-            highlight_tids=[tids[1]],
+            highlight_tids=tids,
+            highlight_tids_color=color_compress,
             highlight_inds_color=(0.0, .6, .3),
             colormap='RdYlBu',
             title=f'pre-compress {s1} {s2}',
-            max_distance=kwargs.get('canonize_distance', 0),
+            max_distance=contract_compressed_opts.get('canonize_distance', 0),
             **span_opts, **draw_opts,
         ))
         clean()
@@ -136,11 +146,12 @@ def vis_contract_around(
         s2 = math.log2(tn.tensor_map[tids[1]].size)
         plots.append(tn._draw_tree_span_tids(
             tids,
-            highlight_tids=[tids[1]],
+            highlight_tids=tids,
+            highlight_tids_color=color_compress,
             highlight_inds_color=(0.0, .6, .3),
             colormap='RdYlBu',
             title=f'post-compress {s1} {s2}',
-            max_distance=kwargs.get('canonize_after_distance', 0),
+            max_distance=contract_compressed_opts.get('canonize_after_distance', 0),
             **span_opts, **draw_opts
         ))
         clean()
@@ -176,24 +187,30 @@ def vis_contract_compressed(
     max_bond,
     cutoff=0.0,
     fix=None,
-    pos_update=None,
+    pos_update='subgraph-mean',
     xlims=None,
     ylims=None,
     progbar=True,
     figsize=(5, 5),
     edge_color=(0.85, 0.85, 0.85),
+    color_compress='#e69f00',
+    color_contract='#009e73',
     show_tags=False,
     ndim_sort='max',
     distance_sort='min',
     weight_bonds=False,
     sorter=None,
-    draw_opts=(),
     title_info=True,
-    **kwargs,
+    draw_opts=None,
+    contract_compressed_opts=None,
 ):
     import math
     import ipywidgets as widgets
     from autoray import lazy as lz
+
+    draw_opts = {} if draw_opts is None else dict(draw_opts)
+    contract_compressed_opts = ({} if contract_compressed_opts is None else
+                                dict(contract_compressed_opts))
 
     fix = tn.draw(fix=fix, get='pos')
     subgraph_sizes = {tid: 1 for tid in fix}
@@ -227,6 +244,7 @@ def vis_contract_compressed(
         s2 = math.log2(tn.tensor_map[tid2].size)
         plots.append(tn.draw(
             highlight_tids=ctids,
+            highlight_tids_color=color_contract,
             title=f'pre-contract {s1:.2f} {s2:.2f}' if title_info else None,
             **draw_opts
         ))
@@ -255,6 +273,7 @@ def vis_contract_compressed(
         s1 = math.log2(tn.tensor_map[tid].size)
         plots.append(tn.draw(
             highlight_tids=[tid],
+            highlight_tids_color=color_contract,
             title=f'post-contract {s1}' if title_info else None,
             **draw_opts
         ))
@@ -265,11 +284,13 @@ def vis_contract_compressed(
         s2 = math.log2(tn.tensor_map[tids[1]].size)
         plots.append(tn._draw_tree_span_tids(
             tids,
-            highlight_tids=[tids[1]],
+            highlight_tids=tids,
+            highlight_tids_color=color_compress,
             highlight_inds_color=(0.0, .6, .3),
             colormap='RdYlBu',
             title=f'pre-compress {s1} {s2}' if title_info else None,
-            max_distance=kwargs.get('canonize_distance', 0),
+            max_distance=contract_compressed_opts.get(
+                'canonize_distance', 0),
             **span_opts, **draw_opts,
         ))
         clean()
@@ -279,11 +300,13 @@ def vis_contract_compressed(
         s2 = math.log2(tn.tensor_map[tids[1]].size)
         plots.append(tn._draw_tree_span_tids(
             tids,
-            highlight_tids=[tids[1]],
+            highlight_tids=tids,
+            highlight_tids_color=color_compress,
             highlight_inds_color=(0.0, .6, .3),
             colormap='RdYlBu',
             title=f'post-compress {s1} {s2}' if title_info else None,
-            max_distance=kwargs.get('canonize_after_distance', 0),
+            max_distance=contract_compressed_opts.get(
+                'canonize_after_distance', 0),
             **span_opts, **draw_opts
         ))
         clean()
@@ -300,7 +323,7 @@ def vis_contract_compressed(
             callback_pre_compress=callback_pre_compress,
             callback_post_compress=callback_post_compress,
             progbar=progbar,
-            **kwargs,
+            **contract_compressed_opts,
         )
 
     def f(x):
@@ -315,15 +338,18 @@ def vis_contract_compressed_static(
     tn,
     optimize,
     max_bond,
+    contract_compressed_opts=None,
     draw_rotation=0.15,
     draw_squash=1/3,
     ystep_scale=1.0,
+    edge_alpha=0.8,
     edge_scale=1.0,
-    color_compress='#e69f00',
-    color_contract='#009e73',
-    color_normal='#56b4e9',
+    tensor_colormap="Blues",
+    contract_colormap="Greens",
+    compress_colormap="Oranges",
+    colorbars=True,
+    grid_color=(.9, .9, .9),
     draw_opts=None,
-    contract_compressed_opts=None,
     figsize=(8, 8),
 ):
     import numpy as np
@@ -353,14 +379,17 @@ def vis_contract_compressed_static(
     pos0 = pos.copy()
 
     # keep track of vertical progression
-    ystep = ystep_scale / tn.num_tensors
+    ystep = 2 * ystep_scale / tn.num_tensors
     y0 = max(xy[1] for xy in pos.values()) + ystep
     ymut = [y0]
 
     lines = []
+    tensor_sizes = []
+    compress_sizes = []
+    contract_sizes = []
 
     def lw(tid, tn):
-        return edge_scale * log2(tn.tensor_map[tid].size) / 10 + 1
+        return edge_scale * log2(tn.tensor_map[tid].size) / 20 + 1
 
     def callback_pre_compress(tn, tids):
         tid1, tid2 = tids
@@ -368,12 +397,34 @@ def vis_contract_compressed_static(
         pos2 = pos[tid2]
         pos1u = (pos1[0], ymut[0])
         pos2u = (pos2[0], ymut[0])
-        size1 = lw(tid1, tn)
-        size2 = lw(tid2, tn)
-        lines.append({'posA': pos1, 'posB': pos1u, 'linewidth': size1})
-        lines.append({'posA': pos2, 'posB': pos2u, 'linewidth': size2})
-        lines.append({'posA': pos1u, 'posB': pos2u, 'color': color_compress,
-                      'arrowstyle': '<->', 'linewidth': max(size1, size2)})
+        size1 = log2(tn.tensor_map[tid1].size)
+        size2 = log2(tn.tensor_map[tid2].size)
+        width1 = lw(tid1, tn)
+        width2 = lw(tid2, tn)
+        lines.append({
+            'posA': pos1,
+            'posB': pos1u,
+            'linewidth': width1,
+            'size': size1,
+            'op': 'tensor',
+        })
+        lines.append({
+            'posA': pos2,
+            'posB': pos2u,
+            'linewidth': width2,
+            'size': size2,
+            'op': 'tensor',
+        })
+        lines.append({
+            'posA': pos1u,
+            'posB': pos2u,
+            'arrowstyle': '<->',
+            'linewidth': max(width1, width2),
+            'size': max(size1, size2),
+            'op': 'compress',
+        })
+        tensor_sizes.extend((size1, size2))
+        compress_sizes.append(max(size1, size2))
         pos[tid1] = pos1u
         pos[tid2] = pos2u
         ymut[0] += ystep
@@ -384,14 +435,40 @@ def vis_contract_compressed_static(
         pos1u = (pos1[0], ymut[0])
         pos2u = (pos2[0], ymut[0])
         pos12 = ((pos1[0] + pos2[0]) / 2, ymut[0])
-        size1 = lw(tid1, tn)
-        size2 = lw(tid2, tn)
-        lines.append({'posA': pos1, 'posB': pos1u, 'linewidth': size1})
-        lines.append({'posA': pos2, 'posB': pos2u, 'linewidth': size2})
-        lines.append({'posA': pos1u, 'posB': pos12, 'linewidth': size1,
-                      'color': color_contract})
-        lines.append({'posA': pos2u, 'posB': pos12, 'linewidth': size2,
-                      'color': color_contract})
+        size1 = log2(tn.tensor_map[tid1].size)
+        size2 = log2(tn.tensor_map[tid2].size)
+        width1 = lw(tid1, tn)
+        width2 = lw(tid2, tn)
+        lines.append({
+            'posA': pos1,
+            'posB': pos1u,
+            'linewidth': width1,
+            'size': size1,
+            'op': 'tensor',
+        })
+        lines.append({
+            'posA': pos2,
+            'posB': pos2u,
+            'linewidth': width2,
+            'size': size2,
+            'op': 'tensor',
+        })
+        lines.append({
+            'posA': pos1u,
+            'posB': pos12,
+            'linewidth': width1,
+            'size': size1,
+            'op': 'contract',
+        })
+        lines.append({
+            'posA': pos2u,
+            'posB': pos12,
+            'linewidth': width2,
+            'size': size2,
+            'op': 'contract',
+        })
+        tensor_sizes.extend((size1, size2))
+        contract_sizes.extend((size1, size2))
         pos[tid2] = pos12
         ymut[0] += ystep
 
@@ -404,33 +481,84 @@ def vis_contract_compressed_static(
         **contract_compressed_opts,
     )
 
-    _, ax = plt.subplots(figsize=figsize)
+    fig, ax = plt.subplots(figsize=figsize)
 
-    tn.draw(
-        ax=ax,
-        fix=pos0,
-        show_tags=False,
-        edge_alpha=1.0,
-        edge_color='black',
-        # node_color='black',
-        node_outline_darkness=0.0,
-        **draw_opts
-    )
+    tn.draw(ax=ax, fix=pos0, show_tags=False, **draw_opts)
+
+    max_sizes = {
+        'tensor': max(tensor_sizes),
+        'compress': max(compress_sizes),
+        'contract': max(contract_sizes),
+    }
+    colormaps = {
+        'tensor': (
+            getattr(mpl.cm, tensor_colormap)
+            if not isinstance(tensor_colormap, mpl.colors.Colormap)
+            else tensor_colormap
+        ),
+        'contract': (
+            getattr(mpl.cm, contract_colormap)
+            if not isinstance(contract_colormap, mpl.colors.Colormap)
+            else contract_colormap
+        ),
+        'compress': (
+            getattr(mpl.cm, compress_colormap)
+            if not isinstance(compress_colormap, mpl.colors.Colormap)
+            else compress_colormap
+        ),
+    }
 
     for line in lines:
+        op = line.pop('op')
+        rel_size = line.pop('size') / max_sizes[op]
+        line['color'] = colormaps[op](rel_size)
         line.setdefault('shrinkA', 0)
         line.setdefault('shrinkB', 0)
-        line.setdefault('color', color_normal)
-        line.setdefault('alpha', 1.0)
+        line.setdefault('alpha', edge_alpha)
         line.setdefault('arrowstyle', '->')
         line.setdefault('mutation_scale', 4)
+        line.setdefault('zorder', 3)
         ax.add_patch(mpl.patches.FancyArrowPatch(**line))
 
     ax.set_aspect('equal')
     ysteps = np.arange(y0, ymut[0], ystep)
     ax.set_yticks(ysteps)
-    ax.grid(True, axis='y', which='major', linestyle=':')
+    ax.grid(True, axis='y', which='major',
+            linestyle=':', color=grid_color)
     ax.set_axisbelow(True)
     ax.set_frame_on(False)
+
+    if colorbars:
+        tensor_norm = mpl.colors.Normalize(
+            vmin=1, vmax=max_sizes["tensor"])
+        contract_norm = mpl.colors.Normalize(
+            vmin=1, vmax=max_sizes["contract"])
+        compress_norm = mpl.colors.Normalize(
+            vmin=1, vmax=max_sizes["compress"])
+
+        ax_tensor = fig.add_axes([0.98, 0.62, 0.02, 0.18])
+        cb_tensor = mpl.colorbar.ColorbarBase(
+            ax_tensor, cmap=colormaps['tensor'], norm=tensor_norm)
+        cb_tensor.outline.set_visible(False)
+        ax_tensor.yaxis.tick_right()
+        ax_tensor.set(title='log2[TENSOR SIZE]')
+
+        ax_contract = fig.add_axes([0.98, 0.41, 0.02, 0.18])
+        cb_contract = mpl.colorbar.ColorbarBase(
+            ax_contract, cmap=colormaps['contract'], norm=contract_norm)
+        cb_contract.outline.set_visible(False)
+        ax_contract.yaxis.tick_right()
+        ax_contract.set(title='log2[CONTRACT SIZE]')
+
+        ax_compress = fig.add_axes([0.98, 0.20, 0.02, 0.18])
+        cb_compress = mpl.colorbar.ColorbarBase(
+            ax_compress, cmap=colormaps['compress'], norm=compress_norm)
+        cb_compress.outline.set_visible(False)
+        ax_compress.yaxis.tick_right()
+        ax_compress.set(title='log2[COMPRESS SIZE]')
+
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', UserWarning)
+        plt.tight_layout()
 
     plt.show()

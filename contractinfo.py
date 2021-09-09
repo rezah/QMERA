@@ -9,10 +9,12 @@ def    cont_tn_2d():
   dist_type="normal"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=True
-  chi=[2,4,6,8,10,12,16,24]
+  chi=[2,4]
   device='cpu'
+  phys_dim=2
   list_width_max=[]
   list_flops_max=[]
+  list_peak_max=[]
   
 ####################################
 
@@ -35,13 +37,20 @@ def    cont_tn_2d():
   #tn_U.unitize_(method=method, allow_no_left_inds=True)
   #tn_U=load_from_disk("Store/tn_U")
   for i in chi:
-   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
+   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
+   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build_3d(phys_dim=phys_dim,chi=i,data_type=data_type,dist_type=dist_type)
+
    #save_to_disk(method,"Store/method")
  ############################################################
-   width_max, flops_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)
+   #width_max, flops_max, peak_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)
+   #list_width_max.append(width_max)
+   #list_flops_max.append(flops_max)
+   #list_peak_max.append(peak_max)
+ ############################################################
+   width_max, flops_max, peak_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)
    list_width_max.append(width_max)
    list_flops_max.append(flops_max)
-  
+   list_peak_max.append(peak_max)
   #quf.Plot_TN(tn_U,list_scale)
 
 
@@ -98,10 +107,17 @@ def    cont_tn_2d():
 #     file.write(str(x_list[index]) + "  "+ str(y[index])+ "  " + "\n")
 
 
-  print ( "chi=",chi, "width=",list_width_max, "flops=",list_flops_max)
+  #print ( "chi=",chi, "width=",list_width_max, "flops=",list_flops_max, "peak_max", list_peak_max)
+  #file = open("Data/contractInfo.txt", "w")
+  #for index in range(len(chi)):
+  #   file.write( str(chi[index]) + "  " +str(list_width_max[index]) + "  "+ str(list_flops_max[index])
+  #   +"  "+str(list_peak_max[index])+ "  " + "\n")
+  print ( "chi=",chi, "width=",list_width_max, "flops=",list_flops_max, "peak_max", list_peak_max)
   file = open("Data/contractInfo.txt", "w")
   for index in range(len(chi)):
-     file.write( str(chi[index]) + "  " +str(list_width_max[index]) + "  "+ str(list_flops_max[index])+ "  " + "\n")
+     file.write( str(chi[index]) + "  " +str(list_width_max[index]) + "  "+ str(list_flops_max[index])
+     +"  "+str(list_peak_max[index])+ "  " + "\n")
+
 
 
 

@@ -3,14 +3,14 @@ import cotengra as ctg
 from quimb import *
 
 
-def    mera_tn_2d():
+def    mera_tn_3d():
 
-  data_type='float32'
+  data_type='float64'
   dist_type="exp"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=True
-  phys_dim=3
-  chi=4
+  phys_dim=2
+  chi=2
   device='cpu'
 
 ####################################
@@ -29,11 +29,7 @@ def    mera_tn_2d():
   #opt="auto-hq"
 
 
-  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(
-  phys_dim=phys_dim,
-  chi=chi,
-  data_type=data_type,
-  dist_type=dist_type)
+  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build_3d(phys_dim=phys_dim,chi=chi,data_type=data_type,dist_type=dist_type)
   save_to_disk(method,"Store/method")
 ############################################################
 
@@ -41,13 +37,13 @@ def    mera_tn_2d():
 
   #tn_U=load_from_disk("Store/tn_U")
   #width_max, flops_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)  
-  #quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
+  #quf.Plot_TN_3d(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim)
 
 
 
 ###############################################################
   #print ("M", quf.Mag_calc(tn_U, opt,data_type=data_type) )
-  print ( "E_init=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
+  print ( "E_init=", quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
   print ( "chi", tn_U.max_bond() )
   #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=6, rand_strength=0.0100,rand_strength_u=0.010, data_type=data_type)    
   #tn_U=quf.TN_to_iso(tn_U, list_tags_I,list_tags_U)

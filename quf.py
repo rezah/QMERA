@@ -131,7 +131,7 @@ class TN2DUni(TensorNetwork2DVector,
         self._row_tag_id = None
         self._col_tag_id = None
         
-        # create a layer of product identities to build on
+        
         ts = [
             Tensor(data=do("eye", phys_dim,dtype=data_type),
                    inds=[self.site_ind(i, j), 
@@ -142,10 +142,7 @@ class TN2DUni(TensorNetwork2DVector,
         ]
         
         super().__init__(self, ts)
-        ##print ( self.site_tag(0, 0) )
-        ##print ("site_ind(i, j)", self.site_ind(1, 1))
-        ##print ("layer_ind(i, j)", self.layer_ind(1, 1),self.layer_ind(4, 2))
-#        #print ("layer_ind_id(i, j)", self._layer_ind_id(1, 1))
+
 
         return self
     @property
@@ -253,7 +250,7 @@ class TN3DUni(TensorNetwork3DVector,
         self._y_tag_id = None
         self._z_tag_id = None
         
-        # create a layer of product identities to build on
+        
         ts = [
             Tensor(data=do("eye", phys_dim),
                    inds=[self.site_ind(i, j, k), 
@@ -264,10 +261,7 @@ class TN3DUni(TensorNetwork3DVector,
         ]
         
         super().__init__(self, ts)
-        ##print ( self.site_tag(0, 0) )
-        ##print ("site_ind(i, j)", self.site_ind(1, 1))
-        ##print ("layer_ind(i, j)", self.layer_ind(1, 1),self.layer_ind(4, 2))
-#        #print ("layer_ind_id(i, j)", self._layer_ind_id(1, 1))
+
 
         return self
     
@@ -340,8 +334,10 @@ class TN3DUni(TensorNetwork3DVector,
 
 
 
-def iso_Tn( tn, chi, size_Iso_x, size_Iso_y,list_tags,shared_I,list_scale,layer=None, L_x=None,L_y=None, Iso=True, shift_x=0, shift_y=0,
-           dis_x=1, dis_y=1,last_bond="off", cycle="on",data_type='float64', seed_val=10,scale=0, label=0, dist_type="uniform"):
+def iso_Tn( tn, chi, size_Iso_x, size_Iso_y,list_tags,shared_I,list_scale,layer=None, L_x=None,L_y=None, 
+           Iso=True, shift_x=0, shift_y=0,
+           dis_x=1, dis_y=1,last_bond="off", cycle="on",data_type='float64', 
+           seed_val=10,scale=0, label=0, dist_type="uniform"):
 
   shared_I.append(f"SI{scale},I{label}")
   list_scale.append(f"SI{scale}")
@@ -351,12 +347,11 @@ def iso_Tn( tn, chi, size_Iso_x, size_Iso_y,list_tags,shared_I,list_scale,layer=
   ly_up=L_y//size_Iso_y if size_Iso_y != 0 else L_y
 
 
-  ##print (shift_x, L_x,dis_x, shift_y, L_y, dis_y)
+
   for i in range(shift_x, L_x,dis_x):
      for j in range(shift_y, L_y, dis_y):
-        ##print (i,j)
+        
         if cycle=="off":
-                ##print ((i+size_Iso_x-1)>L_x-1 , (j+size_Iso_y-1)>L_y-1)
                 if (i+size_Iso_x-1)>L_x-1   or  (j+size_Iso_y-1)>L_y-1: break
         
         where=[]
@@ -402,8 +397,9 @@ def iso_Tn( tn, chi, size_Iso_x, size_Iso_y,list_tags,shared_I,list_scale,layer=
 
 
 
-def Uni_Tn( tn, chi, size_U_x, size_U_y,list_tags,shared_U,list_scale,layer=None, L_x=None,L_y=None, Iso_on=True, shift_x=0, shift_y=0,dis_x=1, 
-dis_y=1,last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0,label=0, dist_type="uniform"):
+def Uni_Tn( tn, chi, size_U_x, size_U_y,list_tags,shared_U,list_scale,layer=None, L_x=None,L_y=None, Iso_on=True, shift_x=0, shift_y=0,dis_x=1, dis_y=1,last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0,label=0, dist_type="uniform"):
+  
+  
   shared_U.append(f"SU{scale},U{label}")
   list_scale.append(f"SU{scale}")
   for i in range(shift_x, L_x,dis_x):
@@ -452,12 +448,14 @@ dis_y=1,last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0,la
 
 
 
+def Uni_Tn_3D( tn, chi, size_U_x, size_U_y,size_U_z,list_tags,list_scale,layer=None,
+     L_x=None,L_y=None,L_z=None, Iso_on=True, shift_x=0, shift_y=0,shift_z=0,dis_x=1, 
+     dis_y=1,dis_z=1,last_bond="off", cycle="on",data_type='float64', 
+     dist_type="uniform",seed_val=10, scale=0, label=0):
+    
 
-def Uni_Tn_3D( tn, chi, size_U_x, size_U_y,size_U_z,list_tags,layer=None, L_x=None,L_y=None,L_z=None, Iso_on=True, shift_x=0, shift_y=0,shift_z=0,dis_x=1, 
-     dis_y=1,dis_z=1,last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0):
-    
-    
-         
+  list_scale.append(f"SU{scale}")
+
   for i in range(shift_x, L_x,dis_x):
    for j in range(shift_y, L_y, dis_y):
     for k in range(shift_z, L_z, dis_z):
@@ -466,11 +464,10 @@ def Uni_Tn_3D( tn, chi, size_U_x, size_U_y,size_U_z,list_tags,layer=None, L_x=No
 
 
          for i_x, j_y, k_z in zip(size_U_x, size_U_y, size_U_z):
-                if cycle=="off" and i+i_x<L_x-1 and  j+j_y<L_y-1 and k+k_z<L_z-1: 
+                if cycle=="off" and i+i_x<=L_x-1 and  j+j_y<=L_y-1 and k+k_z<=L_z-1: 
                     where.append( ( (i+i_x)%L_x, (j+j_y)%L_y, (k+k_z)%L_z)  )                 
                 elif cycle=="on":
                      where.append( ( (i+i_x)%L_x, (j+j_y)%L_y, (k+k_z)%L_z)  )                 
-
 
         else:    
          for i_x in range(size_U_x):
@@ -480,12 +477,13 @@ def Uni_Tn_3D( tn, chi, size_U_x, size_U_y,size_U_z,list_tags,layer=None, L_x=No
                 ##print (i_x, j_y, i+i_x<=L_x-1, j+j_y<=L_y-1, cycle=="off")
                 if cycle=="off" and i+i_x<=L_x-1 and  j+j_y<=L_y-1 and k+k_z<=L_z-1: 
                     where.append( (  (i+i_x)%L_x,  (j+j_y)%L_y, (k+k_z)%L_z   )  )
-                
                 elif cycle=="on":
                      where.append( (  (i+i_x)%L_x,  (j+j_y)%L_y, (k+k_z)%L_z   )  )                 
 
                 
-                
+
+
+
         #print (i,j,k,where)
 
         #take_out trivial unitary
@@ -495,22 +493,23 @@ def Uni_Tn_3D( tn, chi, size_U_x, size_U_y,size_U_z,list_tags,layer=None, L_x=No
           dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]*2
           if seed_val==0:
             G_v=qu.eye( int(prod(dims)**(1./2.)), dtype=data_type).reshape( dims )
-            G_r=qu.randn(dims,dtype=data_type, dist="uniform", seed=seed_val)
+            G_r=qu.randn(dims,dtype=data_type, dist=dist_type, seed=seed_val+i+j)
             G_v=G_v+G_r*(0.1)
           else:
-            G_v=qu.randn(dims,dtype=data_type, dist="uniform", seed=seed_val)
+            G_v=qu.randn(dims,dtype=data_type, dist=dist_type, seed=seed_val+i+j)
           
           list_tags.append(f"U{layer},I{i},{j},{k}")
-          tn.reverse_gate(G=G_v,where=where,iso=Iso_on,tags=["U",f"U{layer}",f"U{layer},I{i},{j},{k}", f"SU{scale}"])
+          tn.reverse_gate(G=G_v,where=where,iso=Iso_on,tags=["U",f"U{layer}",f"U{layer},I{i},{j},{k}",f"SU{scale}",f"SU{scale},U{label}"])
 
 
 
 
+def iso_Tn_3D( tn, chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,list_scale,layer=None, 
+L_x=None,L_y=None, L_z=None, Iso=True, shift_x=0, shift_y=0,shift_z=0,dis_x=1, dis_y=1, dis_z=1,
+last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0,dist_type="uniform",label=0):
 
 
-def iso_Tn_3D( tn, chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,layer=None, L_x=None,L_y=None, L_z=None, Iso=True, shift_x=0, shift_y=0,shift_z=0,dis_x=1, dis_y=1, dis_z=1,last_bond="off", cycle="on",data_type='float64', seed_val=10, scale=0):
-
-    
+  list_scale.append(f"SI{scale}")
 
   lx_up=L_x//size_Iso_x if size_Iso_x != 0 else L_x 
   ly_up=L_y//size_Iso_y if size_Iso_y != 0 else L_y
@@ -531,7 +530,6 @@ def iso_Tn_3D( tn, chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,layer=None,
         for i_x in range(size_Iso_x if size_Iso_x != 0 else 1):
          for j_y in range(size_Iso_y if size_Iso_y != 0 else 1):
           for k_z in range(size_Iso_z if size_Iso_z != 0 else 1):
-
               where.append( (  (i+i_x)%L_x,  (j+j_y)%L_y, (k+k_z)%L_z   )  )                 
                 
              
@@ -545,20 +543,20 @@ def iso_Tn_3D( tn, chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,layer=None,
          ##print ("dim", dims)
          list_tags.append(f"I{layer},I{i},{j},{k}")
          tn.reverse_gate(
-            G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+            G=qu.randn(dims,dtype=data_type, dist=dist_type, seed=seed_val+i+j ), 
             where=where,
             iso=Iso,
-            tags=["I", f"I{layer}",f"I{layer},I{i},{j},{k}", f"SI{scale}"],
+            tags=["I", f"I{layer}",f"I{layer},I{i},{j},{k}",f"SI{scale}",f"SI{scale},I{label}"],
             new_sites=[(f"{ ( shift_x+(   i//(size_Iso_x if size_Iso_x != 0 else 1) ) )%(lx_up) }",
             f"{ ( shift_y+( j//(size_Iso_y if size_Iso_y != 0 else 1 )) )%(ly_up) }", f"{ ( shift_z+( k//(size_Iso_z if size_Iso_z != 0 else 1 )) )%(lz_up) }")]
          )
         else: 
          list_tags.append(f"I{layer},I{i},{j},{k}")
          tn.reverse_gate(
-            G=qu.randn(dims,dtype=data_type, dist="uniform", seed=seed_val), 
+            G=qu.randn(dims,dtype=data_type, dist=dist_type, seed=seed_val+i+j), 
             where=where,
             iso=Iso,
-            tags=["I",f"I{layer}",f"I{layer},I{i},{j},{k}",f"SI{scale}"],
+            tags=["I",f"I{layer}",f"I{layer},I{i},{j},{k}",f"SI{scale}",f"SI{scale},I{label}"],
             )
 
   index_map={}
@@ -624,24 +622,29 @@ def Heis_local_Ham_open_tree(N_x,N_y,data_type="float64"):
 
 
 
-def Heis_local_Ham_open(N_x,N_y,data_type="float64"):
+def Heis_local_Ham_open(N_x,N_y,data_type="float64",phys_dim=2):
 
  list_sites=[]
  list_inter=[]
  ##print (qu.ham_heis(2))
- H=qu.ham_heis(2).astype(data_type)
+ #H=qu.ham_heis(2).astype(data_type)
+ if phys_dim==2:
+    h_h=qu.ham_heis(2).astype(data_type)
+ else:
+    h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+    h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
 
 
 
  for i in range(N_x-1): 
   for j in range(N_y): 
    list_sites.append( [ ( i,j), ((i+1),j) ]   )
-   list_inter.append( H )
+   list_inter.append( h_h )
 
  for i in range(N_x): 
   for j in range(N_y-1): 
    list_sites.append( [ ( i,j), (i, (j+1)) ]   )
-   list_inter.append( H )
+   list_inter.append( h_h )
 
  return list_sites, list_inter
 
@@ -673,31 +676,37 @@ def Heis_local_Ham_cycle(N_x,N_y):
 
 
 
-def Heis_local_Ham_open_3D(N_x,N_y,N_z):
+def Heis_local_Ham_open_3D(N_x,N_y,N_z, data_type="float64", phys_dim=2):
 
  list_sites=[]
  list_inter=[]
  ##print (qu.ham_heis(2))
+ if phys_dim==2:
+   h_h=qu.ham_heis(2).astype(data_type)
+ else:
+   h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+   h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
+
 
  for i in range(N_x-1): 
   for j in range(N_y): 
    for k in range(N_z): 
 
     list_sites.append( [ ( i,j,k), (i+1,j,k) ]   )
-    list_inter.append( qu.ham_heis(2).astype("float64") )
+    list_inter.append( h_h )
 
  for i in range(N_x): 
   for j in range(N_y-1): 
    for k in range(N_z): 
     list_sites.append( [ ( i,j,k), (i,j+1,k) ]   )
-    list_inter.append( qu.ham_heis(2).astype("float64") )
+    list_inter.append( h_h )
 
 
  for i in range(N_x): 
   for j in range(N_y): 
    for k in range(N_z-1): 
     list_sites.append( [ ( i,j,k), (i,j,k+1) ]   )
-    list_inter.append( qu.ham_heis(2).astype("float64") )
+    list_inter.append( h_h )
 
 
  return list_sites, list_inter
@@ -757,7 +766,10 @@ def uni_xy_44(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, share
    label_listU[0]+=1
    size_U_x=2
    size_U_y=1
-   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=3, shift_y=2,dis_x=4, dis_y=4, cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],dist_type=dist_type)
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0],
+    L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=3, shift_y=2,dis_x=4, dis_y=4, 
+    cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],
+    dist_type=dist_type)
 
    num_layer[0]+=1
    label_listU[0]+=1
@@ -936,127 +948,1122 @@ def  Iso_33(tn_U, N_x_l, N_y_l,layer_num,chi,seed_val=10,last_bond="off"):
 
 
 
+def uni_xy_44_3D_iso_corner(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
 
-def uni_xy_44_3D(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, seed_val=10, cycle="off"):
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=0,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
 
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+#####################################################################################################################################
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,
+   dist_type=dist_type)
+
+
+
+
+
+
+
+def uni_xy_44_3D_iso_corner_full(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=0,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+###################more corner#################
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=1,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=0,shift_z=2,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=1,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=0,shift_z=2,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=0,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=0,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=0,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+#####################################################################################################################################
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, 
+   scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,
+   dist_type=dist_type)
+
+
+
+
+###################more corner#################
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=1,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=0, shift_y=2,shift_z=2,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=1,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=2,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=2,shift_z=0,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=2,shift_z=3,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def uni_xy_44_3D_iso_center_zx(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=0, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+######################################################################################################################
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=1, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+############################################################################################################################
+
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+################################################################################################################################
+
+
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=3, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=3, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+################################################################################################################################
+
+
+def uni_xy_44_3D_iso_center_zy(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+   num_layer[0]+=1
 ############y-direction#############
    size_U_x=1
    size_U_y=2
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=3,shift_z=1,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val, scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def uni_xy_44_3D(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=3,shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
    size_U_x=1
    size_U_y=2
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=2, shift_y=3,shift_z=1,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=3,shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
 
    size_U_x=1
    size_U_y=2
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=3,shift_z=2,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=3,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
 
    size_U_x=1
    size_U_y=2
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=2, shift_y=3,shift_z=2,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=3,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
 
-   ##print ("\n")
 ############x-direction#############
    num_layer[0]+=1
-
    size_U_x=2
    size_U_y=1
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=3, shift_y=1,shift_z=1,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=1,shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
-
    size_U_x=2
    size_U_y=1
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=3, shift_y=2,shift_z=1,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
-
    size_U_x=2
    size_U_y=1
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=3, shift_y=1,shift_z=2,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=1,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
-
    size_U_x=2
    size_U_y=1
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=3, shift_y=2,shift_z=2,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
-   #print ("\n")
 ############z-direction#############
    num_layer[0]+=1
-
    size_U_x=1
    size_U_y=1
    size_U_z=2
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=1,shift_z=3,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=1,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=1
+   size_U_z=2
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=2,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=1
+   size_U_z=2
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=1,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+
+   num_layer[0]+=1
+   size_U_x=1
+   size_U_y=1
+   size_U_z=2
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=2,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+   num_layer[0]+=1
+
+
+
+
+
+
+
+
+
+def uni_xy_44_3D_full(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+
+   for i_iter in range(4):
+     for k_iter in range(4):
+           num_layer[0]+=1
+           size_U_x=1
+           size_U_y=2
+           size_U_z=1
+           Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+                              L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+                              shift_x=i_iter, shift_y=3,shift_z=k_iter,dis_x=4,dis_y=4,dis_z=4,
+                              cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   for j_iter in range(4):
+     for k_iter in range(4):
+           num_layer[0]+=1
+           size_U_x=2
+           size_U_y=1
+           size_U_z=1
+           Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+                              L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+                              shift_x=3, shift_y=j_iter,shift_z=k_iter,dis_x=4,dis_y=4,dis_z=4,
+                              cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   for i_iter in range(4):
+    for j_iter in range(4):
+           num_layer[0]+=1
+           size_U_x=1
+           size_U_y=1
+           size_U_z=2
+           Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+                              L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+                              shift_x=i_iter, shift_y=j_iter,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+                              cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+
+
+
+
+def uni_xy_44_3D_sparse(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
+
+   num_layer[0]+=1
+############y-direction#############
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=3,shift_z=1,
+   dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
 
    num_layer[0]+=1
 
    size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=3,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+
+
+
+
+############x-direction#############
+   num_layer[0]+=1
+   size_U_x=2
    size_U_y=1
-   size_U_z=2
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=2,shift_z=3,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=1,shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
+
+
 
    num_layer[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=3, shift_y=2,shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
+############z-direction#############
+
+
+   num_layer[0]+=1
    size_U_x=1
    size_U_y=1
    size_U_z=2
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=2, shift_y=1,shift_z=3,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=1, shift_y=1,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
    num_layer[0]+=1
-
    size_U_x=1
    size_U_y=1
    size_U_z=2
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=2, shift_y=2,shift_z=3,dis_x=4,dis_y=4,dis_z=4,cycle=cycle,seed_val=seed_val,scale=num_layer[2])
-
-   num_layer[2]+=1
-
-
-
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+   shift_x=2, shift_y=2,shift_z=3,dis_x=4,dis_y=4,dis_z=4,
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
 
 
 
 
 
 
-def uni_xy_33_3D(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, seed_val=10, cycle="off"):
+
+
+def uni_xy_22_3D_full(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
 
    layer_num[0]+=1
    size_U_x=2
    size_U_y=1
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, layer=layer_num[0], L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, shift_x=2, shift_y=1, shift_z=1,dis_x=3, dis_y=3,dis_z=3, cycle=cycle,seed_val=seed_val, scale=layer_num[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=0, shift_z=0,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=0, shift_z=1,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=1, shift_z=0,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=1, shift_z=1,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+def uni_xy_22_3D_sparse(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=0, shift_z=0,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=1, shift_z=0,dis_x=2, dis_y=2,dis_z=2, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+
+
+
+
+def uni_xy_33_3D(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=2, shift_y=1, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
    layer_num[0]+=1
    size_U_x=1
    size_U_y=2
    size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y,size_U_z,list_tags, layer=layer_num[0], L_x=N_x_l, L_y=N_y_l,L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=2, shift_z=1,dis_x=3, dis_y=3,dis_z=3, cycle=cycle,seed_val=seed_val,scale=layer_num[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y,size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l,L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=2, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
    layer_num[0]+=1
 
    size_U_x=1
    size_U_y=1
    size_U_z=2
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y,size_U_z,list_tags, layer=layer_num[0], L_x=N_x_l, L_y=N_y_l,L_z=N_z_l, Iso_on=True, shift_x=1, shift_y=1, shift_z=2,dis_x=3, dis_y=3,dis_z=3, cycle=cycle,seed_val=seed_val,scale=layer_num[2])
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y,size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l,L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=1, shift_z=2,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val,scale=scale,dist_type=dist_type)
    layer_num[0]+=1
-   layer_num[2]+=1
+
+
+
+def uni_xy_33_3D_center_zy(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=0, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=1, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+def uni_xy_33_3D_center_zx(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=0, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=1
+   size_U_z=2
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=1, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=2
+   size_U_y=1
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=1, shift_y=2, shift_z=1,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
+def uni_xy_33_3D_corner_sparse(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=0, shift_z=0,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=2, shift_y=0, shift_z=0,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=0, shift_y=1, shift_z=2,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, shift_x=2, shift_y=1, shift_z=2,dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+def uni_xy_33_3D_corner_full(tn_U, N_x_l, N_y_l,N_z_l, layer_num,list_tags,chi, list_scale,scale,seed_val=10,
+ cycle="off",dist_type="uniform"):
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=0, shift_y=0, shift_z=0, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=2, shift_y=0, shift_z=0, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=0, shift_y=0, shift_z=2, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=2, shift_y=0, shift_z=2, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=0, shift_y=1, shift_z=0, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+  
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=2, shift_y=1, shift_z=0, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=0, shift_y=1, shift_z=2, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+   layer_num[0]+=1
+   size_U_x=1
+   size_U_y=2
+   size_U_z=1
+   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z,list_tags, list_scale,layer=layer_num[0], 
+   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, 
+   Iso_on=True, 
+   shift_x=2, shift_y=1, shift_z=2, dis_x=3, dis_y=3,dis_z=3, 
+   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+
+
+
 
 
 
@@ -1097,7 +2104,8 @@ def  Iso_33_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,chi,seed_val=10,last_bond="off
 
 
 
-def  Iso_22_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,list_tags,chi,seed_val=10,last_bond="off",Iso=True,dist_type="uniform"):
+def  Iso_22_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,list_tags,chi,list_scale,scale,seed_val=10,last_bond="off",
+Iso=True,dist_type="uniform",data_type="float64"):
 
 
   size_Iso_x=0
@@ -1109,8 +2117,8 @@ def  Iso_22_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,list_tags,chi,seed_val=10,last
   l_z=N_z_l
 
   layer_num[1]+=1
-  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y,size_Iso_z,list_tags,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,
-         dis_x=1, dis_y=2, dis_z=1, cycle="on",seed_val=seed_val,scale=layer_num[3], Iso=Iso,dist_type=dist_type)
+  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y,size_Iso_z,list_tags,list_scale,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,
+      dis_x=1, dis_y=2, dis_z=1, cycle="off",seed_val=seed_val,scale=scale, Iso=Iso,dist_type=dist_type,data_type=data_type)
 
   layer_num[1]+=1
   size_Iso_x=2
@@ -1122,7 +2130,8 @@ def  Iso_22_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,list_tags,chi,seed_val=10,last
   l_z=N_z_l
 
 
-  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,dis_x=2, dis_y=1,dis_z=1, cycle="on",seed_val=seed_val,scale=layer_num[3],Iso=Iso)
+  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,list_scale,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,
+  dis_x=2, dis_y=1,dis_z=1, cycle="off",seed_val=seed_val,scale=scale,Iso=Iso,dist_type=dist_type,data_type=data_type)
   layer_num[1]+=1
 
 
@@ -1132,7 +2141,8 @@ def  Iso_22_3D(tn_U, N_x_l, N_y_l,N_z_l,layer_num,list_tags,chi,seed_val=10,last
   l_x=N_x_l//2
   l_y=N_y_l//2
   l_z=N_z_l
-  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,dis_x=1, dis_y=1,dis_z=2, cycle="on",seed_val=seed_val, last_bond=last_bond,scale=layer_num[3],Iso=Iso)
+  iso_Tn_3D(tn_U,chi, size_Iso_x, size_Iso_y, size_Iso_z,list_tags,list_scale,layer=layer_num[1], L_x=l_x,L_y=l_y,L_z=l_z,dis_x=1, 
+  dis_y=1,dis_z=2, cycle="off",seed_val=seed_val, last_bond=last_bond,scale=scale,Iso=Iso,dist_type=dist_type,data_type=data_type)
   layer_num[1]+=1
 
 
@@ -1252,140 +2262,125 @@ def Iso_44(tn_U, N_x_l, N_y_l,layer_num,chi,seed_val=10, last_bond="off"):
 
 
 
-def Iso_4_3_local_3D(tn,cor,chi,num_layer,list_tags,seed_val=10, data_type="float64",Iso_on=True):
+def Iso_4_3_local_3D(tn,cor,chi,num_layer,list_tags,list_scale,seed_val=10, data_type="float64",Iso=True, scale=0,dist_type="uniform"):
 
-
+   list_scale.append(f"SI{scale}")
    layer=num_layer[1]
    i,j,k=cor
    for j_iter in range(4):
        num_layer[1]+=1
        layer=num_layer[1]
        where=[ (i+1,j+j_iter,k+1),(i+1,j+j_iter,k+2) ]
-       ##print (where, "------->", (f"{-1}",f"{-2}",f"{-3}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i+1},{j+j_iter},{k+1}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+j+j_iter ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k+1}", f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k+1}", f"SI{scale}"],
           new_sites=[(f"{-1}",f"{-2}",f"{-3}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
        where=[ (i+2,j+j_iter,k+1),(i+2,j+j_iter,k+2) ]
-       ##print (where, "------->", (f"{-4}",f"{-5}",f"{-6}") )
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i+2},{j+j_iter},{k+1}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+j ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i+2},{j+j_iter},{k+1}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i+2},{j+j_iter},{k+1}",f"SI{scale}"],
           new_sites=[(f"{-4}",f"{-5}",f"{-6}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
        where=[ (-1,-2,-3),(-4,-5,-6) ]
-       ##print (where, "------->", (f"{i+1}",f"{j+j_iter}",f"{k+1}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{-1},{-2},{-3}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+i+j ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{-1},{-2},{-3}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{-1},{-2},{-3}",f"SI{scale}"],
           new_sites=[(f"{i+1}",f"{j+j_iter}",f"{k+1}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
        where=[ (i,j+j_iter,k+1),(i,j+j_iter,k+2) ]
-       ##print (where, "------->", (f"{i}",f"{j+j_iter}",f"{k+1}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i},{j+j_iter},{k+1}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+4*j_iter ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i},{j+j_iter},{k+1}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i},{j+j_iter},{k+1}",f"SI{scale}"],
           new_sites=[(f"{i}",f"{j+j_iter}",f"{k+1}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
-
        where=[ (i+3,j+j_iter,k+1),(i+3,j+j_iter,k+2) ]
-       ##print (where, "------->", (f"{i+3}",f"{j+j_iter}",f"{k+1}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i+3},{j+j_iter},{k+1}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+3*j_iter+3*j ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i+3},{j+j_iter},{k+1}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i+3},{j+j_iter},{k+1}",f"SI{scale}"],
           new_sites=[(f"{i+3}",f"{j+j_iter}",f"{k+1}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
-
        where=[ (i+1,j+j_iter,k),(i+2,j+j_iter,k) ]
-       ##print (where, "------->", (f"{i+1}",f"{j+j_iter}",f"{k}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i+1},{j+j_iter},{k}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+2*j_iter ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k}",f"SI{scale}"],
           new_sites=[(f"{i+1}",f"{j+j_iter}",f"{k}")]
        )
 
        num_layer[1]+=1
        layer=num_layer[1]
-
        where=[ (i+1,j+j_iter,k+3),(i+2,j+j_iter,k+3) ]
-       ##print (where, "------->", (f"{i+1}",f"{j+j_iter}",f"{k+3}"))
        dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
        dims.insert(0, min(prod(dims), chi))
        list_tags.append(f"I{layer},I{i+1},{j+j_iter},{k+3}")
        tn.reverse_gate(
-          G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+          G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+j_iter ), 
           where=where,
-          iso=Iso_on,
-          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k+3}",f"SI{num_layer[3]}"],
+          iso=Iso,
+          tags=["I", f"I{layer}",f"I{layer},I{i+1},{j+j_iter},{k+3}",f"SI{scale}"],
           new_sites=[(f"{i+1}",f"{j+j_iter}",f"{k+3}")]
        )
 
 
-
-
-   ##print( "\n" )
-   ##print( "\n" )
 
    for i_iter in [ i+0,i+1,i+3 ]:
     for k_iter in [ k+0,k+1,k+3 ]:
      num_layer[1]+=1
      layer=num_layer[1]
      where=[ (i_iter,j+1,k_iter),(i_iter,j+2,k_iter) ]
-     ##print (where, "------->", (f"{i_iter}",f"{j+1}",f"{k_iter}") )
      dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
      dims.insert(0, min(prod(dims), chi))
      list_tags.append(f"I{layer},I{i_iter},{j+1},{k_iter}")
      tn.reverse_gate(
-        G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+        G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+2*i_iter+3*j_iter ), 
         where=where,
-        iso=Iso_on,
-        tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j+1},{k_iter}",f"SI{num_layer[3]}"],
+        iso=Iso,
+        tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j+1},{k_iter}",f"SI{scale}"],
         new_sites=[(f"{i_iter}",f"{j+1}",f"{k_iter}")]
      )
 
@@ -1822,48 +2817,85 @@ Iso=True,Iso_apply="on",dist_type="uniform"):
 
 
 
-def  Iso_44_11_3D(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U,list_tags_I,uni="on",last_bond="off", cycle="off", Iso="on",seed_val=10):
+def  Iso_44_11_3D(tn_U, N_x, N_y, N_z,chi,num_layer,list_tags_U,list_tags_I, shared_I, shared_U, list_scale,
+scale=0, uni_h="off", uni_top="off", uni_h_Iso="off",uni_h_Iso_top="off",
+last_bond="off", cycle="off", data_type="float64", Iso_apply="on", seed_val=10,
+dist_type="uniform", seed_val_u=0, Iso=True, uni_h_Iso_top_top="on"):
 
- if uni=="on":
-    uni_xy_44_3D(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, seed_val=0, cycle=cycle)
+
+ if uni_h=="on":
+    uni_xy_44_3D(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
+      dist_type=dist_type)
+    #uni_xy_44_3D_sparse(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
+       #dist_type=dist_type)
+    #uni_xy_44_3D_full(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
+      #dist_type=dist_type)
 
 
- if Iso=="on":
+ if uni_h_Iso=="on":
+   #uni_xy_44_3D_iso_corner(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
+   #               dist_type=dist_type)
+   # uni_xy_44_3D_iso_corner_full(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, 
+   #                seed_val=seed_val_u, cycle=cycle,
+   #                   dist_type=dist_type)
+   uni_xy_44_3D_iso_center_zx(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
+                   dist_type=dist_type)
+   #  uni_xy_44_3D_iso_center_zy(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
+   #                 dist_type=dist_type)
+
+
+ if Iso_apply=="on":
   for i in range(0,N_x,4):
    for j in range(0,N_y,4):
     for k in range(0,N_z,4):
        cor=(i,j,k)
-       Iso_4_3_local_3D(tn_U,cor,chi,num_layer,list_tags_I,seed_val=seed_val)
-       if i ==0 and j==0 and k==0:
-         num_layer[3]+=1
+       Iso_4_3_local_3D(tn_U,cor,chi,num_layer,list_tags_I,list_scale,scale=scale,seed_val=seed_val,
+                     data_type=data_type,Iso=Iso,dist_type=dist_type)
 
  N_x=N_x-N_x//4 
  N_y=N_y-N_y//4
  N_z=N_z-N_z//4
 
- if uni=="on":
-      uni_xy_33_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi, seed_val=0, cycle=cycle)
+ if uni_top=="on":
+      uni_xy_33_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                    cycle=cycle,dist_type=dist_type)
 
 
- if Iso=="on":
+
+ if uni_h_Iso_top=="on":
+      uni_xy_33_3D_corner_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                    cycle=cycle,dist_type=dist_type)
+      #uni_xy_33_3D_center_zy(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                     #cycle=cycle,dist_type=dist_type)
+      # uni_xy_33_3D_center_zx(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+      #               cycle=cycle,dist_type=dist_type)
+
+
+ if Iso_apply=="on":
 
   for i in range(0,N_x,3):
    for j in range(0,N_y,3):
     for k in range(0,N_z,3):
       cor=(i,j,k)
-      Iso_3_2_local_3D(tn_U,cor,num_layer,list_tags_I,chi,seed_val=seed_val)
-      if i ==0 and j==0 and k==0:
-        num_layer[3]+=1
+      Iso_3_2_local_3D(tn_U,cor,num_layer,list_tags_I,chi,list_scale,scale,
+                      seed_val=seed_val,data_type=data_type,Iso=Iso,dist_type=dist_type)
+
+ 
+ N_x=N_x-N_x//3
+ N_y=N_y-N_y//3
+ N_z=N_z-N_z//3
 
 
- if Iso=="on":
+ if uni_h_Iso_top_top=="on":
+      #uni_xy_22_3D_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+       #             cycle=cycle,dist_type=dist_type)
+      uni_xy_22_3D_sparse(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                     cycle=cycle,dist_type=dist_type)
 
-  N_x=N_x-N_x//3
-  N_y=N_y-N_y//3
-  N_z=N_z-N_z//3
-  Iso_22_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_I,chi,seed_val=seed_val, last_bond=last_bond)
-  num_layer[3]+=1
-
+ 
+ if Iso_apply=="on":
+      Iso_22_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_I,chi,list_scale,scale,seed_val=seed_val, 
+                    last_bond=last_bond,dist_type=dist_type,data_type=data_type)
 
 
 
@@ -1974,66 +3006,59 @@ def  Iso_33_11_3D(tn_U, N_x, N_y, N_z, chi, num_layer, list_tags_U, list_tags_I 
 
 
 
-def Iso_3_2_local_3D(tn,cor, layer_number,list_tags,chi,seed_val=10, data_type="float64",Iso_on=True):
+def Iso_3_2_local_3D(tn,cor, layer_number,list_tags,chi,list_scale,scale,dist_type="uniform",seed_val=10, data_type="float64",Iso=True):
 
     i,j,k=cor
+    list_scale.append(f"SI{scale}")
     layer=layer_number[1]
     for i_iter in range(i,i+3,1):
      for j_iter in range(j,j+3,1):
       for k_iter in range(k,k+1,1):
         where=[ (i_iter,j_iter,k_iter),(i_iter,j_iter,k_iter+1) ]
-        ##print (where, "--->", (f"{i_iter}",f"{j_iter}",f"{k_iter}"))
         dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
         dims.insert(0, min(prod(dims), chi))
         list_tags.append(f"I{layer},I{i_iter},{j_iter},{k_iter}")
         tn.reverse_gate(
-           G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+           G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+j_iter+k_iter ), 
            where=where,
-           iso=Iso_on,
-           tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j_iter},{k_iter}", f"SI{layer_number[3]}"],
+           iso=Iso,
+           tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j_iter},{k_iter}", f"SI{scale}"],
            new_sites=[(f"{i_iter}",f"{j_iter}",f"{k_iter}")]
         )
 
 
 
-    ##print ("\n")
     layer_number[1]+=1
     layer=layer_number[1]
-    ##print ("layer",layer)
     for i_iter in range(i,i+3,1):
       for k_iter in [k,k+2]:
         where=[ (i_iter,j+0,k_iter),(i_iter,j+1,k_iter) ]
-        ##print (where, "--->", f"{i_iter}",f"{j}",f"{k_iter}")
         dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
         dims.insert(0, min(prod(dims), chi))
         list_tags.append(f"I{layer},I{i_iter},{j},{k_iter}")
         tn.reverse_gate(
-           G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+           G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val+k_iter+i_iter ), 
            where=where,
-           iso=Iso_on,
-           tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j},{k_iter}", f"SI{layer_number[3]}"],
+           iso=Iso,
+           tags=["I", f"I{layer}",f"I{layer},I{i_iter},{j},{k_iter}",f"SI{scale}"],
            new_sites=[(f"{i_iter}",f"{j}",f"{k_iter}")]
         )
 
-    ##print ("\n")
     layer_number[1]+=1
     layer=layer_number[1]
-    ##print ("layer",layer)
     for k_iter in [k,k+2]:
      for j_iter in [j,j+2]:
       where=[ (i,j_iter,k_iter),(i+1,j_iter,k_iter) ]
-      ##print (where, "--->", f"{i}",f"{j_iter}",f"{k_iter}")
       dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
       dims.insert(0, min(prod(dims), chi))
       list_tags.append(f"I{layer},I{i},{j_iter},{k_iter}")
       tn.reverse_gate(
-         G=qu.randn(dims, dtype=data_type, dist="uniform", seed=seed_val ), 
+         G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val ), 
          where=where,
-         iso=Iso_on,
-         tags=["I", f"I{layer}",f"I{layer},I{i},{j_iter},{k_iter}", f"SI{layer_number[3]}"],
+         iso=Iso,
+         tags=["I", f"I{layer}",f"I{layer},I{i},{j_iter},{k_iter}", f"SI{scale}"],
          new_sites=[(f"{i}",f"{j_iter}",f"{k_iter}")]
       )
-
 
 
     layer_number[1]+=1
@@ -2047,7 +3072,6 @@ def Iso_3_2_local_3D(tn,cor, layer_number,list_tags,chi,seed_val=10, data_type="
       k_f=k+k_l
       index_map[f"l{i_f},{j_f},{k_f}"] =f"l{i_f-(i_f+1)//3},{j_f-(j_f+1)//3},{k_f-(k_f+1)//3}" 
 
-    ##print (index_map)
     tn.reindex_(index_map)
 
 
@@ -2055,6 +3079,7 @@ def Iso_3_2_local_3D(tn,cor, layer_number,list_tags,chi,seed_val=10, data_type="
 def   Info_contract(tn_U,list_sites,data_type="float64", opt="auto-hq"):
   list_width={}
   list_flops={}
+  list_peak={}
   tn_U.unitize_(method='qr', allow_no_left_inds=True)
   for i in range(len(list_sites)):
       
@@ -2066,10 +3091,13 @@ def   Info_contract(tn_U,list_sites,data_type="float64", opt="auto-hq"):
       tn_U_ij_ex.rank_simplify_()
       width=tn_U_ij_ex.contraction_width( optimize=opt)
       flops=np.log10(tn_U_ij_ex.contraction_cost(optimize=opt))
-      #print ( "contract", i, where, width, flops )
+      tree = tn_U_ij_ex.contraction_tree(opt)
+      #treec = tn.contraction_tree(copt)
+      #print ( "contract", i, where, width, flops, np.log2(tree.peak_size()) )
       #print ( tn_U_ij_ex.contract(all, optimize=opt) )
       list_width[i] = width
       list_flops[i] = float(flops)
+      list_peak[i]= np.log2(tree.peak_size())
       #elem_w=max(list_width, key=list_width.get)
       #elem_f=max(list_flops, key=list_flops.get)
       #print ("Max_results", list_width[elem_w], list_flops[elem_f],list_sites[elem_w],list_sites[elem_f]  )
@@ -2077,9 +3105,46 @@ def   Info_contract(tn_U,list_sites,data_type="float64", opt="auto-hq"):
 
   elem_w=max(list_width, key=list_width.get)
   elem_f=max(list_flops, key=list_flops.get)
+  elem_p=max(list_peak, key=list_peak.get)
   
-  print ("Max_results", list_width[elem_w], list_flops[elem_f],list_sites[elem_w], list_sites[elem_f]  )
-  return list_width[elem_w], list_flops[elem_f]
+  print ("Max_results", list_width[elem_w], list_peak[elem_p], list_flops[elem_f],list_sites[elem_w], list_sites[elem_f]  )
+  return list_width[elem_w], list_flops[elem_f], list_peak[elem_p]
+
+
+
+def   Info_contract_test(tn_U,list_sites,data_type="float64", opt="auto-hq"):
+  list_width={}
+  list_flops={}
+  list_peak={}
+  tn_U.unitize_(method='qr', allow_no_left_inds=True)
+  for i in range(len(list_sites)):
+      
+      where=list_sites[i]
+      tags = [ tn_U.site_tag(*coo) for coo in where ]
+      tn_U_ij = tn_U.select(tags, which='any')
+      tn_U_ij_G=tn_U_ij.gate(qu.pauli("I",dtype=data_type) & qu.pauli("I",dtype=data_type), list_sites[i])
+      tn_U_ij_ex = (tn_U_ij_G & tn_U_ij.H)
+      tn_U_ij_ex.rank_simplify_()
+      width=tn_U_ij_ex.contraction_width( optimize=opt)
+      flops=np.log10(tn_U_ij_ex.contraction_cost(optimize=opt))
+      tree = tn_U_ij_ex.contraction_tree(opt)
+      #treec = tn.contraction_tree(copt)
+      #print ( "contract", i, where, width, flops, np.log2(tree.peak_size()) )
+      #print ( tn_U_ij_ex.contract(all, optimize=opt) )
+      list_width[i] = width
+      list_flops[i] = float(flops)
+      list_peak[i]= np.log2(tree.peak_size())
+      #elem_w=max(list_width, key=list_width.get)
+      #elem_f=max(list_flops, key=list_flops.get)
+      #print ("Max_results", list_width[elem_w], list_flops[elem_f],list_sites[elem_w],list_sites[elem_f]  )
+
+
+  elem_w=max(list_width, key=list_width.get)
+  elem_f=max(list_flops, key=list_flops.get)
+  elem_p=max(list_peak, key=list_peak.get)
+  
+  print ("Max_results", list_width[elem_w], list_peak[elem_p], list_flops[elem_f],list_sites[elem_w], list_sites[elem_f]  )
+  return list_width[elem_w], list_flops[elem_f], list_peak[elem_p]
 
 
 def   Info_contract_Tree(tn_U,list_sites,data_type="float64", opt="auto-hq"):
@@ -2265,7 +3330,7 @@ def get_3d_pos(Lx, Ly, Lz, a=22, b=44, p=0.2):
    }
 
 
-def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U):
+def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U,phys_dim):
   fix = {
       f'reg{i},{j}': (i, j) for i, j in itertools.product(range(tn_U.Lx), range(tn_U.Ly))
   }
@@ -2312,15 +3377,25 @@ def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U):
   print (dict_nodes,list_tags_U)
   
   
-  tn_U.draw( color=list_scale,fix=fix, iterations=600, figsize=(40, 40),  return_fig=True,node_size=420 , edge_scale=3, initial_layout='spectral', edge_alpha=0.53, legend=True,show_tags=False, arrow_length=0.9, node_shape=dict_nodes, highlight_inds=list_inds,highlight_inds_color="#ffffff",node_hatch=dict_hatch,node_outline_size=1.2,
-  node_outline_darkness=0.2,arrow_closeness=1.0)
+  tn_U.draw( color=list_scale,fix=fix, iterations=600, figsize=(40, 40),  
+  return_fig=True,node_size=420 , edge_scale=3, initial_layout='spectral', edge_alpha=0.53, 
+  legend=True,show_tags=False, arrow_length=0.9, 
+  node_shape=dict_nodes, highlight_inds=list_inds,highlight_inds_color="#ffffff",
+  node_hatch=dict_hatch,node_outline_size=1.2,
+  node_outline_darkness=0.2,arrow_closeness=1.0,show_inds='bond-size',font_size=12, font_size_inner=22)
   plt.savefig('mera.pdf')
   plt.clf()
 
 
 
 
-def  Plot_TN_3d(tn_U, list_scale, tn_3d):
+def  Plot_TN_3d(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
+
+
+
+
+  tn_3d=TN3D_rand(tn_U.Lx, tn_U.Ly, tn_U.Lz, phys_dim, cyclic=False, site_tag_id='g{},{},{}')
+
 
   fix = {
       f'g{i},{j},{k}': pos for (i, j, k) , pos in get_3d_pos( tn_U.Lx,tn_U.Ly,tn_U.Lz).items()
@@ -2338,7 +3413,7 @@ def  Plot_TN_3d(tn_U, list_scale, tn_3d):
 
   fix.update(fix1)
   fix.update(fix2)
-  fix.update(fix3)
+#  fix.update(fix3)
 
   #print (tn_U)
 
@@ -2346,8 +3421,42 @@ def  Plot_TN_3d(tn_U, list_scale, tn_3d):
   
   #custom_colors=["#FF6347", "#FA8072","#CD5C5C","#E0FFFF"]
   #print (fix)
-  tn.draw( color=[ f"SU{i}"  for i in range(list_scale[2])]+[ f"SI{i}"  for i in range(list_scale[3])], fix=fix, iterations=20, figsize=(100, 100),  return_fig=True,node_size=4900 , edge_scale=6, initial_layout='circular', edge_alpha=0.633, legend=True,show_tags=False, arrow_length=0.01)
-  plt.savefig('mera3D.pdf')
+  marker_list=["s","P", "H", "X", "+", "P", "s", "P","s", "P"]
+  hatch_list=['-', '////','-', '////', '-', '////','-', '////']
+  marker_list=marker_list[:len(list_scale)]
+  hatch_list=hatch_list[:len(list_scale)]
+
+  dict_nodes = dict(zip(list_scale, marker_list))
+  dict_hatch = dict(zip(list_scale, hatch_list))
+
+  list_inds=()
+  for tag in list_tags_U:
+    t = tn_U[tag]
+    inds = t.inds
+    list_inds+=inds
+
+  list_inds=()
+  for t in tn_U["const"] :
+    inds = t.left_inds
+    list_inds+=inds
+  
+  
+  #print (dict_nodes,list_tags_U)
+  print (list_scale)
+  
+  tn.draw( color=list_scale,fix=fix, iterations=600, figsize=(50, 50),  
+  return_fig=True,node_size=520 , edge_scale=4, 
+  initial_layout='spectral', edge_alpha=0.43, 
+  legend=True,show_tags=False, arrow_length=0.5, 
+  node_shape=dict_nodes, highlight_inds=list_inds,
+  highlight_inds_color="#ffffff",
+  node_hatch=dict_hatch,node_outline_size=1.2,
+  node_outline_darkness=0.3,arrow_closeness=1.0, 
+  #show_inds='bond-size',
+  font_size=12, 
+  font_size_inner=22)
+ 
+  plt.savefig('mera3d.pdf')
   plt.clf()
 
 #circular
@@ -2432,7 +3541,11 @@ def   TN_to_iso(tn, list_tags_I,list_tags_U):
   return  tn
 
 
-def   check_tags(tn_U, list_tags_I, list_tags_U):
+def  check_tags(tn_U, list_tags_I, list_tags_U):
+  #print (   tn_U.num_tensors, len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Lz*tn_U.Ly    )
+  if tn_U.num_tensors != len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Lz*tn_U.Ly:
+       print ("tags are not unique", tn_U.num_tensors, len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Lz*tn_U.Ly )
+
 
   map_tags=tn_U.tag_map
   for i in list_tags_I:
@@ -2596,7 +3709,70 @@ def  auto_diff_tree(tn_U, list_sites,list_inter, opt, optimizer_c='L-BFGS-B', ta
 
 
 
-def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform"):
+def  Tn_mera_build_3d(chi=6,data_type='float64', dist_type="uniform", phys_dim=2):
+
+  data_type  = data_type
+  num_layers = 2
+  N_x = 4*2
+  N_y = 4*2
+  N_z = 4*2
+  tn_U = TN3DUni.empty( N_x, N_y, N_z, phys_dim=phys_dim )
+  chi = chi
+
+  list_sites, list_inter=Heis_local_Ham_open_3D( N_x,N_y,N_z,data_type=data_type,phys_dim=phys_dim )
+
+  print ( "N_x, N_y, N_z", N_x, N_y, N_z, "chi", chi )
+  list_tags_U=[]
+  list_tags_I=[]
+  label_listU=[0]
+  shared_U=[]
+  shared_I=[]
+  list_scale=[]
+  num_layer=[0,0]     #U, I
+  label_list=[0]
+######################
+
+
+  Iso_44_11_3D(tn_U, N_x, N_y, N_z,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+  scale=0,
+  uni_h="on",
+  uni_top="on", 
+  uni_h_Iso="on",
+  uni_h_Iso_top="on",
+  uni_h_Iso_top_top="on",
+  last_bond="off", 
+  cycle="off", 
+  Iso_apply="on",
+  data_type=data_type, 
+  seed_val=10,
+  seed_val_u=0,
+  dist_type=dist_type)
+
+
+  uni_xy_22_3D_full(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,1, seed_val=0, 
+                    cycle="off",dist_type=dist_type)
+#   uni_xy_22_3D_sparse(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,scale, seed_val=0, 
+#                      cycle="off",dist_type=dist_type)
+
+  Iso_22_3D(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_I,chi,list_scale,1,seed_val=10, 
+                    last_bond="on",dist_type=dist_type,data_type=data_type)
+
+
+
+
+  check_tags(tn_U, list_tags_I, list_tags_U)
+  list_scale=eliminate_dupl(list_scale)
+  #tn_U.gauge_all_canonize_(max_iterations=5)
+  tn_U.unitize_(method=method_norm, allow_no_left_inds=True)
+  return tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale
+
+
+
+
+
+
+
+def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform",phys_dim=2):
 
   data_type=data_type
   num_layers = 2
@@ -2610,8 +3786,8 @@ def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform"):
   N_y=4*4
 
 
-  tn_U = TN2DUni.empty(N_x, N_y, phys_dim=2,data_type=data_type)
-  list_sites, list_inter = Heis_local_Ham_open(N_x,N_y,data_type=data_type)
+  tn_U = TN2DUni.empty(N_x, N_y, phys_dim=phys_dim,data_type=data_type)
+  list_sites, list_inter = Heis_local_Ham_open(N_x,N_y,data_type=data_type,phys_dim=phys_dim)
 
   chi = chi
 

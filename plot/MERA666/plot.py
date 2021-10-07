@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from numpy import linalg as LA
 
-mpl.rcParams['xtick.major.size'] = 10
-mpl.rcParams['xtick.major.width'] = 1
-mpl.rcParams['xtick.minor.size'] = 5
-mpl.rcParams['xtick.minor.width'] = 1
-mpl.rcParams['ytick.major.size'] = 10
-mpl.rcParams['ytick.major.width'] = 1
-mpl.rcParams['ytick.minor.size'] = 5
-mpl.rcParams['ytick.minor.width'] = 1
+# mpl.rcParams['xtick.major.size'] = 10
+# mpl.rcParams['xtick.major.width'] = 1
+# mpl.rcParams['xtick.minor.size'] = 5
+# mpl.rcParams['xtick.minor.width'] = 1
+# mpl.rcParams['ytick.major.size'] = 10
+# mpl.rcParams['ytick.major.width'] = 1
+# mpl.rcParams['ytick.minor.size'] = 5
+# mpl.rcParams['ytick.minor.width'] = 1
 
 
 
@@ -31,77 +31,83 @@ def sort_low(error):
  return error_f
 
 
-
-#R=np.loadtxt("meraF.txt")
-#x1=R[:,0]
-#y1=R[:,1]
-
-#R=np.loadtxt("meraFF.txt")
-#x2=R[:,0]
-#y2=R[:,1]
+R=np.loadtxt("Es.txt")
+x_memorys=R[:,2]
+x_flopss=R[:,3]
+y=R[:,1]
+y=list(y)
+errors= [ abs  ( (i+169.992)/169.992)   for i in y]
 
 
-R=np.loadtxt("meraFF.txt")
-x3=R[:,0]
-y3=R[:,1]
 
-#y=list(y1)+list(y2)+list(y3)
-y=list(y3)
-
-#y=sort_low(y)
+R=np.loadtxt("PEPS.txt")
+x_memoryp=R[:,2]
+y=R[:,1]
+y=list(y)
+errorp= [ abs  ( (i+169.992)/169.992)   for i in y]
 
 
-R=np.loadtxt("meraX22F.txt")
-xMX12=R[:,0]
-yMX12=R[:,1]
+
+R=np.loadtxt("Em.txt")
+x_memorym=R[:,2]
+x_flopsm=R[:,3]
+y=R[:,1]
+y=list(y)
+errorm= [ abs  ( (i+169.992)/169.992)   for i in y]
 
 
-R=np.loadtxt("meraX30F.txt")
-xMX18=R[:,0]
-yMX18=R[:,1]
+R=np.loadtxt("Ef.txt")
+x_memoryf=R[:,2]
+x_flopsf=R[:,3]
+yf=R[:,1]
+yf=list(yf)
+errorf= [ abs  ( (i+169.992)/169.992)   for i in yf]
 
 
-R=np.loadtxt("meraX50F.txt")
-xMX22=R[:,0]
-yMX22=R[:,1]
+#fig=plt.figure(figsize=(7,7))
+
+#plt.plot( x_memoryp,errorp,'+-',markersize=10, color = '#f12626', label='peps')
+# plt.plot( x_memorys,errors,'h-',markersize=10, color = '#400e9c', label='sMERA')
+# #plt.plot( x_memorym,errorm,'o-',markersize=10, color = '#f57900', label='mMERA')
+# plt.plot(x_memoryf,errorf,'s-',markersize=10, color = '#cf729d', label='fMERA')
 
 
-R=np.loadtxt("meraX60F.txt")
-xMX28=R[:,0]
-yMX28=R[:,1]
-R=np.loadtxt("mera.txt")
-x3=R[:,0]
-y3=R[:,1]
-y3=list(yMX28)+list(y3)
-
-fig=plt.figure(figsize=(7,7))
-
-#plt.plot( y,'--',lw=3,markersize=10, color = '#f57900', label='MERA, $\chi=8$')
-plt.plot(  yMX12,'-.',lw=3,markersize=10, color = '#cf729d', label='MERA, $\chi=22$')
-plt.plot(  yMX18,'-.',lw=3,markersize=10, color = '#0e9c38', label='MERA, $\chi=30$')
-plt.plot(  yMX22,'-.',lw=3,markersize=10, color = '#400e9c', label='MERA, $\chi=50$')
-plt.plot(  yMX28,'-.',lw=3,markersize=10, color = '#f12626', label='MERA, $\chi=60$')
+plt.plot( x_flopss,errors,'h-',markersize=10, color = '#400e9c', label='sMERA')
+#plt.plot( x_flopsm,errorm,'o-',markersize=10, color = '#f57900', label='mMERA')
+plt.plot(x_flopsf,errorf,'s-',markersize=10, color = '#cf729d', label='fMERA')
 
 
-plt.xscale('log')
+#plt.plot(  yMX12,'-.',lw=3,markersize=10, color = '#cf729d', label='MERA, $\chi=12$')
+#plt.plot(  yMX18,'-.',lw=3,markersize=10, color = '#0e9c38', label='MERA, $\chi=18$')
+#plt.plot(  yMX22,'-.',lw=3,markersize=10, color = '#400e9c', label='MERA, $\chi=22$')
+#plt.plot(  yMX28,'-.',lw=3,markersize=10, color = '#f12626', label='MERA, $\chi=28$')
+
+
+#plt.xscale('log')
+plt.yscale('log')
 
 
 #plt.title('qmps')
-plt.xlabel(r'iterations',fontsize=18)
-plt.ylabel(r'E',fontsize=21)
-#plt.axhline(-39.212834,color='black', label='PEPS, D=4')
+#plt.xlabel('peak-size',fontsize=11)
+plt.xlabel('flops',fontsize=14)
+plt.ylabel(r'$\delta E$',fontsize=11)
+plt.axhline(0.012,color='black', label='PEPS, D=2')
+#plt.axhline(0.010,color='black', label='PEPS, D=4')
+#plt.axhline(0.004,color='black', label='PEPS, D=5')
 
 
-plt.xlim([20,12000])
-plt.ylim([-168, -161])
 
-plt.xticks(fontsize=18)
-plt.yticks(fontsize=18)
-plt.legend(loc="upper right", prop={'size': 18})
+
+#plt.xlim([20,1000])
+plt.ylim([5.e-3, 2.e-1])
+
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=10)
+plt.legend(loc="upper right", prop={'size': 10})
 
 
 
 
 plt.grid(True)
-plt.savefig('qmpsB-plot.pdf')
+plt.savefig('errorF.pdf')
 plt.clf()

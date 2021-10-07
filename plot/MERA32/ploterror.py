@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from numpy import linalg as LA
 
-mpl.rcParams['xtick.major.size'] = 10
-mpl.rcParams['xtick.major.width'] = 1
-mpl.rcParams['xtick.minor.size'] = 5
-mpl.rcParams['xtick.minor.width'] = 1
-mpl.rcParams['ytick.major.size'] = 10
-mpl.rcParams['ytick.major.width'] = 1
-mpl.rcParams['ytick.minor.size'] = 5
-mpl.rcParams['ytick.minor.width'] = 1
+#mpl.rcParams['xtick.major.size'] = 10
+#mpl.rcParams['xtick.major.width'] = 1
+#mpl.rcParams['xtick.minor.size'] = 5
+#mpl.rcParams['xtick.minor.width'] = 1
+#mpl.rcParams['ytick.major.size'] = 10
+#mpl.rcParams['ytick.major.width'] = 1
+#mpl.rcParams['ytick.minor.size'] = 5
+#mpl.rcParams['ytick.minor.width'] = 1
 
 
 
@@ -49,7 +49,7 @@ x= [   abs ( 1./i )            for i in x]
 
 
 
-fig=plt.figure(figsize=(7,7))
+#fig=plt.figure(figsize=(7,7))
 
 plt.plot( x, y, 'o',markersize=10, color = '#a40000', label='MERA')
 #plt.plot( xt, yt, 's',markersize=10, color = '#f57900', label='Tree')
@@ -68,9 +68,9 @@ plt.axhline(   0.00014 ,color='#204a87', label='PEPS, D=8')
 plt.xlim([0.01, 0.2])
 plt.ylim([ 0.00001, 0.1])
 
-plt.xticks(fontsize=12)
-plt.yticks(fontsize=12)
-plt.legend(loc="center right", prop={'size': 18})
+plt.xticks(fontsize=8)
+plt.yticks(fontsize=8)
+plt.legend(loc="center right", prop={'size': 12})
 
 
 

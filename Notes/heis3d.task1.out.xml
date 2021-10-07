@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ALPS.xsl"?>
+<SIMULATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xml.comp-phys.org/2002/10/ALPS.xsd">
+  <PARAMETERS>
+    <PARAMETER name="ALGORITHM">loop</PARAMETER>
+    <PARAMETER name="local_S">0.5</PARAMETER>
+    <PARAMETER name="H">12</PARAMETER>
+    <PARAMETER name="J">1</PARAMETER>
+    <PARAMETER name="L">12</PARAMETER>
+    <PARAMETER name="LATTICE">inhomogeneous simple cubic lattice</PARAMETER>
+    <PARAMETER name="SEED">0</PARAMETER>
+    <PARAMETER name="T">0.003</PARAMETER>
+    <PARAMETER name="W">12</PARAMETER>
+    <PARAMETER name="MODEL">spin</PARAMETER>
+    <PARAMETER name="THERMALIZATION">5000</PARAMETER>
+    <PARAMETER name="SWEEPS">50000</PARAMETER>
+  </PARAMETERS>
+  <MCRUN id="1" status="finished" elapsed="03:45:51" progress="100%">
+    <DISORDER_SEED value="1905408610"/>
+    <SEED id="1" value="96951189"/>
+    <EXECUTED processes="1" elapsed="00:03:49" phase="equilibrating">
+      <FROM>2021-Oct-02 23:44:08</FROM>
+      <TO>2021-Oct-02 23:47:57</TO>
+      <MACHINE id="1"><NAME>1ec6f5460699</NAME></MACHINE>
+      <USER>unknown</USER>
+    </EXECUTED>
+    <EXECUTED processes="1" elapsed="00:12:50" phase="equilibrating">
+      <FROM>2021-Oct-02 23:49:53</FROM>
+      <TO>2021-Oct-03 00:02:43</TO>
+      <MACHINE id="1"><NAME>b22d1bd473b1</NAME></MACHINE>
+      <USER>unknown</USER>
+    </EXECUTED>
+    <EXECUTED processes="1" elapsed="03:29:12" phase="running">
+      <FROM>2021-Oct-03 00:02:43</FROM>
+      <TO>2021-Oct-03 03:31:55</TO>
+      <MACHINE id="1"><NAME>b22d1bd473b1</NAME></MACHINE>
+      <USER>unknown</USER>
+    </EXECUTED>
+    <CHECKPOINT id="1" format="osiris" file="heis3d.task1.clone1"/>
+  </MCRUN>
+</SIMULATION>

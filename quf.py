@@ -1,5 +1,6 @@
 from quimb import *
 from quimb.tensor import *
+from quimb.tensor.tensor_core import *
 import quimb as qu
 import numpy as np
 import quimb.tensor as qtn
@@ -23,8 +24,21 @@ from quimb.tensor.tensor_3d import *
 import torch
 import os, sys
 import scipy.linalg
+from autoray import  astype
 be_verbose = True
 method_norm=load_from_disk("Store/method")
+
+
+
+
+def change_datatype(TN, dtype):
+   for t in TN:
+            if t.dtype != dtype:
+               t.modify(apply=lambda data: astype(data, dtype), left_inds=t.left_inds)
+
+   l_type=[  t.dtype for t in TN ] 
+   print ( "TN_data_type="   ,  l_type[0],l_type[-1]   )
+
 
 
 
@@ -651,6 +665,53 @@ def Heis_local_Ham_open(N_x,N_y,data_type="float64",phys_dim=2):
 
 
 
+
+def Heis_local_Ham_open_long(N_x,N_y,data_type="float64",phys_dim=2):
+
+ list_sites=[]
+ list_inter=[]
+ ##print (qu.ham_heis(2))
+ #H=qu.ham_heis(2).astype(data_type)
+ if phys_dim==2:
+    h_h=qu.ham_heis(2).astype(data_type)
+ else:
+    h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+    h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
+
+
+ val=0
+ for i, j in itertools.product(range(N_x), range(N_y)):
+    for i1, j1 in itertools.product(range(N_x), range(N_y)):
+  
+      if i != i1   or j != j1:
+       ii=i*N_y+j
+       ii_=i1*N_y+j1
+       if ii_<ii:
+         val+=1
+         r=(abs(i-i1)**2+abs(j-j1)**2)**(0.5)
+         #print  ( (i,j),(i1,j1),r,val   )
+         list_sites.append( [ ( i,j), (i1,j1) ]   )
+         list_inter.append( h_h/r )
+
+
+ return list_sites, list_inter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def Heis_local_Ham_cycle(N_x,N_y):
 
  list_sites=[]
@@ -670,8 +731,253 @@ def Heis_local_Ham_cycle(N_x,N_y):
  return list_sites, list_inter
 
 
+def  mpo_2d_His(L_x,L_y,L_L, data_type="float64"):
+
+ Z=qu.pauli('Z',dtype=data_type) * 0.5
+ X=qu.pauli('X',dtype=data_type) * 0.5
+ Y= np.array([[0, -1],[1,0]]) * 0.5
+ I=qu.pauli('I',dtype=data_type)
+ Y=Y.astype(data_type)
+ X=X.astype(data_type)
+ Z=Z.astype(data_type)
+
+ Ham=[X, Y, Z]
+ MPO_I=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_result*0.0
+ MPO_f=MPO_result*0.0
+ 
+ 
+ max_bond_val=300
+ cutoff_val=1.0e-12
+ for count, elem in enumerate (Ham):
+   for i, j in itertools.product(range(L_x-1), range(L_y)):
+      ii=i*L_y+j
+      ii_=(i+1)*L_y+j
+      Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+      W = np.zeros([1, 1, 2, 2], dtype=data_type)
+      Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+   
+      Wl[ 0,:,:]=elem
+      W[ 0,0,:,:]=elem
+      Wr[ 0,:,:]=elem
+      W_list=[Wl]+[W]*(L_L-2)+[Wr]
+      MPO_I=MPO_identity(L_L, phys_dim=2 )
+      if count!=1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_])
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+      elif count==1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_]*-1.0)
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
 
 
+
+ for count, elem in enumerate (Ham):
+   for i, j in itertools.product(range(L_x), range(L_y-1)):
+      ii=i*L_y+j
+      ii_=i*L_y+j+1
+      Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+      W = np.zeros([1, 1, 2, 2], dtype=data_type)
+      Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+
+      Wl[ 0,:,:]=elem
+      W[ 0,0,:,:]=elem
+      Wr[ 0,:,:]=elem
+      W_list=[Wl]+[W]*(L_L-2)+[Wr]
+
+      MPO_I=MPO_identity(L_L, phys_dim=2 )
+      if count!=1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_])
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+      elif count==1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_]*-1.)
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+
+
+ MPO_f=MPO_result
+ MPO_f.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+ print ( MPO_f.show() )
+ return  MPO_f 
+
+
+
+
+
+
+
+
+
+
+
+
+
+def  mpo_2d_His_long(L_x,L_y,L_L, data_type="float64",cutoff_val=1.0e-12):
+
+ Z=qu.pauli('Z',dtype=data_type) * 0.5
+ X=qu.pauli('X',dtype=data_type) * 0.5
+ Y= np.array([[0, -1],[1,0]]) * 0.5
+ I=qu.pauli('I',dtype=data_type)
+ Y=Y.astype(data_type)
+ X=X.astype(data_type)
+ Z=Z.astype(data_type)
+
+ Ham=[X, Y, Z]
+ MPO_I=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_result*0.0
+ MPO_f=MPO_result*0.0
+ 
+ 
+ max_bond_val=300
+ cutoff_val=1.0e-12
+ for count, elem in enumerate (Ham):
+   for i, j in itertools.product(range(L_x), range(L_y)):
+    for i1, j1 in itertools.product(range(L_x), range(L_y)):
+     if i !=i1 or j!=j1:
+      r=(abs(i-i1)**2+abs(j-j1)**2)**(0.5)
+      ii=i*L_y+j
+      ii_=i1*L_y+j1
+      if ii_<ii:
+         Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+         W = np.zeros([1, 1, 2, 2], dtype=data_type)
+         Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+      
+         Wl[ 0,:,:]=elem
+         W[ 0,0,:,:]=elem
+         Wr[ 0,:,:]=elem
+         W_list=[Wl]+[W]*(L_L-2)+[Wr]
+         MPO_I=MPO_identity(L_L, phys_dim=2 )
+         if count!=1:
+            MPO_I[ii].modify(data=W_list[ii])
+            MPO_I[ii_].modify(data=W_list[ii_]*(r**-1))
+            MPO_result=MPO_result+MPO_I
+            MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+         elif count==1:
+            MPO_I[ii].modify(data=W_list[ii])
+            MPO_I[ii_].modify(data=W_list[ii_]*-1.0*(r**-1))
+            MPO_result=MPO_result+MPO_I
+            MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+ MPO_f=MPO_result
+ MPO_f.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+ print ( MPO_f.show() )
+ return  MPO_f 
+
+
+def  mpo_3d_His(L_x,L_y,L_z,L_L, data_type="float64", chi=200,cutoff_val=1.0e-12):
+
+ Z=qu.pauli('Z',dtype=data_type) * 0.5
+ X=qu.pauli('X',dtype=data_type) * 0.5
+ Y= np.array([[0, -1],[1,0]]) * 0.5
+ I=qu.pauli('I',dtype=data_type)
+ Y=Y.astype(data_type)
+ X=X.astype(data_type)
+ Z=Z.astype(data_type)
+
+ Ham=[X, Y, Z]
+ MPO_I=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_identity(L_L, phys_dim=2)
+ MPO_result=MPO_result*0.0
+ MPO_f=MPO_result*0.0
+ 
+ 
+ max_bond_val=chi
+ cutoff_val=cutoff_val
+ for count, elem in enumerate (Ham):
+   for i, j, k in itertools.product(range(L_x-1), range(L_y),range(L_z)):
+      print ("1", i,j,k,MPO_result.max_bond())
+      ii=i*L_y*L_z+j*L_z+k
+      ii_=(i+1)*L_y*L_z+j*L_z+k
+      Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+      W = np.zeros([1, 1, 2, 2], dtype=data_type)
+      Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+   
+      Wl[ 0,:,:]=elem
+      W[ 0,0,:,:]=elem
+      Wr[ 0,:,:]=elem
+      W_list=[Wl]+[W]*(L_L-2)+[Wr]
+      MPO_I=MPO_identity(L_L, phys_dim=2 )
+      if count!=1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_])
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+      elif count==1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_]*-1.0)
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+ MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+ for count, elem in enumerate (Ham):
+   for i, j, k in itertools.product(range(L_x), range(L_y-1),range(L_z)):
+      print ("2", i,j,k,MPO_result.max_bond())
+      ii=i*L_y*L_z+j*L_z+k
+      ii_=i*L_y*L_z+(j+1)*L_z+k
+      Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+      W = np.zeros([1, 1, 2, 2], dtype=data_type)
+      Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+
+      Wl[ 0,:,:]=elem
+      W[ 0,0,:,:]=elem
+      Wr[ 0,:,:]=elem
+      W_list=[Wl]+[W]*(L_L-2)+[Wr]
+
+      MPO_I=MPO_identity(L_L, phys_dim=2 )
+      if count!=1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_])
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+      elif count==1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_]*-1.)
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+ MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+ for count, elem in enumerate (Ham):
+   for i, j, k in itertools.product(range(L_x), range(L_y),range(L_z-1)):
+      print ("3", i,j,k, MPO_result.max_bond() )
+      ii=i*L_y*L_z+j*L_z+k
+      ii_=i*L_y*L_z+j*L_z+k+1
+      Wl = np.zeros([ 1, 2, 2], dtype=data_type)
+      W = np.zeros([1, 1, 2, 2], dtype=data_type)
+      Wr = np.zeros([ 1, 2, 2], dtype=data_type)
+
+      Wl[ 0,:,:]=elem
+      W[ 0,0,:,:]=elem
+      Wr[ 0,:,:]=elem
+      W_list=[Wl]+[W]*(L_L-2)+[Wr]
+
+      MPO_I=MPO_identity(L_L, phys_dim=2 )
+      if count!=1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_])
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+      elif count==1:
+         MPO_I[ii].modify(data=W_list[ii])
+         MPO_I[ii_].modify(data=W_list[ii_]*-1.)
+         MPO_result=MPO_result+MPO_I
+         MPO_result.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+
+
+ MPO_f=MPO_result
+ MPO_f.compress( max_bond=max_bond_val, cutoff=cutoff_val )
+ print ( MPO_f.show() )
+ return  MPO_f 
 
 
 
@@ -716,6 +1022,48 @@ def Heis_local_Ham_open_3D(N_x,N_y,N_z, data_type="float64", phys_dim=2):
 
 
 
+
+def Heis_local_Ham_cycle_3D(N_x,N_y,N_z, data_type="float64", phys_dim=2):
+
+ list_sites=[]
+ list_inter=[]
+ ##print (qu.ham_heis(2))
+ if phys_dim==2:
+   h_h=qu.ham_heis(2).astype(data_type)
+ else:
+   h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+   h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
+
+
+ for i in range(N_x): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+
+    list_sites.append( [ ( i,j,k), ( (i+1)%N_x ,j,k) ]   )
+    list_inter.append( h_h )
+
+ for i in range(N_x): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+    list_sites.append( [ ( i,j,k), (i,(j+1)%N_y,k) ]   )
+    list_inter.append( h_h )
+
+
+ for i in range(N_x): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+    list_sites.append( [ ( i,j,k), (i,j,(k+1)%N_z ) ]   )
+    list_inter.append( h_h )
+
+
+ return list_sites, list_inter
+
+
+
+
+
+
+
 def Heis_local_Ham_cycle_3d(N_x,N_y, N_z):
 
  list_sites=[]
@@ -744,16 +1092,56 @@ def Heis_local_Ham_cycle_3d(N_x,N_y, N_z):
  return list_sites, list_inter
 
 
+def uni_xy_44_mps(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, shared_U,lsit_scale,scale=0, seed_val=10, cycle="off", data_type="float64",dist_type="uniform"):
+
+
+   num_layer[0]+=1
+   size_U_x=2
+   size_U_y=1
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+   shift_x=0, shift_y=0,
+   dis_x=2, dis_y=2, 
+   cycle=cycle,seed_val=seed_val, 
+   data_type=data_type,scale=scale, label=label_listU[0],dist_type=dist_type)
+
+
+
+   num_layer[0]+=1
+   label_listU[0]+=1
+   size_U_x=2
+   size_U_y=1
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0],
+    L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+    shift_x=1, shift_y=1,
+    dis_x=2, dis_y=2, 
+cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],
+    dist_type=dist_type)
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 def uni_xy_44(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, shared_U,lsit_scale,scale=0, seed_val=10, cycle="off", data_type="float64",dist_type="uniform"):
+
+
    num_layer[0]+=1
    size_U_x=2
    size_U_y=1
-   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=3, shift_y=1,dis_x=4, dis_y=4, cycle=cycle,seed_val=seed_val, data_type=data_type,scale=scale, label=label_listU[0],dist_type=dist_type)
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+   shift_x=3, shift_y=1,
+   dis_x=4, dis_y=4, 
+   cycle=cycle,seed_val=seed_val, 
+   data_type=data_type,scale=scale, label=label_listU[0],dist_type=dist_type)
 
 
    num_layer[0]+=1
@@ -762,12 +1150,15 @@ def uni_xy_44(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, share
    size_U_y=2
    Uni_Tn( tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
           shift_x=1, shift_y=3,dis_x=4, dis_y=4, cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],dist_type=dist_type)
+
    num_layer[0]+=1
    label_listU[0]+=1
    size_U_x=2
    size_U_y=1
    Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0],
-    L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=3, shift_y=2,dis_x=4, dis_y=4, 
+    L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+    shift_x=3, shift_y=2,
+    dis_x=4, dis_y=4, 
     cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],
     dist_type=dist_type)
 
@@ -785,6 +1176,7 @@ def uni_xy_44(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, share
 
 
 def uni_xy_44_full(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, shared_U,lsit_scale,scale=0, seed_val=10, cycle="off", data_type="float64",dist_type="uniform"):
+
    num_layer[0]+=1
    size_U_x=2
    size_U_y=1
@@ -806,14 +1198,25 @@ def uni_xy_44_Iso(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, s
    num_layer[0]+=1
    size_U_x=2
    size_U_y=1
-   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=1, shift_y=1,dis_x=4, dis_y=4, cycle=cycle,seed_val=seed_val, data_type=data_type,scale=scale, label=label_listU[0],dist_type=dist_type)
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+   shift_x=1, shift_y=1,
+   dis_x=4, dis_y=4, 
+   cycle=cycle,
+   seed_val=seed_val, 
+   data_type=data_type,scale=scale, 
+   label=label_listU[0],dist_type=dist_type)
 
 
    num_layer[0]+=1
    label_listU[0]+=1
    size_U_x=2
    size_U_y=1
-   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, shift_x=1, shift_y=2,dis_x=4, dis_y=4, cycle=cycle,seed_val=seed_val, data_type=data_type,scale=scale, label=label_listU[0],dist_type=dist_type)
+   Uni_Tn(tn_U, chi, size_U_x, size_U_y, list_tags_U,shared_U,lsit_scale,layer=num_layer[0], L_x=N_x_l, L_y=N_y_l, Iso_on=True, 
+   shift_x=1, shift_y=2,
+   dis_x=4, dis_y=4, 
+   cycle=cycle,seed_val=seed_val, 
+   data_type=data_type,scale=scale, 
+   label=label_listU[0],dist_type=dist_type)
    num_layer[0]+=1
    label_listU[0]+=1
 
@@ -1359,7 +1762,7 @@ def uni_xy_44_3D_iso_center_zx(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags
    shift_x=1, shift_y=0, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
-######################################################################################################################
+#####################################################################################################################
 
    num_layer[0]+=1
 ############y-direction#############
@@ -1381,7 +1784,7 @@ def uni_xy_44_3D_iso_center_zx(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags
    shift_x=1, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
-############################################################################################################################
+##########################################################################################################################
 
 
    num_layer[0]+=1
@@ -1431,48 +1834,25 @@ def uni_xy_44_3D_iso_center_zx(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags
 
 def uni_xy_44_3D_iso_center_zy(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags_U, list_scale, scale,seed_val=10, cycle="off", dist_type="uniform"):
 
-   num_layer[0]+=1
-############y-direction#############
-   size_U_x=1
-   size_U_y=2
-   size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
-   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=1, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
-   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=1, shift_y=0, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
-   num_layer[0]+=1
-############y-direction#############
-   size_U_x=1
-   size_U_y=2
-   size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
-   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=2, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
-   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
-
-
-
-
-   num_layer[0]+=1
-############y-direction#############
-   size_U_x=1
-   size_U_y=2
-   size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
-   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=1, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
-   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
-
-   num_layer[0]+=1
-############y-direction#############
-   size_U_x=1
-   size_U_y=2
-   size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
-   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=2, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
-   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=2, shift_y=0, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
 
 
@@ -1483,18 +1863,61 @@ def uni_xy_44_3D_iso_center_zy(tn_U, N_x_l, N_y_l, N_z_l,chi,num_layer,list_tags
    size_U_z=1
    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=1, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+   shift_x=1, shift_y=1, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
-   num_layer[0]+=1
-############y-direction#############
-   size_U_x=1
-   size_U_y=2
-   size_U_z=1
-   Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
-   L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
-   shift_x=2, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
-   cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=1, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=2, shift_y=1, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=2, shift_y=1, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+
+
+
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=1, shift_y=2, shift_z=2,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
+
+#    num_layer[0]+=1
+# ############y-direction#############
+#    size_U_x=1
+#    size_U_y=2
+#    size_U_z=1
+#    Uni_Tn_3D(tn_U, chi, size_U_x, size_U_y, size_U_z, list_tags_U,list_scale,layer=num_layer[0], 
+#    L_x=N_x_l, L_y=N_y_l, L_z=N_z_l, Iso_on=True, 
+#    shift_x=2, shift_y=2, shift_z=1,dis_x=4,dis_y=4,dis_z=4,
+#    cycle=cycle,seed_val=seed_val, scale=scale,dist_type=dist_type)
 
 
 
@@ -2404,6 +2827,84 @@ def Iso_4_3_local_3D(tn,cor,chi,num_layer,list_tags,list_scale,seed_val=10, data
 
 
 
+
+
+
+def Iso_mps(tn,chi,num_layer, list_tags,list_scale,seed_val=10, data_type="float64",Iso=True, scale=0,dist_type="uniform"):
+
+      Lx=tn.Lx
+      Ly=tn.Ly
+      #print (  (0,0)  )
+      list_scale.append(f"SI{scale}")
+      layer=num_layer[1]
+      num_layer[1]+=1
+      layer=num_layer[1]
+      where=[ (0,0)      ]
+      dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
+      dims.insert(0, min(prod(dims), chi))
+      list_tags.append(f"I{layer},I{0},{0}")
+      tn.reverse_gate(
+         G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+0 ), 
+         where=where,
+         iso=Iso,
+         tags=["I", f"I{layer}",f"I{layer},I{0},{0}", f"SI{scale}"],
+         new_sites=[(f"{0}",f"{0}")]
+      )
+
+
+
+      for i, j in itertools.product(range(Lx), range(Ly)):
+               layer=num_layer[1]
+               num_layer[1]+=1
+               layer=num_layer[1]
+               if j != Ly-1:
+                  #print (  (i,j), (i,j+1)  )
+                  where=[ (i,j),(i,j+1) ]
+                  dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
+                  dims.insert(0, min(prod(dims), chi))
+                  list_tags.append(f"I{layer},I{i},{j+1}")
+                  tn.reverse_gate(
+                     G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+i ), 
+                     where=where,
+                     iso=Iso,
+                     tags=["I", f"I{layer}",f"I{layer},I{i},{j+1}", f"SI{scale}"],
+                     new_sites=[(f"{i}",f"{j+1}")]
+                  )
+               elif i !=Lx-1:
+                  #print (  (i,j),(i+1,(j+1)%Ly)  )
+                  where=[ (i,j),(i+1,(j+1)%Ly) ]
+                  dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
+                  dims.insert(0, min(prod(dims), chi))
+                  list_tags.append(f"I{layer},I{i+1},{(j+1)%Ly}")
+                  tn.reverse_gate(
+                     G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+i ), 
+                     where=where,
+                     iso=Iso,
+                     tags=["I", f"I{layer}",f"I{layer},I{i+1},{(j+1)%Ly}", f"SI{scale}"],
+                     new_sites=[(f"{i+1}",f"{(j+1)%Ly}")]
+                  )
+   
+                          
+      layer=num_layer[1]
+      num_layer[1]+=1
+      layer=num_layer[1]
+      where=[ (Lx-1,Ly-1)      ]
+      dims = [tn.ind_size(tn.layer_ind(*coo)) for coo in where]
+      list_tags.append(f"I{layer},I{Lx-1},{Ly-1}")
+      tn.reverse_gate(
+         G=qu.randn(dims, dtype=data_type, dist=dist_type, seed=seed_val+0 ), 
+         where=where,
+         iso=Iso,
+         tags=["I", f"I{layer}",f"I{layer},I{Lx-1},{Ly-1}", f"SI{scale}"]
+      )
+
+
+
+
+
+
+
+
 def Iso_4_3_local(tn,cor,chi,num_layer, list_tags,label_list,shared_I,list_scale,seed_val=10, data_type="float64",Iso=True, scale=0,dist_type="uniform"):
 
 
@@ -2825,23 +3326,23 @@ dist_type="uniform", seed_val_u=0, Iso=True, uni_h_Iso_top_top="on"):
 
  if uni_h=="on":
     uni_xy_44_3D(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
-      dist_type=dist_type)
+                   dist_type=dist_type)
     #uni_xy_44_3D_sparse(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
-       #dist_type=dist_type)
+     #  dist_type=dist_type)
     #uni_xy_44_3D_full(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
-      #dist_type=dist_type)
+     # dist_type=dist_type)
 
 
  if uni_h_Iso=="on":
-   #uni_xy_44_3D_iso_corner(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
-   #               dist_type=dist_type)
-   # uni_xy_44_3D_iso_corner_full(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, 
-   #                seed_val=seed_val_u, cycle=cycle,
-   #                   dist_type=dist_type)
-   uni_xy_44_3D_iso_center_zx(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
-                   dist_type=dist_type)
-   #  uni_xy_44_3D_iso_center_zy(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
-   #                 dist_type=dist_type)
+   uni_xy_44_3D_iso_corner(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
+                  dist_type=dist_type)
+   #uni_xy_44_3D_iso_corner_full(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, 
+    #               seed_val=seed_val_u, cycle="off",
+    #                  dist_type=dist_type)
+   #uni_xy_44_3D_iso_center_zx(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle, 
+    #               dist_type=dist_type)
+   #uni_xy_44_3D_iso_center_zy(tn_U, N_x, N_y,N_z,chi,num_layer,list_tags_U, list_scale, scale, seed_val=seed_val_u, cycle=cycle,
+    #                dist_type=dist_type)
 
 
  if Iso_apply=="on":
@@ -2863,12 +3364,12 @@ dist_type="uniform", seed_val_u=0, Iso=True, uni_h_Iso_top_top="on"):
 
 
  if uni_h_Iso_top=="on":
-      uni_xy_33_3D_corner_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
-                    cycle=cycle,dist_type=dist_type)
-      #uni_xy_33_3D_center_zy(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
-                     #cycle=cycle,dist_type=dist_type)
-      # uni_xy_33_3D_center_zx(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
-      #               cycle=cycle,dist_type=dist_type)
+      #uni_xy_33_3D_corner_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+       #             cycle="off",dist_type=dist_type)
+      uni_xy_33_3D_center_zy(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                     cycle="off",dist_type=dist_type)
+      #uni_xy_33_3D_center_zx(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+       #              cycle="off",dist_type=dist_type)
 
 
  if Iso_apply=="on":
@@ -2888,14 +3389,104 @@ dist_type="uniform", seed_val_u=0, Iso=True, uni_h_Iso_top_top="on"):
 
  if uni_h_Iso_top_top=="on":
       #uni_xy_22_3D_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
-       #             cycle=cycle,dist_type=dist_type)
+       #             cycle="off",dist_type=dist_type)
       uni_xy_22_3D_sparse(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
-                     cycle=cycle,dist_type=dist_type)
+                     cycle="off",dist_type=dist_type)
 
  
  if Iso_apply=="on":
       Iso_22_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_I,chi,list_scale,scale,seed_val=seed_val, 
                     last_bond=last_bond,dist_type=dist_type,data_type=data_type)
+
+
+
+
+
+
+
+
+
+
+def  Iso_33_11_3D(tn_U, N_x, N_y, N_z,chi,num_layer,list_tags_U,list_tags_I, shared_I, shared_U, list_scale,
+scale=0, uni_h="off", uni_h_Iso="off",uni_h_Iso_top="off",
+last_bond="off", cycle="off", data_type="float64", Iso_apply="on", seed_val=10,
+dist_type="uniform", seed_val_u=0, Iso=True, uni_h_Iso_top_top="on"):
+
+
+ if uni_h=="on":
+      uni_xy_33_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                    cycle=cycle,dist_type=dist_type)
+
+
+
+ if uni_h_Iso=="on":
+      #uni_xy_33_3D_corner_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+       #             cycle=cycle,dist_type=dist_type)
+      uni_xy_33_3D_center_zy(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                     cycle=cycle,dist_type=dist_type)
+      #uni_xy_33_3D_center_zx(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+      #               cycle=cycle,dist_type=dist_type)
+
+
+ if Iso_apply=="on":
+
+  for i in range(0,N_x,3):
+   for j in range(0,N_y,3):
+    for k in range(0,N_z,3):
+      cor=(i,j,k)
+      Iso_3_2_local_3D(tn_U,cor,num_layer,list_tags_I,chi,list_scale,scale,
+                      seed_val=seed_val,data_type=data_type,Iso=Iso,dist_type=dist_type)
+
+ 
+ N_x=N_x-N_x//3
+ N_y=N_y-N_y//3
+ N_z=N_z-N_z//3
+
+
+ if uni_h_Iso_top=="on":
+      uni_xy_22_3D_full(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+                    cycle=cycle,dist_type=dist_type)
+      #uni_xy_22_3D_sparse(tn_U, N_x, N_y,N_z,num_layer,list_tags_U,chi,list_scale,scale, seed_val=seed_val_u, 
+       #              cycle=cycle,dist_type=dist_type)
+
+ 
+ if Iso_apply=="on":
+      Iso_22_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_I,chi,list_scale,scale,seed_val=seed_val, 
+                    last_bond=last_bond,dist_type=dist_type,data_type=data_type)
+
+
+
+
+
+
+
+def  mps_build(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,
+list_scale,scale=0,uni_h="off",uni_h_full="off",uni_h_Iso="off",cycle="off", data_type="float64",seed_val=10,dist_type="uniform", seed_val_u=0):
+
+ label_list=[0]
+ label_listU=[0]
+
+ if uni_h=="on":
+     uni_xy_44_mps( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale, seed_val=seed_val_u, cycle=cycle, data_type=data_type, dist_type=dist_type)
+
+ if uni_h_full=="on":
+     uni_xy_44_full( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle, data_type=data_type,dist_type=dist_type)
+
+ if uni_h_Iso=="on":
+    uni_xy_44_Iso( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle="off", data_type=data_type,dist_type=dist_type)
+
+
+ #Iso_mps(tn_U, chi, num_layer, list_tags_I,list_scale,scale=scale,seed_val=seed_val,data_type=data_type,Iso=True,dist_type=dist_type)
+   
+   
+   
+ 
+
+
+
+
+
+
 
 
 
@@ -2912,17 +3503,17 @@ last_bond="off",cycle="off", data_type="float64", Iso_apply="on", Iso_1=True, Is
  label_listU=[0]
 
  if uni_h=="on":
-  uni_xy_44( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale, seed_val=seed_val_u, cycle=cycle, data_type=data_type, dist_type=dist_type)
+      uni_xy_44( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale, seed_val=seed_val_u, cycle=cycle, data_type=data_type, dist_type=dist_type)
 
 
 
  if uni_h_full=="on":
-  uni_xy_44_full( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle, data_type=data_type,dist_type=dist_type)
+      uni_xy_44_full( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle, data_type=data_type,dist_type=dist_type)
 
 
 
  if uni_h_Iso=="on":
-  uni_xy_44_Iso( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle, data_type=data_type,dist_type=dist_type)
+      uni_xy_44_Iso( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle="off", data_type=data_type,dist_type=dist_type)
 
 
  if Iso_apply=="on":
@@ -2941,7 +3532,7 @@ last_bond="off",cycle="off", data_type="float64", Iso_apply="on", Iso_1=True, Is
  N_y=N_y-N_y//4
 
  if uni_top=="on":
-  uni_xy_33(tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle,data_type=data_type,dist_type=dist_type)
+    uni_xy_33(tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle,data_type=data_type,dist_type=dist_type)
 
  if Iso_apply=="on":
   for i in range(0,N_x,3):
@@ -2960,12 +3551,12 @@ last_bond="off",cycle="off", data_type="float64", Iso_apply="on", Iso_1=True, Is
  N_x=N_x-N_x//3
  N_y=N_y-N_y//3
 
- if uni_h_Iso=="on":
-   uni_xy_22_Iso( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle=cycle, data_type=data_type,dist_type=dist_type)
+ #if uni_h_Iso=="on":
+   #uni_xy_22_Iso( tn_U, N_x, N_y, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=scale,seed_val=seed_val_u, cycle="off", data_type=data_type,dist_type=dist_type)
 
 
  if Iso_apply=="on":
-  Iso_22(tn_U, N_x, N_y,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=scale,seed_val=seed_val, last_bond=last_bond,data_type=data_type,Iso=Iso_2,dist_type=dist_type)
+   Iso_22(tn_U, N_x, N_y,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=scale,seed_val=seed_val, last_bond=last_bond,data_type=data_type,Iso=Iso_2,dist_type=dist_type)
 
 
 
@@ -2976,28 +3567,6 @@ last_bond="off",cycle="off", data_type="float64", Iso_apply="on", Iso_1=True, Is
 
 
 
-
-
-
-def  Iso_33_11_3D(tn_U, N_x, N_y, N_z, chi, num_layer, list_tags_U, list_tags_I ,uni="on", last_bond="off",cycle="off", Iso="on"):
-
-
- if uni=="on":
-  uni_xy_33_3D(tn_U, N_x, N_y, N_z, num_layer,list_tags_U,chi, seed_val=0, cycle=cycle)
-
-
- if Iso=="on":
-   for i, j, k in itertools.product(range(0,N_x,3), range(0,N_x,3),range(0,N_z,3)):
-      cor=(i,j,k)
-      Iso_3_2_local_3D(tn_U, cor, num_layer,list_tags_I,chi,seed_val=10)
-      if i ==0 and j==0 and k==0:
-          num_layer[3]+=1
-
-   N_x=N_x-N_x//3
-   N_y=N_y-N_y//3
-   N_z=N_z-N_z//3
-   Iso_22_3D(tn_U, N_x, N_y,N_z,num_layer,list_tags_I,chi, seed_val=10, last_bond=last_bond)
-   num_layer[3]+=1
 
 
 
@@ -3088,7 +3657,7 @@ def   Info_contract(tn_U,list_sites,data_type="float64", opt="auto-hq"):
       tn_U_ij = tn_U.select(tags, which='any')
       tn_U_ij_G=tn_U_ij.gate(qu.pauli("I",dtype=data_type) & qu.pauli("I",dtype=data_type), list_sites[i])
       tn_U_ij_ex = (tn_U_ij_G & tn_U_ij.H)
-      tn_U_ij_ex.rank_simplify_()
+      #tn_U_ij_ex.rank_simplify_()
       width=tn_U_ij_ex.contraction_width( optimize=opt)
       flops=np.log10(tn_U_ij_ex.contraction_cost(optimize=opt))
       tree = tn_U_ij_ex.contraction_tree(opt)
@@ -3338,6 +3907,9 @@ def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U,phys_dim):
       f'k{i},{j}': (i+0.25, j+0.25) for i, j in itertools.product(range(tn_U.Lx), range(tn_U.Ly))
   }
 
+  fix3 = {
+      f'l{i},{j}': (i,j) for i, j in itertools.product(range(tn_U.Lx), range(tn_U.Ly))
+  }
 
 
 #  fix1 = {
@@ -3350,7 +3922,7 @@ def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U,phys_dim):
 #  }
 
   fix.update(fix)
-  #fix.update(fix1)
+  fix.update(fix3)
   #custom_colors=["#FF00FF"]
   #spectral
   #list_scale=["const"]+list_scale
@@ -3377,12 +3949,14 @@ def  Plot_TN(tn_U, list_scale,list_tags_I, list_tags_U,phys_dim):
   print (dict_nodes,list_tags_U)
   
   
-  tn_U.draw( color=list_scale,fix=fix, iterations=600, figsize=(40, 40),  
-  return_fig=True,node_size=420 , edge_scale=3, initial_layout='spectral', edge_alpha=0.53, 
-  legend=True,show_tags=False, arrow_length=0.9, 
+  tn_U.draw( color=list_scale,fix=fix, iterations=600, figsize=(60, 60),  
+  return_fig=True,node_size=4220 , edge_scale=3, initial_layout='spectral', edge_alpha=0.53, 
+  legend=True,show_tags=False, arrow_length=0.2, 
   node_shape=dict_nodes, highlight_inds=list_inds,highlight_inds_color="#ffffff",
   node_hatch=dict_hatch,node_outline_size=1.2,
-  node_outline_darkness=0.2,arrow_closeness=1.0,show_inds='bond-size',font_size=12, font_size_inner=22)
+  node_outline_darkness=0.2,arrow_closeness=1.0,
+  #show_inds='bond-size',
+  font_size=12, font_size_inner=22)
   plt.savefig('mera.pdf')
   plt.clf()
 
@@ -3413,7 +3987,7 @@ def  Plot_TN_3d(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
 
   fix.update(fix1)
   fix.update(fix2)
-#  fix.update(fix3)
+  #fix.update(fix3)
 
   #print (tn_U)
 
@@ -3445,8 +4019,8 @@ def  Plot_TN_3d(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
   print (list_scale)
   
   tn.draw( color=list_scale,fix=fix, iterations=600, figsize=(50, 50),  
-  return_fig=True,node_size=520 , edge_scale=4, 
-  initial_layout='spectral', edge_alpha=0.43, 
+  return_fig=True,node_size=2520 , edge_scale=7, 
+  initial_layout='spectral', edge_alpha=0.83, 
   legend=True,show_tags=False, arrow_length=0.5, 
   node_shape=dict_nodes, highlight_inds=list_inds,
   highlight_inds_color="#ffffff",
@@ -3455,7 +4029,18 @@ def  Plot_TN_3d(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
   #show_inds='bond-size',
   font_size=12, 
   font_size_inner=22)
- 
+
+#   tn_3d.draw( color=list_scale,fix=fix, iterations=600, figsize=(50, 50),  
+#   return_fig=True,node_size=4520 , edge_scale=7, 
+#   initial_layout='spectral', edge_alpha=0.83, 
+#   legend=True,show_tags=False, arrow_length=0.5, highlight_inds=list_inds,
+#   highlight_inds_color="#ffffff",node_outline_size=1.2,
+#   node_outline_darkness=0.3,arrow_closeness=1.0, 
+#   #show_inds='bond-size',
+#   font_size=12, 
+#   font_size_inner=22)
+
+
   plt.savefig('mera3d.pdf')
   plt.clf()
 
@@ -3558,6 +4143,31 @@ def  check_tags(tn_U, list_tags_I, list_tags_U):
 
 
 
+
+
+def  check_tags_2d(tn_U, list_tags_I, list_tags_U):
+  #print (   tn_U.num_tensors, len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Lz*tn_U.Ly    )
+  if tn_U.num_tensors != len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Ly:
+       print ("tags are not unique", tn_U.num_tensors, len(list_tags_I)+len(list_tags_U)+tn_U.Lx*tn_U.Lz*tn_U.Ly )
+
+
+  map_tags=tn_U.tag_map
+  for i in list_tags_I:
+    if len(map_tags[i]) != 1:
+       print ("tags are not unique", i,map_tags[i] )
+
+  for i in list_tags_U:
+    if len(map_tags[i]) != 1:
+       print ("tags are not unique", i,map_tags[i] )
+
+
+
+
+
+
+
+
+
 ########################################################################################################
 
 def  auto_diff_mera(tn_U, list_sites,list_inter, opt, optimizer_c='L-BFGS-B', tags=[],jit_fn=True, device="cpu"):
@@ -3625,34 +4235,36 @@ def Mag_calc(tn_U, optimize,data_type="float64"):
     for j in range(N_y): 
           list_sites.append(  ( i,j)   )
 
-
-  results=[]
-  coor_tempo=[]        
+  val_count=0
+  results=[]      
   for coor1 in   list_sites:
    for coor2 in   list_sites:
-      rx_i,ry_i=coor1
-      rx_j,ry_j=coor2
+      rx_i, ry_i = coor1
+      rx_j, ry_j = coor2
+      ii=rx_i*N_y+ry_i
+      ii_=rx_j*N_y+ry_j
       #print (coor1, coor2,coor2 not in coor_tempo)
-      if  coor2 not in coor_tempo :
-        #print (coor1, coor2, coor2 not in coor_tempo)
-        coor_tempo.append(coor1)
-        dis_val=(exp(1j * pi * (rx_i-rx_j) )*exp(1j * pi * (ry_i-ry_j) )).real
-        #print (coor1,coor2, dis_val )
-        tags = [tn_U.site_tag(*coor1)]+[tn_U.site_tag(*coor2)]
-        tn_ij = tn_U.select(tags, which='any')
-        res=0
-        for count,ele in enumerate(list_inter):
-            tn_ij_X=tn_ij.gate(ele, (coor1,) )
-            tn_ij_XX=tn_ij_X.gate(ele, (coor2,))
-            tn_ij_exX = ( tn_ij.H &  tn_ij_XX)
-            tn_ij_exX.rank_simplify_()
-            if count != 2:
-              res+=tn_ij_exX.contract(all, optimize=optimize)
-            else:
-              res-=tn_ij_exX.contract(all, optimize=optimize)
-        
-        print (res, dis_val)
-        results.append(res*dis_val)
+      if rx_i !=rx_j or ry_i!=ry_j :
+         if ii_<ii:
+                  val_count+=1
+                  dis_val=(exp(1j * pi * (rx_i-rx_j) )*exp(1j * pi * (ry_i-ry_j) )).real
+                  print (coor1,coor2, ii, ii_,dis_val,val_count , len(results) )
+                  tags = [tn_U.site_tag(*coor1)]+[tn_U.site_tag(*coor2)]
+                  tn_ij = tn_U.select(tags, which='any')
+                  res=0
+                  for count,ele in enumerate(list_inter):
+                        #print ("count",count)
+                        tn_ij_X=tn_ij.gate(ele, (coor1,) )
+                        tn_ij_XX=tn_ij_X.gate(ele, (coor2,))
+                        tn_ij_exX = ( tn_ij.H &  tn_ij_XX)
+                        tn_ij_exX.rank_simplify_()
+                        if count != 1:
+                           res+=tn_ij_exX.contract(all, optimize=optimize)
+                        else:
+                           res-=tn_ij_exX.contract(all, optimize=optimize)
+
+                  print (res, dis_val)
+                  results.append(res*dis_val)
   return sum (results)/len(results)
 
 
@@ -3709,17 +4321,26 @@ def  auto_diff_tree(tn_U, list_sites,list_inter, opt, optimizer_c='L-BFGS-B', ta
 
 
 
-def  Tn_mera_build_3d(chi=6,data_type='float64', dist_type="uniform", phys_dim=2):
+
+
+
+
+
+
+
+
+def  Tn_mera_build_3d(chi=4,data_type='float64', dist_type="uniform", phys_dim=2):
 
   data_type  = data_type
   num_layers = 2
-  N_x = 4*2
-  N_y = 4*2
-  N_z = 4*2
+  N_x = 4*1
+  N_y = 4*1
+  N_z = 4*1
   tn_U = TN3DUni.empty( N_x, N_y, N_z, phys_dim=phys_dim )
   chi = chi
 
   list_sites, list_inter=Heis_local_Ham_open_3D( N_x,N_y,N_z,data_type=data_type,phys_dim=phys_dim )
+  #list_sites, list_inter=Heis_local_Ham_cycle_3D( N_x,N_y,N_z,data_type=data_type,phys_dim=phys_dim )
 
   print ( "N_x, N_y, N_z", N_x, N_y, N_z, "chi", chi )
   list_tags_U=[]
@@ -3733,14 +4354,14 @@ def  Tn_mera_build_3d(chi=6,data_type='float64', dist_type="uniform", phys_dim=2
 ######################
 
 
-  Iso_44_11_3D(tn_U, N_x, N_y, N_z,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+  Iso_44_11_3D( tn_U, N_x, N_y, N_z, chi, num_layer, list_tags_U, list_tags_I, shared_I, shared_U, list_scale,
   scale=0,
-  uni_h="on",
-  uni_top="on", 
-  uni_h_Iso="on",
-  uni_h_Iso_top="on",
-  uni_h_Iso_top_top="on",
-  last_bond="off", 
+  uni_h="off",
+  uni_top="off", 
+  uni_h_Iso="off",
+  uni_h_Iso_top="off",
+  uni_h_Iso_top_top="off",
+  last_bond="on", 
   cycle="off", 
   Iso_apply="on",
   data_type=data_type, 
@@ -3748,14 +4369,47 @@ def  Tn_mera_build_3d(chi=6,data_type='float64', dist_type="uniform", phys_dim=2
   seed_val_u=0,
   dist_type=dist_type)
 
+#   Iso_44_11_3D( tn_U, N_x//4, N_y//4, N_z//4, chi, num_layer, list_tags_U, list_tags_I, shared_I, shared_U, list_scale,
+#   scale=0,
+#   uni_h="on",
+#   uni_top="off", 
+#   uni_h_Iso="off",
+#   uni_h_Iso_top="off",
+#   uni_h_Iso_top_top="off",
+#   last_bond="on", 
+#   cycle="off", 
+#   Iso_apply="on",
+#   data_type=data_type, 
+#   seed_val=10,
+#   seed_val_u=0,
+#   dist_type=dist_type)
 
-  uni_xy_22_3D_full(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,1, seed_val=0, 
-                    cycle="off",dist_type=dist_type)
-#   uni_xy_22_3D_sparse(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,scale, seed_val=0, 
+
+
+
+#   Iso_33_11_3D( tn_U, N_x//4, N_y//4, N_z//4, chi, num_layer, list_tags_U, list_tags_I, shared_I, shared_U, list_scale,
+#   scale=1,
+#   uni_h="on",
+#   uni_h_Iso="off",
+#   uni_h_Iso_top="off",
+#   last_bond="off", 
+#   cycle="off", 
+#   Iso_apply="on",
+#   data_type=data_type, 
+#   seed_val=10,
+#   seed_val_u=0,
+#   dist_type=dist_type)
+
+
+
+
+
+#  uni_xy_22_3D_full(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,1, seed_val=0, 
 #                      cycle="off",dist_type=dist_type)
-
-  Iso_22_3D(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_I,chi,list_scale,1,seed_val=10, 
-                    last_bond="on",dist_type=dist_type,data_type=data_type)
+# #   uni_xy_22_3D_sparse(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_U,chi,list_scale,scale, seed_val=0, 
+# #                      cycle="off",dist_type=dist_type)
+#  Iso_22_3D(tn_U, N_x//4, N_y//4,N_z//4,num_layer,list_tags_I,chi,list_scale,1,seed_val=10, 
+#                      last_bond="on",dist_type=dist_type,data_type=data_type)
 
 
 
@@ -3772,22 +4426,23 @@ def  Tn_mera_build_3d(chi=6,data_type='float64', dist_type="uniform", phys_dim=2
 
 
 
-def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform",phys_dim=2):
+def Tn_mera_build(chi=6,data_type='float64',dist_type="uniform",phys_dim=2):
 
   data_type=data_type
   num_layers = 2
   N_x=4**num_layers
   N_y=4**num_layers
 
-  N_x=3*3
-  N_y=3*3
+  N_x=8
+  N_y=8
 
-  N_x=4*4
-  N_y=4*4
+  #N_x=4*4*2
+  #N_y=4*4*2
 
 
   tn_U = TN2DUni.empty(N_x, N_y, phys_dim=phys_dim,data_type=data_type)
   list_sites, list_inter = Heis_local_Ham_open(N_x,N_y,data_type=data_type,phys_dim=phys_dim)
+  #list_sites, list_inter = Heis_local_Ham_open_long(N_x,N_y,data_type=data_type,phys_dim=phys_dim)
 
   chi = chi
 
@@ -3803,56 +4458,70 @@ def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform",phys_dim=2):
   label_list=[0]
 
 ######################
-
-  Iso_44_11(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+  mps_build(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
   scale=0,
-  uni_h="off",
-  uni_top="on",
-  uni_h_full="on",
-  uni_h_Iso="on",
-  last_bond="off",
+  uni_h="on",
+  uni_h_full="off",
+  uni_h_Iso="off",
   cycle="off",
-  data_type=data_type,
-  Iso_apply="on", 
-  Iso_1=True, 
-  Iso_2=True,
+  data_type=data_type, 
   seed_val=120,
-  seed_val_u=0,
+  seed_val_u=10,
   dist_type=dist_type)
 
-  Iso_44_11(tn_U, N_x//4, N_y//4,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
-  scale=1,
-  uni_h="off",           #sparse Horizontal and vertical
-  uni_top="off",
-  uni_h_full="off",
-  uni_h_Iso="on",
-  last_bond="on",
-  cycle="off",
-  data_type=data_type,
-  Iso_apply="on", 
-  Iso_1=True, 
-  Iso_2=True,
-  seed_val=10,
-  seed_val_u=0,
-  dist_type=dist_type)
+
+
+
+
+#   Iso_44_11(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+#    scale=0,
+#    uni_h="off",
+#    uni_top="off",
+#    uni_h_full="off",
+#    uni_h_Iso="off",
+#    last_bond="off",
+#    cycle="off",
+#    data_type=data_type,
+#    Iso_apply="off", 
+#    Iso_1=True, 
+#    Iso_2=True,
+#    seed_val=120,
+#    seed_val_u=0,
+#    dist_type=dist_type)
+
+#   Iso_44_11(tn_U, N_x//4, N_y//4,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+#   scale=1,
+#   uni_h="off",           #sparse Horizontal and vertical
+#   uni_top="off",
+#   uni_h_full="off",
+#   uni_h_Iso="off",
+#   last_bond="off",
+#   cycle="off",
+#   data_type=data_type,
+#   Iso_apply="on", 
+#   Iso_1=True, 
+#   Iso_2=True,
+#   seed_val=10,
+#   seed_val_u=0,
+#   dist_type=dist_type)
 
 
 
   
   #uni_xy_22_Iso( tn_U, N_x//16, N_y//16, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=2,seed_val=10, cycle="off", data_type=data_type,dist_type=dist_type)
-  #Iso_22(tn_U, N_x//16, N_y//16,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=2,seed_val=10, last_bond="on",data_type=data_type, Iso=True,dist_type=dist_type)
+  #Iso_22(tn_U, N_x//4, N_y//4,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=2,seed_val=10, last_bond="on",data_type=data_type, Iso=True,dist_type=dist_type)
 
 
 ########################
-#   Iso_33_11(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
-#   scale=0,
-#   uni_h="off",
-#   uni_h_full="off",
-#   last_bond="off",
-#   cycle="off",
-#   data_type=data_type, 
-#   Iso=True,
-#   Iso_apply="on",dist_type=dist_type)
+  #Iso_33_11(tn_U, N_x, N_y,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+  # scale=0,
+  # uni_h="on",
+  # uni_h_full="off",
+  # last_bond="off",
+  # cycle="off",
+  # data_type=data_type, 
+  # Iso=True,
+  # Iso_apply="on",dist_type=dist_type)
 
 #   Iso_33_11(tn_U, N_x//3, N_y//3,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
 #   scale=1,
@@ -3865,17 +4534,17 @@ def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform",phys_dim=2):
 #   Iso_apply="on",dist_type=dist_type)
 
 
-#  Iso_22(tn_U, N_x//3, N_y//3,
-#  chi,num_layer, 
-#  list_tags_I,
-#  label_list,
-#  shared_I,
-#  list_scale,
-#  scale=2,
-#  seed_val=40,
-#  last_bond="on",
-#  data_type=data_type,
-#  Iso=True,dist_type=dist_type)
+  #Iso_22(tn_U, N_x//3, N_y//3,
+  #    chi,num_layer, 
+  #    list_tags_I,
+  #    label_list,
+  #    shared_I,
+  #    list_scale,
+  #    scale=2,
+  #    seed_val=40,
+  #    last_bond="on",
+  #    data_type=data_type,
+  #    Iso=True,dist_type=dist_type)
 
 #  quf.Iso_33_11(tn_U, N_x//9, N_y//9,chi,
 #  num_layer,list_tags_U,
@@ -3888,10 +4557,11 @@ def   Tn_mera_build(chi=6,data_type='float64', dist_type="uniform",phys_dim=2):
 #  cycle="off",
 #  data_type=data_type, Iso=True,Iso_apply="on",dist_type=dist_type)
 
-  check_tags(tn_U, list_tags_I, list_tags_U)
+  check_tags_2d(tn_U, list_tags_I, list_tags_U)
   list_scale=eliminate_dupl(list_scale)
   #tn_U.gauge_all_canonize_(max_iterations=5)
   tn_U.unitize_(method=method_norm, allow_no_left_inds=True)
+  #tn_U.astype(dtype, inplace=True)
   return tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale
 
 

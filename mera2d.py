@@ -5,11 +5,11 @@ from quimb import *
 
 def    mera_tn_2d():
 
-  data_type='float32'
-  dist_type="exp"         #{'normal', 'uniform', 'exp'}
+  data_type='float64'
+  dist_type="uniform"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=True
-  phys_dim=3
+  phys_dim=2
   chi=4
   device='cpu'
 
@@ -19,7 +19,7 @@ def    mera_tn_2d():
      progbar=True,
      minimize='flops',       #{'size', 'flops', 'combo'}, what to target
      reconf_opts={}, 
-     max_repeats=2**5,
+     max_repeats=2**6,
      max_time=3600,
 #    max_time='rate:1e6',
      parallel=True,
@@ -40,8 +40,10 @@ def    mera_tn_2d():
 
 
   #tn_U=load_from_disk("Store/tn_U")
+  #tn_U.astype_(data_type)
+  quf.change_datatype(tn_U, data_type)
   #width_max, flops_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)  
-  #quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
+  quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
 
 
 
@@ -49,7 +51,7 @@ def    mera_tn_2d():
   #print ("M", quf.Mag_calc(tn_U, opt,data_type=data_type) )
   print ( "E_init=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
   print ( "chi", tn_U.max_bond() )
-  #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=6, rand_strength=0.0100,rand_strength_u=0.010, data_type=data_type)    
+  #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=16, rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
   #tn_U=quf.TN_to_iso(tn_U, list_tags_I,list_tags_U)
   print ( "chi_new", tn_U.max_bond()  )
   print ("E_init_f=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt))
@@ -59,19 +61,24 @@ def    mera_tn_2d():
 
 
 
+  optimizer_c='L-BFGS-B'
+  optimizer_c='adam'
+
+  #optimizer_c='LD_VAR2'
+  #optimizer_c='LD_LBFGS'
+  #optimizer_c='LD_TNEWTON_PRECOND_RESTART'
+  #optimizer_c='LN_COBYLA'
+
+  tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
 
 
 
-  tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c='L-BFGS-B', tags=[], jit_fn=jit_fn,  device=device)
-  tnopt_mera.optimizer = 'L-BFGS-B' 
-  #tnopt_mera.optimizer = 'CG' 
-  #tnopt_mera.optimizer = 'adam' 
-  tn_U = tnopt_mera.optimize(n=2000 ,ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
+  tn_U = tnopt_mera.optimize(n=100 ,hessp=False, ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
+  #tn_U =  tnopt_mera.optimize_nlopt(400 ,ftol_rel= 2.220e-14)
+
 
 
   #tn_U = tnopt_mera.optimize_basinhopping(n=100, nhop=10, temperature=0.5 ,ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 1, disp=False)
-
-
   #tnopt_mera.optimizer = 'TNC' 
   #tn_U = tnopt_mera.optimize( n=1000, stepmx=200, eta=0.25, maxCGit=200, accuracy=1e-12, maxfun=int(10e+8), gtol= 1e-10, disp=False)
 

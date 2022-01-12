@@ -1,0 +1,31 @@
+[2022-01-10 13:59:59,368 I 9803 9803] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 13:59:59,368 I 9803 9803] store_runner.cc:30: Allowing the Plasma store to use up to 8.42864GB of memory.
+[2022-01-10 13:59:59,368 I 9803 9803] store_runner.cc:46: Starting object store with directory /dev/shm, fallback /home/reza/Dropbox/Prog/MERA/temp/, and huge page support disabled
+[2022-01-10 13:59:59,368 I 9803 9832] dlmalloc.cc:146: create_and_mmap_buffer(8428716040, /dev/shm/plasmaXXXXXX)
+[2022-01-10 13:59:59,369 I 9803 9803] grpc_server.cc:112: ObjectManager server started, listening on port 38835.
+[2022-01-10 13:59:59,373 I 9803 9803] node_manager.cc:302: Initializing NodeManager with ID 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed
+[2022-01-10 13:59:59,373 I 9803 9803] grpc_server.cc:112: NodeManager server started, listening on port 36785.
+[2022-01-10 13:59:59,378 I 9803 9845] agent_manager.cc:85: Monitor agent process with pid 9844, register timeout 30000ms.
+[2022-01-10 13:59:59,379 I 9803 9803] raylet.cc:103: Raylet of id, 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed started. Raylet consists of node_manager and object_manager. node_manager address: 131.215.21.210:36785 object_manager address: 131.215.21.210:38835 hostname: 131.215.21.210
+[2022-01-10 13:59:59,381 I 9803 9803] accessor.cc:560: Received notification for node id = 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed, IsAlive = 1
+[2022-01-10 13:59:59,473 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9864
+[2022-01-10 13:59:59,473 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9865
+[2022-01-10 13:59:59,474 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9866
+[2022-01-10 13:59:59,474 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9867
+[2022-01-10 13:59:59,474 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9868
+[2022-01-10 13:59:59,475 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9869
+[2022-01-10 13:59:59,475 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9870
+[2022-01-10 13:59:59,483 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9871
+[2022-01-10 13:59:59,491 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9872
+[2022-01-10 13:59:59,499 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9873
+[2022-01-10 13:59:59,507 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9874
+[2022-01-10 13:59:59,515 I 9803 9803] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 9875
+[2022-01-10 14:00:00,113 I 9803 9832] object_store.cc:35: Object store current usage 8e-09 / 8.42864 GB.
+[2022-01-10 14:00:00,232 I 9803 9803] node_manager.cc:541: New job has started. Job id 01000000 Driver pid 9692 is dead: 0 driver address: 131.215.21.210
+[2022-01-10 14:00:00,379 I 9803 9803] agent_manager.cc:36: HandleRegisterAgent, ip: 131.215.21.210, port: 59010, pid: 9844
+[2022-01-10 14:00:00,909 I 9803 9803] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = 0
+[2022-01-10 14:00:00,909 I 9803 9803] node_manager.cc:1309: Driver (pid=9692) is disconnected. job_id: 01000000
+[2022-01-10 14:00:00,910 I 9803 9803] node_manager.cc:541: New job has started. Job id 01000000 Driver pid -1 is dead: 1 driver address: 
+[2022-01-10 14:00:01,048 I 9803 9803] main.cc:278: Raylet received SIGTERM, shutting down...
+[2022-01-10 14:00:01,048 I 9803 9803] accessor.cc:391: Unregistering node info, node id = 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed
+[2022-01-10 14:00:01,048 I 9803 9803] io_service_pool.cc:47: IOServicePool is stopped.

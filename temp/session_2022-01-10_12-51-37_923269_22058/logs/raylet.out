@@ -1,0 +1,45 @@
+[2022-01-10 12:51:40,117 I 22169 22169] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 12:51:40,118 I 22169 22169] store_runner.cc:30: Allowing the Plasma store to use up to 7.77424GB of memory.
+[2022-01-10 12:51:40,118 I 22169 22169] store_runner.cc:46: Starting object store with directory /dev/shm, fallback /home/reza/Dropbox/Prog/MERA/temp/, and huge page support disabled
+[2022-01-10 12:51:40,118 I 22169 22199] dlmalloc.cc:146: create_and_mmap_buffer(7774273544, /dev/shm/plasmaXXXXXX)
+[2022-01-10 12:51:40,119 I 22169 22169] grpc_server.cc:112: ObjectManager server started, listening on port 34911.
+[2022-01-10 12:51:40,125 I 22169 22169] node_manager.cc:302: Initializing NodeManager with ID c9327160d2235c8b042368bac34ed63a4873e2b93d84f604ff867e9f
+[2022-01-10 12:51:40,125 I 22169 22169] grpc_server.cc:112: NodeManager server started, listening on port 38967.
+[2022-01-10 12:51:40,132 I 22169 22211] agent_manager.cc:85: Monitor agent process with pid 22210, register timeout 30000ms.
+[2022-01-10 12:51:40,132 I 22169 22169] raylet.cc:103: Raylet of id, c9327160d2235c8b042368bac34ed63a4873e2b93d84f604ff867e9f started. Raylet consists of node_manager and object_manager. node_manager address: 131.215.21.210:38967 object_manager address: 131.215.21.210:34911 hostname: 131.215.21.210
+[2022-01-10 12:51:40,134 I 22169 22169] accessor.cc:560: Received notification for node id = c9327160d2235c8b042368bac34ed63a4873e2b93d84f604ff867e9f, IsAlive = 1
+[2022-01-10 12:51:40,223 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22230
+[2022-01-10 12:51:40,224 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22231
+[2022-01-10 12:51:40,224 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22232
+[2022-01-10 12:51:40,225 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22233
+[2022-01-10 12:51:40,226 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22234
+[2022-01-10 12:51:40,227 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22235
+[2022-01-10 12:51:40,230 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22236
+[2022-01-10 12:51:40,234 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22237
+[2022-01-10 12:51:40,238 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22238
+[2022-01-10 12:51:40,246 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22239
+[2022-01-10 12:51:40,266 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22241
+[2022-01-10 12:51:40,275 I 22169 22169] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 22246
+[2022-01-10 12:51:40,844 I 22169 22199] object_store.cc:35: Object store current usage 8e-09 / 7.77424 GB.
+[2022-01-10 12:51:40,963 I 22169 22169] node_manager.cc:541: New job has started. Job id 01000000 Driver pid 22058 is dead: 0 driver address: 131.215.21.210
+[2022-01-10 12:51:41,170 I 22169 22169] agent_manager.cc:36: HandleRegisterAgent, ip: 131.215.21.210, port: 64843, pid: 22210
+[2022-01-10 13:01:40,192 I 22169 22169] node_manager.cc:620: Sending Python GC request to 13 local workers to clean up Python cyclic references.
+[2022-01-10 13:11:40,221 I 22169 22169] node_manager.cc:620: Sending Python GC request to 13 local workers to clean up Python cyclic references.
+[2022-01-10 13:13:26,836 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = 0
+[2022-01-10 13:13:26,836 I 22169 22169] node_manager.cc:1309: Driver (pid=22058) is disconnected. job_id: 01000000
+[2022-01-10 13:13:26,840 I 22169 22169] node_manager.cc:541: New job has started. Job id 01000000 Driver pid -1 is dead: 1 driver address: 
+[2022-01-10 13:13:26,892 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,892 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,893 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,894 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,894 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,894 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,896 I 22169 22169] node_manager.cc:1209: NodeManager::DisconnectClient, disconnect_type=5, has creation task exception = 0
+[2022-01-10 13:13:26,987 I 22169 22169] main.cc:278: Raylet received SIGTERM, shutting down...
+[2022-01-10 13:13:26,987 I 22169 22169] accessor.cc:391: Unregistering node info, node id = c9327160d2235c8b042368bac34ed63a4873e2b93d84f604ff867e9f
+[2022-01-10 13:13:26,987 I 22169 22169] io_service_pool.cc:47: IOServicePool is stopped.

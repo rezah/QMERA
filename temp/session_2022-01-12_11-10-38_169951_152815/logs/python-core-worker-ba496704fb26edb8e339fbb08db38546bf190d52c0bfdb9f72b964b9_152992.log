@@ -1,0 +1,7 @@
+[2022-01-12 11:10:41,991 I 152992 152992] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 152992
+[2022-01-12 11:10:41,999 I 152992 152992] grpc_server.cc:112: worker server started, listening on port 46319.
+[2022-01-12 11:10:42,002 I 152992 152992] core_worker.cc:479: Initializing worker at address: 131.215.21.210:46319, worker ID ba496704fb26edb8e339fbb08db38546bf190d52c0bfdb9f72b964b9, raylet cb7257dbae2c754564b6bece96d39bab19e712e07801f0bedb5a6163
+[2022-01-12 11:10:42,111 I 152992 152992] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-12 11:10:42,136 I 152992 153258] accessor.cc:560: Received notification for node id = cb7257dbae2c754564b6bece96d39bab19e712e07801f0bedb5a6163, IsAlive = 1
+[2022-01-12 11:11:59,327 I 152992 153258] accessor.cc:560: Received notification for node id = cb7257dbae2c754564b6bece96d39bab19e712e07801f0bedb5a6163, IsAlive = 0
+[2022-01-12 11:11:59,327 I 152992 153258] core_worker.cc:911: Node failure from cb7257dbae2c754564b6bece96d39bab19e712e07801f0bedb5a6163. All objects pinned on that node will be lost if object reconstruction is not enabled.

@@ -1,0 +1,505 @@
+[2022-01-10 11:28:31,007 I 12368 12368] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_redis_failure_detector.cc:30: Starting redis failure detector.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:42: Loading job table data.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:54: Loading node table data.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:66: Loading cluster resources table data.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:93: Loading actor table data.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:79: Loading placement group table data.
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:46: Finished loading job table data, size = 0
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:58: Finished loading node table data, size = 0
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:70: Finished loading cluster resources table data, size = 0
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:97: Finished loading actor table data, size = 0
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_init_data.cc:84: Finished loading placement group table data, size = 0
+[2022-01-10 11:28:31,008 I 12368 12368] gcs_heartbeat_manager.cc:30: GcsHeartbeatManager start, num_heartbeats_timeout=30
+[2022-01-10 11:28:31,022 I 12368 12368] grpc_server.cc:112: GcsServer server started, listening on port 34093.
+[2022-01-10 11:28:31,030 I 12368 12368] gcs_server.cc:339: Gcs server address = 131.215.21.210:34093
+[2022-01-10 11:28:31,030 I 12368 12368] gcs_server.cc:343: Finished setting gcs server address: 131.215.21.210:34093
+[2022-01-10 11:28:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 0, DrainNode request count: 0, GetAllNodeInfo request count: 0, GetInternalConfig request count: 0}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 0, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 0}
+[2022-01-10 11:28:33,058 I 12368 12368] gcs_node_manager.cc:42: Registering node info, node id = 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4, address = 131.215.21.210
+[2022-01-10 11:28:33,058 I 12368 12368] gcs_node_manager.cc:47: Finished registering node info, node id = 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4, address = 131.215.21.210
+[2022-01-10 11:28:33,058 I 12368 12368] gcs_placement_group_manager.cc:722: A new node: 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4 registered, will try to reschedule all the infeasible placement groups.
+[2022-01-10 11:28:33,060 I 12368 12368] gcs_job_manager.cc:140: Getting all job info.
+[2022-01-10 11:28:33,060 I 12368 12368] gcs_job_manager.cc:146: Finished getting all job info.
+[2022-01-10 11:28:33,990 I 12368 12368] gcs_job_manager.cc:40: Adding job, job id = 01000000, driver pid = 12149
+[2022-01-10 11:28:33,991 I 12368 12368] gcs_job_manager.cc:54: Finished adding job, job id = 01000000, driver pid = 12149
+[2022-01-10 11:29:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 41, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:30:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 65, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:31:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 89, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:32:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 113, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:33:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 137, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:34:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 161, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:35:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 185, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:36:31,030 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 209, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:37:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 233, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:38:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 257, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:39:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 281, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:40:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 305, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:41:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 329, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:42:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 353, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:43:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 377, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:44:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 401, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:45:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 425, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:46:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 449, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:47:31,031 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 473, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:48:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 497, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:49:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 521, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:50:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 545, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:51:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 569, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:52:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 593, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:53:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 617, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:54:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 641, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:55:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 665, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:56:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 689, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:57:31,032 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 713, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:58:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 737, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 11:59:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 761, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:00:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 785, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:01:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 809, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:02:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 833, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:03:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 857, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:04:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 881, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:05:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 905, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:06:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 929, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:07:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 953, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:08:31,033 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 977, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:09:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1001, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:10:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1025, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:11:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1049, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:12:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1073, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:13:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1097, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:14:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1121, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:15:31,034 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1145, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:16:31,036 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1169, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:17:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1193, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:18:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1217, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:19:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1241, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:20:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1265, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:21:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1289, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:22:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1313, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:23:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1337, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:24:31,037 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1361, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:25:31,038 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1385, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:26:31,038 I 12368 12368] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 1, DrainNode request count: 0, GetAllNodeInfo request count: 1409, GetInternalConfig request count: 1}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 1, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 1}
+[2022-01-10 12:26:38,584 I 12368 12368] gcs_job_manager.cc:85: Finished marking job state, job id = 01000000
+[2022-01-10 12:26:38,641 I 12368 12368] gcs_node_manager.cc:66: Draining node info, node id = 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4
+[2022-01-10 12:26:38,641 I 12368 12368] gcs_node_manager.cc:188: Removing node, node id = 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4
+[2022-01-10 12:26:38,641 I 12368 12368] gcs_placement_group_manager.cc:697: Node 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4 failed, rescheduling the placement groups on the dead node.
+[2022-01-10 12:26:38,641 I 12368 12368] gcs_actor_manager.cc:797: Node 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4 failed, reconstructing actors.
+[2022-01-10 12:26:38,723 I 12368 12368] gcs_node_manager.cc:116: Raylet 089d7194cf38e7c3d9181cc84a38b6b000a5d14ecffc3dca45948fa4 is drained. Status IOError: . The information will be published to the cluster.
+[2022-01-10 12:26:38,754 I 12368 12368] gcs_server_main.cc:125: GCS server received SIGTERM, shutting down...
+[2022-01-10 12:26:38,754 I 12368 12368] gcs_server.cc:167: Stopping GCS server.
+[2022-01-10 12:26:38,763 I 12368 12368] gcs_server.cc:185: GCS server stopped.
+[2022-01-10 12:26:38,763 I 12368 12368] io_service_pool.cc:47: IOServicePool is stopped.

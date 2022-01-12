@@ -1,0 +1,36 @@
+[2022-01-10 13:14:21,588 I 24882 24882] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 13:14:21,588 I 24882 24882] store_runner.cc:30: Allowing the Plasma store to use up to 8.40676GB of memory.
+[2022-01-10 13:14:21,588 I 24882 24882] store_runner.cc:46: Starting object store with directory /dev/shm, fallback /home/reza/Dropbox/Prog/MERA/temp/, and huge page support disabled
+[2022-01-10 13:14:21,588 I 24882 24911] dlmalloc.cc:146: create_and_mmap_buffer(8406827016, /dev/shm/plasmaXXXXXX)
+[2022-01-10 13:14:21,589 I 24882 24882] grpc_server.cc:112: ObjectManager server started, listening on port 38569.
+[2022-01-10 13:14:21,593 I 24882 24882] node_manager.cc:302: Initializing NodeManager with ID 1890a6c4b2f3e05cc7cb4f49f02697687574c309aef4d8f13add88a5
+[2022-01-10 13:14:21,594 I 24882 24882] grpc_server.cc:112: NodeManager server started, listening on port 43209.
+[2022-01-10 13:14:21,598 I 24882 24923] agent_manager.cc:85: Monitor agent process with pid 24922, register timeout 30000ms.
+[2022-01-10 13:14:21,598 I 24882 24882] raylet.cc:103: Raylet of id, 1890a6c4b2f3e05cc7cb4f49f02697687574c309aef4d8f13add88a5 started. Raylet consists of node_manager and object_manager. node_manager address: 131.215.21.210:43209 object_manager address: 131.215.21.210:38569 hostname: 131.215.21.210
+[2022-01-10 13:14:21,599 I 24882 24882] accessor.cc:560: Received notification for node id = 1890a6c4b2f3e05cc7cb4f49f02697687574c309aef4d8f13add88a5, IsAlive = 1
+[2022-01-10 13:14:21,694 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24943
+[2022-01-10 13:14:21,695 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24944
+[2022-01-10 13:14:21,695 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24945
+[2022-01-10 13:14:21,696 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24946
+[2022-01-10 13:14:21,698 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24947
+[2022-01-10 13:14:21,699 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24948
+[2022-01-10 13:14:21,700 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24949
+[2022-01-10 13:14:21,708 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24950
+[2022-01-10 13:14:21,710 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24951
+[2022-01-10 13:14:21,714 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24952
+[2022-01-10 13:14:21,734 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24953
+[2022-01-10 13:14:21,749 I 24882 24882] worker_pool.cc:418: Started worker process of 1 worker(s) with pid 24954
+[2022-01-10 13:14:22,288 I 24882 24911] object_store.cc:35: Object store current usage 8e-09 / 8.40676 GB.
+[2022-01-10 13:14:22,607 I 24882 24882] node_manager.cc:541: New job has started. Job id 01000000 Driver pid 24770 is dead: 0 driver address: 131.215.21.210
+[2022-01-10 13:14:22,744 I 24882 24882] agent_manager.cc:36: HandleRegisterAgent, ip: 131.215.21.210, port: 39871, pid: 24922
+[2022-01-10 13:24:21,604 I 24882 24882] node_manager.cc:620: Sending Python GC request to 13 local workers to clean up Python cyclic references.
+[2022-01-10 13:34:21,694 I 24882 24882] node_manager.cc:620: Sending Python GC request to 13 local workers to clean up Python cyclic references.
+[2022-01-10 13:40:01,132 I 24882 24911] object_store.cc:35: Object store current usage 0.00458787 / 8.40676 GB.
+[2022-01-10 13:40:30,571 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 5120 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:40:36,656 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 6131 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:41:03,945 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 19826 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:41:06,094 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 7378 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:41:18,120 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 5687 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:41:54,010 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 35808 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:42:10,774 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 8395 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.
+[2022-01-10 13:42:14,805 W 24882 24924] node_manager.cc:156: Last heartbeat was sent 9179 ms ago. There might be resource pressure on this node. If heartbeat keeps lagging, this node can be marked as dead mistakenly.

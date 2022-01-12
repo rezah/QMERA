@@ -1,0 +1,9 @@
+[2022-01-11 10:38:57,123 I 84013 84013] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 84013
+[2022-01-11 10:38:58,061 I 84013 84013] grpc_server.cc:112: driver server started, listening on port 43521.
+[2022-01-11 10:38:58,065 I 84013 84013] core_worker.cc:479: Initializing worker at address: 131.215.21.210:43521, worker ID 01000000ffffffffffffffffffffffffffffffffffffffffffffffff, raylet aeb92027bc89eff39e80850b86ad9eed64af457af961b50265d9718e
+[2022-01-11 10:38:58,174 I 84013 84013] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-11 10:38:58,174 I 84013 84550] accessor.cc:560: Received notification for node id = aeb92027bc89eff39e80850b86ad9eed64af457af961b50265d9718e, IsAlive = 1
+[2022-01-11 10:39:22,072 E 84609 84013] logging.cc:317: *** SIGTERM received at time=1641926362 on cpu 4 ***
+[2022-01-11 10:39:22,072 E 84609 84013] logging.cc:317: PC: @     0x7f43382b03f4  (unknown)  do_futex_wait.constprop.0
+[2022-01-11 10:39:22,074 E 84609 84013] logging.cc:317:     @     0x7f43382b23c0  (unknown)  (unknown)
+[2022-01-11 10:39:22,076 E 84609 84013] logging.cc:317:     @               0x80  (unknown)  (unknown)

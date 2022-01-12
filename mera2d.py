@@ -1,30 +1,44 @@
 import quf
 import cotengra as ctg
 from quimb import *
+import time
+from cotengra.parallel import RayExecutor
+from concurrent.futures import ProcessPoolExecutor
+from loky import get_reusable_executor
 
+
+
+
+#client_gpu = quf.get_client_g(1.)
+#client_cpu = quf.get_client_c(1.0)              # 0.5 == two tasks are perfomed on one cpu
+#ray start --head --num-cpus=12
 
 def    mera_tn_2d():
 
-  data_type='float64'
-  dist_type="uniform"         #{'normal', 'uniform', 'exp'}
+  data_type= 'float64' #"complex128"  #  'float32'
+  dist_type="normal"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
-  jit_fn=True
+  jit_fn=False
   phys_dim=2
-  chi=4
+  chi=16
   device='cpu'
-
+  autodiff_backend="torch"
+  executor =  get_reusable_executor()          #get_reusable_executor()  #   RayExecutor() #client_cpu  # #RayExecutor()  #get_reusable_executor()   #RayExecutor() #RayExecutor()  #None #ProcessPoolExecutor()
+  division_seg=16               # segment number of interaction list ~ #cpus  default_remote_opts={'num_cpus': 12.0}
+#ray stop --force
 ####################################
 
   opt = ctg.ReusableHyperOptimizer(
-     progbar=True,
-     minimize='flops',       #{'size', 'flops', 'combo'}, what to target
-     reconf_opts={}, 
+     progbar=False,
+     minimize='combo-64',       #{'size', 'flops', 'combo'}, what to target
+     #reconf_opts={}, 
      max_repeats=2**6,
      max_time=3600,
 #    max_time='rate:1e6',
      parallel=True,
      #optlib='baytune',         # 'nevergrad', 'baytune', 'chocolate','random'
-     directory="cash/"
+     directory="cash/",
+     #executor=executor
  )
   #opt="auto-hq"
 
@@ -43,38 +57,50 @@ def    mera_tn_2d():
   #tn_U.astype_(data_type)
   quf.change_datatype(tn_U, data_type)
   #width_max, flops_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)  
-  quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
+  #quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
 
 
-
+  #start_time = time.time()
 ###############################################################
   #print ("M", quf.Mag_calc(tn_U, opt,data_type=data_type) )
-  print ( "E_init=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
+  #print ( "E_init=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt),"--- %s seconds ---" % (time.time() - start_time) )
+  #start_time = time.time()
+  #print ( "E_init=",quf.energy_mps(tn_U, list_sites, list_inter,optimize=opt),"--- %s seconds ---" % (time.time() - start_time)  )
   print ( "chi", tn_U.max_bond() )
-  #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=16, rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
+  #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=64, rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
   #tn_U=quf.TN_to_iso(tn_U, list_tags_I,list_tags_U)
   print ( "chi_new", tn_U.max_bond()  )
-  print ("E_init_f=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt))
+  #start_time = time.time()
+  #print ("E_init_f=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt), "--- %s seconds ---" % (time.time() - start_time))
+  #print ( "E_init=",quf.energy_mps(tn_U, list_sites, list_inter,optimize=opt) )
+
+
 #  tn_U.unitize_(method=method, allow_no_left_inds=True)
   #print ("E_init=", quf.energy_f(tn_U, list_sites, list_inter,optimize=opt))
 #################################################
 
 
-
+  segment=len(list_inter)//division_seg #//12
   optimizer_c='L-BFGS-B'
   optimizer_c='adam'
+  #optimizer_c='CG'
 
   #optimizer_c='LD_VAR2'
   #optimizer_c='LD_LBFGS'
   #optimizer_c='LD_TNEWTON_PRECOND_RESTART'
   #optimizer_c='LN_COBYLA'
 
-  tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
+  #tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device,autodiff_backend=autodiff_backend)
+  tnopt_mera=quf.auto_diff_mera_parallel(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device, executor=executor, segment=segment, autodiff_backend=autodiff_backend)
+
+
+  #tnopt_mera=quf.auto_diff_umps(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
 
 
 
-  tn_U = tnopt_mera.optimize(n=100 ,hessp=False, ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
-  #tn_U =  tnopt_mera.optimize_nlopt(400 ,ftol_rel= 2.220e-14)
+
+  tn_U = tnopt_mera.optimize(n=120 ,hessp=False, ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
+  #tn_U =  tnopt_mera.optimize_nlopt(50 ,ftol_rel= 2.220e-14)
 
 
 
@@ -90,7 +116,7 @@ def    mera_tn_2d():
 
 
   #tn_U.unitize_(method=method, allow_no_left_inds=True)
-  print ( "E_f=", quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
+  #print ( "E_f=", quf.energy_f(tn_U, list_sites, list_inter,optimize=opt) )
   #print ("M", quf.Mag_calc(tn_U, opt,data_type=data_type) )
   save_to_disk( tn_U, "Store/tn_U")
 
@@ -104,7 +130,6 @@ def    mera_tn_2d():
   file = open("Data/mera.txt", "w")
   for index in range(len(y)):
      file.write(str(x_list[index]) + "  "+ str(y[index])+ "  " + "\n")
-
 
 
 

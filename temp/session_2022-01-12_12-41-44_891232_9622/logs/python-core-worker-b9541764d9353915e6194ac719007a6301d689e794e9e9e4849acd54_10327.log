@@ -1,0 +1,10 @@
+[2022-01-12 12:41:49,357 I 10327 10327] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 10327
+[2022-01-12 12:41:49,410 I 10327 10327] grpc_server.cc:112: worker server started, listening on port 45109.
+[2022-01-12 12:41:49,414 I 10327 10327] core_worker.cc:479: Initializing worker at address: 131.215.21.210:45109, worker ID b9541764d9353915e6194ac719007a6301d689e794e9e9e4849acd54, raylet 63590236badecdba02e7161758bf9d60aa3e0e5eb094b6a0eaeb9b44
+[2022-01-12 12:41:49,526 I 10327 10327] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-12 12:41:49,537 I 10327 10569] accessor.cc:560: Received notification for node id = 63590236badecdba02e7161758bf9d60aa3e0e5eb094b6a0eaeb9b44, IsAlive = 1
+[2022-01-12 12:42:37,474 I 10327 10569] core_worker.cc:829: Exit signal received, this process will exit after all outstanding tasks have finished, exit_type=IDLE_EXIT
+[2022-01-12 12:42:37,474 I 10327 10327] raylet_client.cc:150: RayletClient::Disconnect, exit_type=IDLE_EXIT, has creation_task_exception_pb_bytes=0
+[2022-01-12 12:42:37,474 I 10327 10327] core_worker.cc:363: Removed worker b9541764d9353915e6194ac719007a6301d689e794e9e9e4849acd54
+[2022-01-12 12:42:37,478 I 10327 10327] core_worker.cc:176: Destructing CoreWorkerProcess. pid: 10327
+[2022-01-12 12:42:37,478 I 10327 10327] io_service_pool.cc:47: IOServicePool is stopped.

@@ -1,0 +1,17 @@
+2022-01-10 14:07:02,304	INFO agent.py:90 -- Parent pid is 15975
+2022-01-10 14:07:02,305	INFO agent.py:95 -- Dashboard agent grpc address: 0.0.0.0:61047
+2022-01-10 14:07:02,310	INFO utils.py:200 -- Get all modules by type: DashboardAgentModule
+2022-01-10 14:07:02,796	WARNING tune_head.py:22 -- tune module is not available: cannot import name 'Analysis' from 'ray.tune' (/home/reza/anaconda3/lib/python3.8/site-packages/ray/tune/__init__.py)
+2022-01-10 14:07:02,797	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.event.event_agent.EventAgent'>
+2022-01-10 14:07:02,797	INFO event_agent.py:30 -- Event agent cache buffer size: 10240
+2022-01-10 14:07:02,797	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.log.log_agent.LogAgent'>
+2022-01-10 14:07:02,797	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.reporter.reporter_agent.ReporterAgent'>
+2022-01-10 14:07:02,798	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.runtime_env.runtime_env_agent.RuntimeEnvAgent'>
+2022-01-10 14:07:02,798	INFO agent.py:114 -- Loaded 4 modules.
+2022-01-10 14:07:02,799	INFO agent.py:191 -- Dashboard agent http address: 0.0.0.0:42913
+2022-01-10 14:07:02,799	INFO agent.py:199 -- <ResourceRoute [GET] <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-06-59_504417_15856/logs')> -> <bound method StaticResource._handle of <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-06-59_504417_15856/logs')>>
+2022-01-10 14:07:02,799	INFO agent.py:199 -- <ResourceRoute [OPTIONS] <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-06-59_504417_15856/logs')> -> <bound method _PreflightHandler._preflight_handler of <aiohttp_cors.cors_config._CorsConfigImpl object at 0x7fa5d17a0790>>
+2022-01-10 14:07:02,799	INFO agent.py:200 -- Registered 2 routes.
+2022-01-10 14:07:02,802	INFO event_agent.py:47 -- Report events to b'131.215.21.210:45243'
+2022-01-10 14:07:02,802	INFO event_utils.py:123 -- Monitor events logs modified after 1641850622.3200085 on /home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-06-59_504417_15856/logs/events, the source types are ['CORE_WORKER', 'RAYLET', 'COMMON'].
+2022-01-10 14:16:59,805	ERROR agent.py:126 -- Raylet is dead, exiting.

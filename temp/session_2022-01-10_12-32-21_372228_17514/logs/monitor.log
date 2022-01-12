@@ -1,0 +1,1103 @@
+2022-01-10 12:32:22,924	INFO monitor.py:527 -- Starting monitor using ray installation: /home/reza/anaconda3/lib/python3.8/site-packages/ray/__init__.py
+2022-01-10 12:32:22,924	INFO monitor.py:528 -- Ray version: 1.9.0
+2022-01-10 12:32:22,924	INFO monitor.py:529 -- Ray commit: 92599d9127e228fe8d0a2d94ca75754ec21c4ae4
+2022-01-10 12:32:22,924	INFO monitor.py:530 -- Monitor started with command: ['/home/reza/anaconda3/lib/python3.8/site-packages/ray/autoscaler/_private/monitor.py', '--logs-dir=/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_12-32-21_372228_17514/logs', '--redis-address=131.215.21.210:6379', '--logging-rotate-bytes=536870912', '--logging-rotate-backup-count=5', '--redis-password=5241590000000000', '--monitor-ip=131.215.21.210']
+2022-01-10 12:32:22,928	INFO monitor.py:192 -- Starting autoscaler metrics server on port 44217
+2022-01-10 12:32:22,928	INFO monitor.py:206 -- Monitor: Started
+2022-01-10 12:32:22,951	INFO autoscaler.py:214 -- StandardAutoscaler: {'cluster_name': 'default', 'max_workers': 0, 'upscaling_speed': 1.0, 'docker': {}, 'idle_timeout_minutes': 0, 'provider': {'type': 'readonly', 'use_node_id_as_ip': True}, 'auth': {}, 'available_node_types': {'ray.head.default': {'resources': {}, 'node_config': {}, 'max_workers': 0}}, 'head_node_type': 'ray.head.default', 'file_mounts': {}, 'cluster_synced_files': [], 'file_mounts_sync_continuously': False, 'rsync_exclude': [], 'rsync_filter': [], 'initialization_commands': [], 'setup_commands': [], 'head_setup_commands': [], 'worker_setup_commands': [], 'head_start_ray_commands': [], 'worker_start_ray_commands': [], 'head_node': {}, 'worker_nodes': {}}
+2022-01-10 12:32:22,952	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:22.952680 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:27,959	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:27.959369 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:32,966	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:32.966116 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:37,975	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:37.975434 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:42,980	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:42.979934 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:47,984	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:47.983965 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:52,987	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:52.987812 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:32:57,996	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:32:57.995986 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:03,002	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:03.002069 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:08,008	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:08.008161 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:13,016	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:13.016416 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:18,023	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:18.023489 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:23,028	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:23.027982 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:28,036	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:28.035909 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:33,044	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:33.043930 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:38,052	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:38.051930 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:43,060	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:43.060424 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:48,068	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:48.068030 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:53,078	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:53.077953 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:33:58,084	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:33:58.084561 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:03,091	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:03.091868 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:08,100	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:08.100038 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:13,108	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:13.108131 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:18,116	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:18.116558 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:23,124	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:23.123922 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:28,131	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:28.131877 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:33,140	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:33.140071 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:38,151	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:38.151314 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:43,160	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:43.160059 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:48,167	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:48.167738 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:53,176	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:53.175951 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:34:58,183	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:34:58.183590 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:03,188	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:03.187942 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:08,196	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:08.196303 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:13,203	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:13.203746 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:18,212	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:18.212000 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:23,215	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:23.215804 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:28,224	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:28.223996 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:33,231	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:33.231719 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:38,239	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:38.238959 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:43,244	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:43.244304 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:48,252	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:48.252639 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:53,260	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:53.260244 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:35:58,268	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:35:58.267927 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:03,276	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:03.276085 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:08,284	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:08.283929 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:13,291	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:13.291862 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:18,300	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:18.300040 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:23,307	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:23.307853 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)
+2022-01-10 12:36:28,316	INFO autoscaler.py:278 -- 
+======== Autoscaler status: 2022-01-10 12:36:28.316045 ========
+Node status
+---------------------------------------------------------------
+Healthy:
+ 1 node_a73cdcc1932be5e29bf83013b8fe7585bf1281373fc43077f508e422
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Usage:
+ 0.0/12.0 CPU
+ 0.0/1.0 GPU
+ 0.0/1.0 accelerator_type:GTX
+ 0.00/15.925 GiB memory
+ 0.00/7.963 GiB object_store_memory
+
+Demands:
+ (no resource demands)

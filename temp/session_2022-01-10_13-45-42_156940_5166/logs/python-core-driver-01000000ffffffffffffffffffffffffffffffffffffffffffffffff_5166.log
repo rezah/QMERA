@@ -1,0 +1,20 @@
+[2022-01-10 13:45:45,877 I 5166 5166] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 5166
+[2022-01-10 13:45:46,633 I 5166 5166] grpc_server.cc:112: driver server started, listening on port 43217.
+[2022-01-10 13:45:46,636 I 5166 5166] core_worker.cc:479: Initializing worker at address: 131.215.21.210:43217, worker ID 01000000ffffffffffffffffffffffffffffffffffffffffffffffff, raylet 1b7cb3dfbc581ab919159de5a6895a9fc24da6e7487a6830afdabe13
+[2022-01-10 13:45:46,745 I 5166 5166] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 13:45:46,746 I 5166 5678] accessor.cc:560: Received notification for node id = 1b7cb3dfbc581ab919159de5a6895a9fc24da6e7487a6830afdabe13, IsAlive = 1
+[2022-01-10 13:46:37,887 E 5742 5166] logging.cc:317: *** SIGTERM received at time=1641851197 on cpu 8 ***
+[2022-01-10 13:46:37,887 E 5742 5166] logging.cc:317: PC: @     0x7f04f6d1b1c2  (unknown)  (unknown)
+[2022-01-10 13:46:37,887 E 5742 5166] logging.cc:317:     @     0x7f051daaf3c0  (unknown)  (unknown)
+[2022-01-10 13:46:37,890 E 5784 5166] logging.cc:317: *** SIGTERM received at time=1641851197 on cpu 5 ***
+[2022-01-10 13:46:37,890 E 5784 5166] logging.cc:317: PC: @     0x7f051daae2cf  (unknown)  write
+[2022-01-10 13:46:37,890 E 5756 5166] logging.cc:317: *** SIGTERM received at time=1641851197 on cpu 3 ***
+[2022-01-10 13:46:37,890 E 5728 5166] logging.cc:317: *** SIGTERM received at time=1641851197 on cpu 4 ***
+[2022-01-10 13:46:37,890 E 5756 5166] logging.cc:317: PC: @     0x7f051daae2cf  (unknown)  write
+[2022-01-10 13:46:37,890 E 5728 5166] logging.cc:317: PC: @     0x7f051daad3f4  (unknown)  do_futex_wait.constprop.0
+[2022-01-10 13:46:37,892 E 5756 5166] logging.cc:317:     @     0x7f051daaf3c0  (unknown)  (unknown)
+[2022-01-10 13:46:37,893 E 5728 5166] logging.cc:317:     @     0x7f051daaf3c0  (unknown)  (unknown)
+[2022-01-10 13:46:37,894 E 5784 5166] logging.cc:317:     @     0x7f051daaf3c0  (unknown)  (unknown)
+[2022-01-10 13:46:37,895 E 5756 5166] logging.cc:317:     @     0x7f051d08222c  (unknown)  (unknown)
+[2022-01-10 13:46:37,895 E 5728 5166] logging.cc:317:     @               0x80  (unknown)  (unknown)
+[2022-01-10 13:46:37,897 E 5784 5166] logging.cc:317:     @     0x7f051d08222c  (unknown)  (unknown)

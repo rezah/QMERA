@@ -1,0 +1,59 @@
+2022-01-10 14:02:31,412	INFO head.py:128 -- Dashboard head grpc address: 0.0.0.0:40561
+2022-01-10 14:02:31,412	INFO dashboard.py:92 -- Setup static dir for dashboard: /home/reza/anaconda3/lib/python3.8/site-packages/ray/dashboard/client/build
+2022-01-10 14:02:31,414	INFO head.py:55 -- Connect to GCS at 131.215.21.210:45395
+2022-01-10 14:02:31,417	INFO utils.py:200 -- Get all modules by type: DashboardHeadModule
+2022-01-10 14:02:31,636	WARNING tune_head.py:22 -- tune module is not available: cannot import name 'Analysis' from 'ray.tune' (/home/reza/anaconda3/lib/python3.8/site-packages/ray/tune/__init__.py)
+2022-01-10 14:02:31,636	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.actor.actor_head.ActorHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.event.event_head.EventHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.job.job_head.JobHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.log.log_head.LogHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.node.node_head.NodeHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.reporter.reporter_head.ReportHead'>
+2022-01-10 14:02:31,637	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.snapshot.snapshot_head.APIHead'>
+2022-01-10 14:02:31,638	INFO head.py:168 -- Loading DashboardHeadModule: <class 'ray.dashboard.modules.tune.tune_head.TuneController'>
+2022-01-10 14:02:31,638	INFO head.py:173 -- Loaded 8 modules.
+2022-01-10 14:02:31,641	INFO head.py:253 -- Dashboard head http address: 127.0.0.1:8265
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /> -> <function Dashboard.get_index at 0x7f25318d2dc0>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /favicon.ico> -> <function Dashboard.get_favicon at 0x7f25318d2ee0>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <StaticResource  /static -> PosixPath('/home/reza/anaconda3/lib/python3.8/site-packages/ray/dashboard/client/build/static')> -> <bound method StaticResource._handle of <StaticResource  /static -> PosixPath('/home/reza/anaconda3/lib/python3.8/site-packages/ray/dashboard/client/build/static')>>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /logical/actor_groups> -> <function ActorHead.get_actor_groups at 0x7f2519fd2820>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /logical/actors> -> <function ActorHead.get_all_actors[cache ttl=2, max_size=128] at 0x7f2519fd2940>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /logical/kill_actor> -> <function ActorHead.kill_actor at 0x7f2519fd2af0>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /events> -> <function EventHead.get_event[cache ttl=2, max_size=128] at 0x7f2519fdd1f0>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/version> -> <function JobHead.get_version at 0x7f2519e16c10>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [GET] <DynamicResource  /api/packages/{protocol}/{package_name}> -> <function JobHead.get_package at 0x7f2519e16dc0>
+2022-01-10 14:02:31,642	INFO head.py:271 -- <ResourceRoute [PUT] <DynamicResource  /api/packages/{protocol}/{package_name}> -> <function JobHead.upload_package at 0x7f2519e16f70>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [POST] <PlainResource  /api/jobs/> -> <function JobHead.submit_job at 0x7f2519e17160>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [POST] <DynamicResource  /api/jobs/{job_id}/stop> -> <function JobHead.stop_job at 0x7f2519e17310>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <DynamicResource  /api/jobs/{job_id}> -> <function JobHead.get_job_status at 0x7f2519e174c0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <DynamicResource  /api/jobs/{job_id}/logs> -> <function JobHead.get_job_logs at 0x7f2519e17670>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /log_index> -> <function LogHead.get_log_index at 0x7f2519e720d0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /log_proxy> -> <function LogHead.get_log_from_proxy at 0x7f2519e721f0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /nodes> -> <function NodeHead.get_all_nodes[cache ttl=2, max_size=128] at 0x7f2519e72c10>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <DynamicResource  /nodes/{node_id}> -> <function NodeHead.get_node[cache ttl=2, max_size=128] at 0x7f2519e72dc0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /memory/memory_table> -> <function NodeHead.get_memory_table at 0x7f2519e72f70>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /memory/set_fetch> -> <function NodeHead.set_fetch_memory_info at 0x7f2519e250d0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /node_logs> -> <function NodeHead.get_logs at 0x7f2519e251f0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /node_errors> -> <function NodeHead.get_errors at 0x7f2519e25310>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/launch_profiling> -> <function ReportHead.launch_profiling at 0x7f2519c9e670>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/ray_config> -> <function ReportHead.get_ray_config at 0x7f2519c9e790>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/cluster_status> -> <function ReportHead.get_cluster_status at 0x7f2519c9e8b0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/actors/kill> -> <function APIHead.kill_actor_gcs at 0x7f2519ca7e50>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /api/snapshot> -> <function APIHead.snapshot at 0x7f2519ca7f70>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /tune/info> -> <function TuneController.tune_info at 0x7f24f687b9d0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /tune/availability> -> <function TuneController.get_availability at 0x7f24f687baf0>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /tune/set_experiment> -> <function TuneController.set_tune_experiment at 0x7f24f687bc10>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <PlainResource  /tune/enable_tensorboard> -> <function TuneController.enable_tensorboard at 0x7f24f687bd30>
+2022-01-10 14:02:31,643	INFO head.py:271 -- <ResourceRoute [GET] <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-02-29_530256_11572/logs')> -> <bound method StaticResource._handle of <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-02-29_530256_11572/logs')>>
+2022-01-10 14:02:31,644	INFO head.py:272 -- Registered 32 routes.
+2022-01-10 14:02:31,644	INFO datacenter.py:69 -- Purge data.
+2022-01-10 14:02:31,644	INFO event_utils.py:123 -- Monitor events logs modified after 1641850351.4237814 on /home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-02-29_530256_11572/logs/events, the source types are ['GCS'].
+2022-01-10 14:02:31,647	INFO reporter_head.py:138 -- Subscribed to RAY_REPORTER:*
+2022-01-10 14:02:31,647	INFO actor_head.py:71 -- Subscribed to ACTOR:*
+2022-01-10 14:02:31,647	INFO actor_head.py:81 -- Getting all actor info from GCS.
+2022-01-10 14:02:31,647	INFO node_head.py:249 -- Subscribed to <_Sender name:b'RAY_LOG_CHANNEL', is_pattern:False, receiver:<Receiver is_active:True, senders:1, qsize:0>>
+2022-01-10 14:02:31,647	INFO node_head.py:309 -- Subscribed to b'ERROR_INFO:*'
+2022-01-10 14:02:31,647	INFO actor_head.py:107 -- Received 0 actor info from GCS.
+2022-01-10 14:02:32,079	INFO node_head.py:270 -- Received a log for 131.215.21.210 and autoscaler
+2022-01-10 14:02:36,208	INFO node_head.py:270 -- Received a log for 131.215.21.210 and autoscaler
+2022-01-10 14:02:41,241	INFO node_head.py:270 -- Received a log for 131.215.21.210 and autoscaler

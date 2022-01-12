@@ -5,24 +5,27 @@ from quimb import *
 
 def    cont_tn_2d():
 
-  data_type='float32'
+  data_type='float64'
   dist_type="normal"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=True
-  chi=[2,4]
+  chi=[2,4,16,34,64,120,160,240,340]
   device='cpu'
   phys_dim=2
   list_width_max=[]
   list_flops_max=[]
   list_peak_max=[]
+  list_width_av=[]
+  list_flops_av=[]
+  list_peak_av=[]
   
 ####################################
 
   opt = ctg.ReusableHyperOptimizer(
-     progbar=True,
-     minimize='flops',       #{'size', 'flops', 'combo'}, what to target
-     reconf_opts={}, 
-     max_repeats=2**7,
+     progbar=False,
+     minimize='combo-64',       #{'size', 'flops', 'combo'}, what to target
+     #reconf_opts={}, 
+     max_repeats=2**5,
      max_time=3600,
 #    max_time='rate:1e6',
      parallel=True,
@@ -37,8 +40,8 @@ def    cont_tn_2d():
   #tn_U.unitize_(method=method, allow_no_left_inds=True)
   #tn_U=load_from_disk("Store/tn_U")
   for i in chi:
-   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
-   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build_3d(phys_dim=phys_dim,chi=i,data_type=data_type,dist_type=dist_type)
+   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
+   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build_3d(phys_dim=phys_dim,chi=i,data_type=data_type,dist_type=dist_type)
 
    #save_to_disk(method,"Store/method")
  ############################################################
@@ -47,10 +50,14 @@ def    cont_tn_2d():
    #list_flops_max.append(flops_max)
    #list_peak_max.append(peak_max)
  ############################################################
-   width_max, flops_max, peak_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)
+   width_max, flops_max, peak_max, width_av, flops_av, peak_av=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)
    list_width_max.append(width_max)
    list_flops_max.append(flops_max)
    list_peak_max.append(peak_max)
+   list_width_av.append(width_av)
+   list_flops_av.append(flops_av)
+   list_peak_av.append(peak_av)
+
   #quf.Plot_TN(tn_U,list_scale)
 
 
@@ -112,11 +119,11 @@ def    cont_tn_2d():
   #for index in range(len(chi)):
   #   file.write( str(chi[index]) + "  " +str(list_width_max[index]) + "  "+ str(list_flops_max[index])
   #   +"  "+str(list_peak_max[index])+ "  " + "\n")
-  print ( "chi=",chi, "width=",list_width_max, "flops=",list_flops_max, "peak_max", list_peak_max)
+  print ( "chi=",chi, "width=",list_width_max,list_width_av, "flops=",list_flops_max,list_flops_av, "peak_max", list_peak_max,list_peak_av)
   file = open("Data/contractInfo.txt", "w")
   for index in range(len(chi)):
      file.write( str(chi[index]) + "  " +str(list_width_max[index]) + "  "+ str(list_flops_max[index])
-     +"  "+str(list_peak_max[index])+ "  " + "\n")
+     +"  "+str(list_peak_max[index])+ "  " +str(list_width_av[index])+"  " +str(list_flops_av[index])+ "  "+str(list_peak_av[index])+ "\n")
 
 
 

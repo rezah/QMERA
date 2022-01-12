@@ -1,0 +1,8 @@
+[2022-01-10 14:00:00,059 I 9874 9874] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 9874
+[2022-01-10 14:00:00,065 I 9874 9874] grpc_server.cc:112: worker server started, listening on port 35533.
+[2022-01-10 14:00:00,067 I 9874 9874] core_worker.cc:479: Initializing worker at address: 131.215.21.210:35533, worker ID 91d034bcba7c6049bbf65388a02cbf68b9972ccd7f19d94d379ea3f0, raylet 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed
+[2022-01-10 14:00:00,232 I 9874 9874] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 14:00:00,232 I 9874 10190] accessor.cc:560: Received notification for node id = 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed, IsAlive = 1
+[2022-01-10 14:00:01,071 W 9874 10090] gcs_server_address_updater.cc:61: [1] Failed to get the gcs server address from raylet 1 times in a row. If it keeps failing to obtain the address, the worker might crash. Connection status IOError: 
+[2022-01-10 14:00:01,072 I 9874 10190] accessor.cc:560: Received notification for node id = 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed, IsAlive = 0
+[2022-01-10 14:00:01,072 I 9874 10190] core_worker.cc:911: Node failure from 220ca70ffcf48f450b0386ca0409c977bbc03b02d30eb46f631676ed. All objects pinned on that node will be lost if object reconstruction is not enabled.

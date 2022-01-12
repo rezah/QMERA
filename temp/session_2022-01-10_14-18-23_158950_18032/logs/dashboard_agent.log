@@ -1,0 +1,63 @@
+2022-01-10 14:18:25,861	INFO agent.py:90 -- Parent pid is 18147
+2022-01-10 14:18:25,862	INFO agent.py:95 -- Dashboard agent grpc address: 0.0.0.0:52911
+2022-01-10 14:18:25,867	INFO utils.py:200 -- Get all modules by type: DashboardAgentModule
+2022-01-10 14:18:26,369	WARNING tune_head.py:22 -- tune module is not available: cannot import name 'Analysis' from 'ray.tune' (/home/reza/anaconda3/lib/python3.8/site-packages/ray/tune/__init__.py)
+2022-01-10 14:18:26,370	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.event.event_agent.EventAgent'>
+2022-01-10 14:18:26,370	INFO event_agent.py:30 -- Event agent cache buffer size: 10240
+2022-01-10 14:18:26,370	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.log.log_agent.LogAgent'>
+2022-01-10 14:18:26,370	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.reporter.reporter_agent.ReporterAgent'>
+2022-01-10 14:18:26,371	INFO agent.py:109 -- Loading DashboardAgentModule: <class 'ray.dashboard.modules.runtime_env.runtime_env_agent.RuntimeEnvAgent'>
+2022-01-10 14:18:26,372	INFO agent.py:114 -- Loaded 4 modules.
+2022-01-10 14:18:26,372	INFO agent.py:191 -- Dashboard agent http address: 0.0.0.0:35049
+2022-01-10 14:18:26,372	INFO agent.py:199 -- <ResourceRoute [GET] <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-18-23_158950_18032/logs')> -> <bound method StaticResource._handle of <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-18-23_158950_18032/logs')>>
+2022-01-10 14:18:26,373	INFO agent.py:199 -- <ResourceRoute [OPTIONS] <StaticResource  /logs -> PosixPath('/home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-18-23_158950_18032/logs')> -> <bound method _PreflightHandler._preflight_handler of <aiohttp_cors.cors_config._CorsConfigImpl object at 0x7f63622c3730>>
+2022-01-10 14:18:26,373	INFO agent.py:200 -- Registered 2 routes.
+2022-01-10 14:18:26,374	INFO event_agent.py:47 -- Report events to b'131.215.21.210:35963'
+2022-01-10 14:18:26,375	INFO event_utils.py:123 -- Monitor events logs modified after 1641851305.8804219 on /home/reza/Dropbox/Prog/MERA/temp/session_2022-01-10_14-18-23_158950_18032/logs/events, the source types are ['RAYLET', 'COMMON', 'CORE_WORKER'].
+2022-01-10 14:18:36,904	ERROR gcs_utils.py:136 -- Failed to send request to gcs, reconnecting. Error <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Socket closed"
+	debug_error_string = "{"created":"@1641853116.904379736","description":"Error received from peer ipv4:131.215.21.210:42107","file":"src/core/lib/surface/call.cc","file_line":1061,"grpc_message":"Socket closed","grpc_status":14}"
+>
+2022-01-10 14:18:37,908	ERROR gcs_utils.py:136 -- Failed to send request to gcs, reconnecting. Error <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1641853117.907791742","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":4133,"referenced_errors":[{"created":"@1641853117.907782864","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-01-10 14:18:38,911	ERROR gcs_utils.py:136 -- Failed to send request to gcs, reconnecting. Error <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1641853118.911263683","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":4133,"referenced_errors":[{"created":"@1641853118.911254378","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-01-10 14:18:39,914	ERROR gcs_utils.py:136 -- Failed to send request to gcs, reconnecting. Error <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1641853119.914558283","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":4133,"referenced_errors":[{"created":"@1641853119.914549123","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-01-10 14:18:40,918	ERROR gcs_utils.py:136 -- Failed to send request to gcs, reconnecting. Error <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1641853120.917961490","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":4133,"referenced_errors":[{"created":"@1641853120.917951649","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-01-10 14:18:41,921	ERROR reporter_agent.py:545 -- Error publishing node physical stats.
+Traceback (most recent call last):
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/dashboard/modules/reporter/reporter_agent.py", line 534, in _perform_iteration
+    formatted_status_string = internal_kv._internal_kv_get(
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/experimental/internal_kv.py", line 43, in _internal_kv_get
+    return global_gcs_client.internal_kv_get(key, namespace)
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/gcs_utils.py", line 130, in wrapper
+    return f(self, *args, **kwargs)
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/gcs_utils.py", line 233, in internal_kv_get
+    reply = self._kv_stub.InternalKVGet(req)
+  File "/home/reza/.local/lib/python3.8/site-packages/grpc/_channel.py", line 826, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+  File "/home/reza/.local/lib/python3.8/site-packages/grpc/_channel.py", line 729, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1641853121.921288670","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":4133,"referenced_errors":[{"created":"@1641853121.921279275","description":"failed to connect to all addresses","file":"src/core/ext/filters/client_channel/lb_policy/pick_first/pick_first.cc","file_line":397,"grpc_status":14}]}"
+>
+2022-01-10 14:18:41,925	ERROR agent.py:126 -- Raylet is dead, exiting.

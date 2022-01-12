@@ -1,0 +1,71 @@
+[2022-01-12 12:43:15,043 I 11128 11128] core_worker.cc:132: Constructing CoreWorkerProcess. pid: 11128
+[2022-01-12 12:43:15,050 I 11128 11128] grpc_server.cc:112: worker server started, listening on port 36557.
+[2022-01-12 12:43:15,053 I 11128 11128] core_worker.cc:479: Initializing worker at address: 131.215.21.210:36557, worker ID 7edaee0ba3c5a9ad85c4df3f82ebcf8479110d1be70ffe9fe9bcb52d, raylet 243f4bce0c5cbb91e66e38927998e90476778e9c3a25f81a0fb86acb
+[2022-01-12 12:43:15,205 I 11128 11128] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-12 12:43:15,205 I 11128 11434] accessor.cc:560: Received notification for node id = 243f4bce0c5cbb91e66e38927998e90476778e9c3a25f81a0fb86acb, IsAlive = 1
+[2022-01-12 12:45:08,072 W 11128 11331] gcs_server_address_updater.cc:61: [1] Failed to get the gcs server address from raylet 1 times in a row. If it keeps failing to obtain the address, the worker might crash. Connection status IOError: 
+[2022-01-12 12:45:09,072 I 11128 11434] raylet_client.cc:336: Error reporting task backlog information: IOError: 
+[2022-01-12 12:45:09,227 I 11128 11434] raylet_client.cc:336: Error reporting task backlog information: IOError: 
+[2022-01-12 12:45:10,227 I 11128 11434] raylet_client.cc:336: Error reporting task backlog information: IOError: 
+[2022-01-12 12:45:15,307 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:45:25,315 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:45:35,323 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:45:45,331 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:45:55,339 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:05,347 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:15,355 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:25,363 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:35,371 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:45,379 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:46:55,387 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:05,395 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:15,403 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:25,411 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:35,420 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:45,428 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:47:55,436 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:05,444 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:15,451 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:25,460 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:35,469 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:45,482 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:48:55,493 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:05,500 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:15,509 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:25,515 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:35,522 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:45,529 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:49:55,537 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:05,543 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:08,105 W 11128 11331] gcs_server_address_updater.cc:61: [301] Failed to get the gcs server address from raylet 301 times in a row. If it keeps failing to obtain the address, the worker might crash. Connection status IOError: 
+[2022-01-12 12:50:15,550 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:25,556 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:35,563 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:45,577 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:50:55,584 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:05,592 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:15,598 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:25,606 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:35,613 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:45,619 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:51:55,626 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:05,633 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:15,640 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:25,651 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:35,658 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:45,665 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:52:55,671 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:05,678 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:15,684 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:25,691 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:35,698 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:45,704 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:53:55,711 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:05,718 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:15,724 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:25,731 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:35,737 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:45,745 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:54:55,755 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:55:05,762 W 11128 11435] metric_exporter.cc:206: Export metrics to agent failed: IOError: . This won't affect Ray, but you can lose metrics from the cluster.
+[2022-01-12 12:55:07,132 E 11128 11331] gcs_server_address_updater.cc:76: Failed to receive the GCS address for 600 times without success. The worker will exit ungracefully. It is because GCS has died. It could be because there was an issue that kills GCS, such as high memory usage triggering OOM killer to kill GCS. Cluster will be highly likely unavailable if you see this log. Please check the log from gcs_server.err.

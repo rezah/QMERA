@@ -1,0 +1,56 @@
+:task_name:deploy
+/home/reza/quimb/quimb/core.py:34: UserWarning: 'NUMBA_NUM_THREADS' has been set elsewhere and doesn't match the value 'quimb' has tried to set - 6 vs 1.
+  warnings.warn(
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+:task_name:deploy
+2022-01-12 12:45:07,512	ERROR import_thread.py:89 -- ImportThread: Connection closed by server.
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 688, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 689, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1870, in ray._raylet.CoreWorker.store_task_outputs
+  File "python/ray/_raylet.pyx", line 160, in ray._raylet.check_status
+ray.exceptions.RaySystemError: System error: Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 759, in ray._raylet.task_execution_handler
+  File "python/ray/_raylet.pyx", line 580, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 716, in ray._raylet.execute_task
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/utils.py", line 117, in push_error_to_driver
+    worker.core_worker.push_error(job_id, error_type, message, time.time())
+  File "python/ray/_raylet.pyx", line 2072, in ray._raylet.CoreWorker.push_error
+  File "python/ray/_raylet.pyx", line 160, in ray._raylet.check_status
+ray.exceptions.RaySystemError: System error: Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 783, in ray._raylet.task_execution_handler
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/utils.py", line 117, in push_error_to_driver
+    worker.core_worker.push_error(job_id, error_type, message, time.time())
+  File "python/ray/_raylet.pyx", line 2072, in ray._raylet.CoreWorker.push_error
+  File "python/ray/_raylet.pyx", line 160, in ray._raylet.check_status
+ray.exceptions.RaySystemError: System error: Broken pipe
+Exception ignored in: 'ray._raylet.task_execution_handler'
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 783, in ray._raylet.task_execution_handler
+  File "/home/reza/anaconda3/lib/python3.8/site-packages/ray/_private/utils.py", line 117, in push_error_to_driver
+    worker.core_worker.push_error(job_id, error_type, message, time.time())
+  File "python/ray/_raylet.pyx", line 2072, in ray._raylet.CoreWorker.push_error
+  File "python/ray/_raylet.pyx", line 160, in ray._raylet.check_status
+ray.exceptions.RaySystemError: System error: Broken pipe
+[2022-01-12 12:55:07,270 E 11122 11432] gcs_server_address_updater.cc:76: Failed to receive the GCS address for 600 times without success. The worker will exit ungracefully. It is because GCS has died. It could be because there was an issue that kills GCS, such as high memory usage triggering OOM killer to kill GCS. Cluster will be highly likely unavailable if you see this log. Please check the log from gcs_server.err.

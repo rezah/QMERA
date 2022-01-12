@@ -1,0 +1,41 @@
+[2022-01-10 13:52:04,250 I 7143 7143] io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_redis_failure_detector.cc:30: Starting redis failure detector.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:42: Loading job table data.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:54: Loading node table data.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:66: Loading cluster resources table data.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:93: Loading actor table data.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:79: Loading placement group table data.
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:46: Finished loading job table data, size = 0
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:58: Finished loading node table data, size = 0
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:70: Finished loading cluster resources table data, size = 0
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:97: Finished loading actor table data, size = 0
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_init_data.cc:84: Finished loading placement group table data, size = 0
+[2022-01-10 13:52:04,251 I 7143 7143] gcs_heartbeat_manager.cc:30: GcsHeartbeatManager start, num_heartbeats_timeout=30
+[2022-01-10 13:52:04,265 I 7143 7143] grpc_server.cc:112: GcsServer server started, listening on port 44579.
+[2022-01-10 13:52:04,273 I 7143 7143] gcs_server.cc:339: Gcs server address = 131.215.21.210:44579
+[2022-01-10 13:52:04,273 I 7143 7143] gcs_server.cc:343: Finished setting gcs server address: 131.215.21.210:44579
+[2022-01-10 13:52:04,273 I 7143 7143] gcs_server.cc:531: GcsNodeManager: {RegisterNode request count: 0, DrainNode request count: 0, GetAllNodeInfo request count: 0, GetInternalConfig request count: 0}
+GcsActorManager: {RegisterActor request count: 0, CreateActor request count: 0, GetActorInfo request count: 0, GetNamedActorInfo request count: 0, GetAllActorInfo request count: 0, KillActor request count: 0, ListNamedActors request count: 0, Registered actors count: 0, Destroyed actors count: 0, Named actors count: 0, Unresolved actors count: 0, Pending actors count: 0, Created actors count: 0}
+GcsPlacementGroupManager: {CreatePlacementGroup request count: 0, RemovePlacementGroup request count: 0, GetPlacementGroup request count: 0, GetAllPlacementGroup request count: 0, WaitPlacementGroupUntilReady request count: 0, GetNamedPlacementGroup request count: 0, Scheduling pending placement group count: 0, Registered placement groups count: 0, Named placement group count: 0, Pending placement groups count: 0}
+GcsPubSub:
+- num channels subscribed to: 0
+- total commands queued: 0
+DefaultTaskInfoHandler: {AddTask request count: 0, GetTask request count: 0, AddTaskLease request count: 0, GetTaskLease request count: 0, AttemptTaskReconstruction request count: 0}
+GrpcBasedResourceBroadcaster: {Tracked nodes: 0}
+[2022-01-10 13:52:06,184 I 7143 7143] gcs_node_manager.cc:42: Registering node info, node id = 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803, address = 131.215.21.210
+[2022-01-10 13:52:06,184 I 7143 7143] gcs_node_manager.cc:47: Finished registering node info, node id = 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803, address = 131.215.21.210
+[2022-01-10 13:52:06,184 I 7143 7143] gcs_placement_group_manager.cc:722: A new node: 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803 registered, will try to reschedule all the infeasible placement groups.
+[2022-01-10 13:52:06,186 I 7143 7143] gcs_job_manager.cc:140: Getting all job info.
+[2022-01-10 13:52:06,186 I 7143 7143] gcs_job_manager.cc:146: Finished getting all job info.
+[2022-01-10 13:52:07,104 I 7143 7143] gcs_job_manager.cc:40: Adding job, job id = 01000000, driver pid = 7089
+[2022-01-10 13:52:07,104 I 7143 7143] gcs_job_manager.cc:54: Finished adding job, job id = 01000000, driver pid = 7089
+[2022-01-10 13:52:07,774 I 7143 7143] gcs_job_manager.cc:85: Finished marking job state, job id = 01000000
+[2022-01-10 13:52:07,922 I 7143 7143] gcs_node_manager.cc:66: Draining node info, node id = 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803
+[2022-01-10 13:52:07,922 I 7143 7143] gcs_node_manager.cc:188: Removing node, node id = 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803
+[2022-01-10 13:52:07,922 I 7143 7143] gcs_placement_group_manager.cc:697: Node 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803 failed, rescheduling the placement groups on the dead node.
+[2022-01-10 13:52:07,922 I 7143 7143] gcs_actor_manager.cc:797: Node 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803 failed, reconstructing actors.
+[2022-01-10 13:52:08,073 I 7143 7143] gcs_node_manager.cc:116: Raylet 71a44dc0bc956750474cb063e4163582c59d7e2c1c9f511d6359a803 is drained. Status IOError: . The information will be published to the cluster.
+[2022-01-10 13:52:08,135 I 7143 7143] gcs_server_main.cc:125: GCS server received SIGTERM, shutting down...
+[2022-01-10 13:52:08,135 I 7143 7143] gcs_server.cc:167: Stopping GCS server.
+[2022-01-10 13:52:08,139 I 7143 7143] gcs_server.cc:185: GCS server stopped.
+[2022-01-10 13:52:08,139 I 7143 7143] io_service_pool.cc:47: IOServicePool is stopped.

@@ -43,7 +43,7 @@ def    miniature_tn_():
   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four(phys_dim=phys_dim,chi=5,chi_p=6,chi_pp=6,cycle_u="False",data_type=data_type,dist_type=dist_type)
   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_three(phys_dim=phys_dim,chi=3,chi_p=8,chi_pp=7,depth_U=2,cycle_u="False",data_type=data_type,dist_type=dist_type)
 
-  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four_2d(phys_dim=phys_dim,chi=4,chi_p=5,chi_pp=5,
+  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four_2d(phys_dim=phys_dim,chi=12,chi_p=5,chi_pp=5,
                       cycle_u="False",data_type=data_type,dist_type=dist_type)
  
  
@@ -105,9 +105,9 @@ def    miniature_tn_():
   #optimizer_c='LD_TNEWTON_PRECOND_RESTART'
   #optimizer_c='LN_COBYLA'
 
-  #tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
+  tnopt_mera=quf.auto_diff_mera(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
   #tnopt_mera=quf.auto_diff_umps(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device)
-  tnopt_mera=quf.auto_diff_mera_parallel(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device, executor=executor, segment=segment, autodiff_backend=autodiff_backend)
+  #tnopt_mera=quf.auto_diff_mera_parallel(tn_U, list_sites,list_inter , opt, optimizer_c=optimizer_c, tags=[], jit_fn=jit_fn,  device=device, executor=executor, segment=segment, autodiff_backend=autodiff_backend)
 
 
 

@@ -6516,8 +6516,8 @@ def MiniatureTN_build_four_2d(phys_dim=2,chi=4,chi_p=4,chi_pp=4,data_type="float
    tags_U=[]
    tags_I=[]
    list_scale=[]
-   N_x = 16
-   N_y = 16
+   N_x = 8
+   N_y = 8
    N_z = 1
    list_sites, list_inter=Heis_local_Ham_open_3D_2D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2)
    list_sites, list_inter=Heis_local_Ham_open_3D_2D_O(N_x,N_y,N_z, data_type="float64", phys_dim=2)
@@ -6534,33 +6534,33 @@ def MiniatureTN_build_four_2d(phys_dim=2,chi=4,chi_p=4,chi_pp=4,data_type="float
 
    
    
-   T_unitary(tn_minat,N_x,N_y,N_z,n_layer,tags_U,list_scale,dist_type=dist_type,data_type=data_type, cycle="off")   
+   #T_unitary(tn_minat,N_x,N_y,N_z,n_layer,tags_U,list_scale,dist_type=dist_type,data_type=data_type, cycle="off")   
 
 
 
 
-   for i in range( int(np.log2(N_x))  ):
-     if i ==0:
-        print (i,i+1)
-        T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=4,chi_pp=4,depth_x=i,depth_y=i,
-                depth_z=0,data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
-        T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
-                data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
-     elif i <= int(np.log2(N_x))-2:
-        print (i,i+1)
-        T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i,depth_y=i,
-                data_type=data_type,depth_z=0,last_bond="off",dist_type=dist_type,scale_init=1)
-        T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
-                  data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
-     elif i==int(np.log2(N_x))-1:
-        print (i,i+1)
-        T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=i,depth_y=i,depth_z=0,
-                         dist_type=dist_type,data_type=data_type,scale_init=1)
+   # for i in range( int(np.log2(N_x))  ):
+   #   if i ==0:
+   #      print (i,i+1)
+   #      T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=4,chi_pp=4,depth_x=i,depth_y=i,
+   #              depth_z=0,data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+   #      T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
+   #              data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+   #   elif i <= int(np.log2(N_x))-2:
+   #      print (i,i+1)
+   #      T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i,depth_y=i,
+   #              data_type=data_type,depth_z=0,last_bond="off",dist_type=dist_type,scale_init=1)
+   #      T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
+   #                data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+   #   elif i==int(np.log2(N_x))-1:
+   #      print (i,i+1)
+   #      T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=i,depth_y=i,depth_z=0,
+   #                       dist_type=dist_type,data_type=data_type,scale_init=1)
                
 
 
-   #T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=0,depth_y=0,depth_z=0,
-   #                      dist_type=dist_type,data_type=data_type,scale_init=1)
+   T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=0,depth_y=0,depth_z=0,
+                         dist_type=dist_type,data_type=data_type,scale_init=1)
 
    list_scale=eliminate_dupl(list_scale)
    #tn_minat.unitize_(method=method_norm,allow_no_left_inds=True)

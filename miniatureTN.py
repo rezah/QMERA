@@ -15,11 +15,11 @@ def    miniature_tn_():
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=False
   phys_dim=2
-  chi=3
+  chi=5
   device='cpu'
   autodiff_backend="torch"
   executor =  RayExecutor()            #get_reusable_executor()  #   RayExecutor() #client_cpu  # #RayExecutor()  #get_reusable_executor()   #RayExecutor() #RayExecutor()  #None #ProcessPoolExecutor()
-  division_seg=8               # segment number of interaction list ~ #cpus
+  division_seg=16               # segment number of interaction list ~ #cpus
 #ray stop --force
 
 ####################################
@@ -28,7 +28,7 @@ def    miniature_tn_():
      progbar=True,
      minimize="combo-64", #  "combo-64",       #{'size', 'flops', 'combo'}, what to target
      #reconf_opts={}, 
-     max_repeats=2**9,
+     max_repeats=2**7,
      max_time=3600,
 #    max_time='rate:1e6',
      parallel=True,
@@ -39,9 +39,15 @@ def    miniature_tn_():
 
 
   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.dMERA_build(phys_dim=phys_dim,chi=chi,data_type=data_type,dist_type=dist_type)
-  #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build(phys_dim=phys_dim,chi=3,chi_p=7,cycle_u="False",data_type=data_type,dist_type=dist_type)
-  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four(phys_dim=phys_dim,chi=3,chi_p=6,chi_pp=7,cycle_u="False",data_type=data_type,dist_type=dist_type)
-  #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_three(phys_dim=phys_dim,chi=3,chi_p=4,chi_pp=4,depth_U=2,cycle_u="False",data_type=data_type,dist_type=dist_type)
+  #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build(phys_dim=phys_dim,chi=5,chi_p=10,cycle_u="False",data_type=data_type,dist_type=dist_type)
+  #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four(phys_dim=phys_dim,chi=5,chi_p=6,chi_pp=6,cycle_u="False",data_type=data_type,dist_type=dist_type)
+  #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_three(phys_dim=phys_dim,chi=3,chi_p=8,chi_pp=7,depth_U=2,cycle_u="False",data_type=data_type,dist_type=dist_type)
+
+  tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_four_2d(phys_dim=phys_dim,chi=4,chi_p=5,chi_pp=5,
+                      cycle_u="False",data_type=data_type,dist_type=dist_type)
+ 
+ 
+
   save_to_disk(method,"Store/method")
 ############################################################
 
@@ -65,8 +71,9 @@ def    miniature_tn_():
 
   #quf.expand_bond_MERA(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=12, rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
   #quf.expand_bond_Miniat(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=6, new_bond_dim_internal=7, rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
-  #quf.expand_bond_TN(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=12,chi_check=[4], rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
-  #quf.expand_bond_TN(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=6,chi_check=[12], rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
+  #quf.expand_bond_TN(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=5,chi_check=[12], rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
+  #quf.expand_bond_TN(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=4,chi_check=[], rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
+  #quf.expand_bond_TN(tn_U, list_tags_I,list_tags_U, method='pad',new_bond_dim=5,chi_check=[], rand_strength=0.00300,rand_strength_u=0.0030, data_type=data_type)    
   #quf.Plot_TN_3d_Miniature(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
 
 
@@ -75,7 +82,7 @@ def    miniature_tn_():
   #tn_U=quf.TN_to_iso(tn_U, list_tags_I,list_tags_U)
   print ( "chi_new", tn_U.max_bond()  )
   start_time = time.time()
-  print ("E_init_f=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt), "--- %s seconds ---" % (time.time() - start_time))
+  #print ("E_init_f=",quf.energy_f(tn_U, list_sites, list_inter,optimize=opt), "--- %s seconds ---" % (time.time() - start_time))
   #print ( "E_init=",quf.energy_mps(tn_U, list_sites, list_inter,optimize=opt) )
 
 
@@ -105,7 +112,7 @@ def    miniature_tn_():
 
 
 
-  tn_U = tnopt_mera.optimize(n=100 ,hessp=False, ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
+  tn_U = tnopt_mera.optimize(n=20 ,hessp=False, ftol= 2.220e-10, maxfun= 10e+9, gtol= 1e-12, eps= 1.49016e-08, maxls=400, iprint = 0, disp=False)
   #tn_U =  tnopt_mera.optimize_nlopt(400 ,ftol_rel= 2.220e-14)
 
   #print ( "Tensor", tn_U[list_tags_I[0]], tn_U[list_tags_I[0]].copy() )

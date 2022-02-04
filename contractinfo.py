@@ -9,7 +9,7 @@ def    cont_tn_2d():
   dist_type="normal"         #{'normal', 'uniform', 'exp'}
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=True
-  chi=[2,4,16,34,64,120,160,240,340]
+  chi=[2]
   device='cpu'
   phys_dim=2
   list_width_max=[]
@@ -25,7 +25,7 @@ def    cont_tn_2d():
      progbar=False,
      minimize='combo-64',       #{'size', 'flops', 'combo'}, what to target
      #reconf_opts={}, 
-     max_repeats=2**5,
+     max_repeats=2**8,
      max_time=3600,
 #    max_time='rate:1e6',
      parallel=True,
@@ -40,8 +40,11 @@ def    cont_tn_2d():
   #tn_U.unitize_(method=method, allow_no_left_inds=True)
   #tn_U=load_from_disk("Store/tn_U")
   for i in chi:
-   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
+   #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(chi=i,data_type=data_type,dist_type=dist_type)
    #tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build_3d(phys_dim=phys_dim,chi=i,data_type=data_type,dist_type=dist_type)
+   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.MiniatureTN_build_three(phys_dim=phys_dim,chi=3,chi_p=5,chi_pp=5,depth_U=2,cycle_u="False",data_type=data_type,dist_type=dist_type)
+   tn_U=load_from_disk("Store/tn_UX5XP9XP9")
+   quf.Plot_TN_3d_Miniature(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
 
    #save_to_disk(method,"Store/method")
  ############################################################

@@ -20,7 +20,7 @@ def    mera_tn_2d():
   method="mgs"           #svd, qr, mgs, exp
   jit_fn=False
   phys_dim=2
-  chi=16
+  chi=8
   device='cpu'
   autodiff_backend="torch"
   executor =  get_reusable_executor()          #get_reusable_executor()  #   RayExecutor() #client_cpu  # #RayExecutor()  #get_reusable_executor()   #RayExecutor() #RayExecutor()  #None #ProcessPoolExecutor()
@@ -44,10 +44,13 @@ def    mera_tn_2d():
 
 
   tn_U,list_sites, list_inter,list_tags_I, list_tags_U,list_scale=quf.Tn_mera_build(
-  phys_dim=phys_dim,
-  chi=chi,
-  data_type=data_type,
-  dist_type=dist_type)
+     phys_dim=phys_dim,
+     chi=chi,
+     data_type=data_type,
+     dist_type=dist_type)
+
+
+
   save_to_disk(method,"Store/method")
 ############################################################
 
@@ -57,7 +60,7 @@ def    mera_tn_2d():
   #tn_U.astype_(data_type)
   quf.change_datatype(tn_U, data_type)
   #width_max, flops_max=quf.Info_contract(tn_U,list_sites,data_type=data_type,opt=opt)  
-  #quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
+  quf.Plot_TN(tn_U,list_scale,list_tags_I, list_tags_U,phys_dim)
 
 
   #start_time = time.time()

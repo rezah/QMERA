@@ -1163,7 +1163,84 @@ def Heis_local_Ham_open_3D_1D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2):
 
 
 
+
  return list_sites, list_inter
+
+
+
+
+
+
+
+def Heis_local_Ham_open_3D_2D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2):
+
+ list_sites=[]
+ list_inter=[]
+ ##print (qu.ham_heis(2))
+ if phys_dim==2:
+   h_h=qu.ham_heis(2).astype(data_type)
+ else:
+   h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+   h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
+
+
+ for i in range(N_x): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+
+    list_sites.append( [ ( i,j,k), ( (i+1)% N_x,j,k) ]   )
+    list_inter.append( h_h )
+
+
+ for i in range(N_x): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+
+    list_sites.append( [ ( i,j,k), ( i,(j+1)% N_y,k) ]   )
+    list_inter.append( h_h )
+
+ return list_sites, list_inter
+
+
+
+
+
+
+
+def Heis_local_Ham_open_3D_2D_O(N_x,N_y,N_z, data_type="float64", phys_dim=2):
+
+ list_sites=[]
+ list_inter=[]
+ ##print (qu.ham_heis(2))
+ if phys_dim==2:
+   h_h=qu.ham_heis(2).astype(data_type)
+ else:
+   h_h=np.eye(phys_dim*phys_dim).astype(data_type)
+   h_h=qu.randn((phys_dim, phys_dim, phys_dim, phys_dim),dtype=data_type, dist="uniform", seed=10)
+
+
+ for i in range(N_x-1): 
+  for j in range(N_y): 
+   for k in range(N_z): 
+
+    list_sites.append( [ ( i,j,k), ( i+1,j,k) ]   )
+    list_inter.append( h_h )
+
+
+ for i in range(N_x): 
+  for j in range(N_y-1): 
+   for k in range(N_z): 
+
+    list_sites.append( [ ( i,j,k), ( i,j+1,k) ]   )
+    list_inter.append( h_h )
+
+ return list_sites, list_inter
+
+
+
+
+
+
 
 
 
@@ -1369,6 +1446,14 @@ def uni_xy_44_s(tn_U, N_x_l, N_y_l, chi, num_layer, list_tags_U,label_listU, sha
           shift_x=1, shift_y=3,
           dis_x=4, dis_y=4, 
           cycle=cycle,seed_val=seed_val,data_type=data_type,scale=scale,label=label_listU[0],dist_type=dist_type)
+
+
+
+
+
+
+
+
 
 
 
@@ -4551,7 +4636,7 @@ def  Plot_TN_3d_Miniature(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
   }
 
   #fix.update(fix1)
-  #fix.update(fix2)
+  fix.update(fix2)
   #fix.update(fix3)
 
   #print (tn_U)
@@ -4585,7 +4670,7 @@ def  Plot_TN_3d_Miniature(tn_U,list_scale,list_tags_I, list_tags_U, phys_dim):
   #print (list_scale)
   
   tn.draw( color=list_scale,
-  #fix=fix, 
+  fix=fix, 
   iterations=200, 
   figsize=(60, 60),  
   return_fig=True,
@@ -5188,13 +5273,19 @@ def  Tn_mera_build_3d(chi=4,data_type='float64', dist_type="uniform", phys_dim=2
 
 
 
+
+
+
+
+
+
 def  Tn_mera_build( chi=6, data_type='float64', dist_type="uniform", phys_dim=2 ):
 
 
   data_type=data_type
   num_layers = 2
-  N_x=4*3*2
-  N_y=4*3*2
+  N_x=4*2
+  N_y=4*2
   print ("N_x, N_y", N_x, N_y, "chi", chi)
 
   #N_x=9
@@ -5204,11 +5295,11 @@ def  Tn_mera_build( chi=6, data_type='float64', dist_type="uniform", phys_dim=2 
 
   tn_U = TN2DUni.empty(N_x, N_y, phys_dim=phys_dim,data_type=data_type)
   list_sites, list_inter = Heis_local_Ham_open(N_x,N_y,data_type=data_type,phys_dim=phys_dim)
-  list_sites, list_inter = Heis_local_Ham_open_long(N_x,N_y,data_type=data_type,phys_dim=phys_dim,alpha=3, phi=pi/6,theta=pi/6,N_interval=1000)
+  #list_sites, list_inter = Heis_local_Ham_open_long(N_x,N_y,data_type=data_type,phys_dim=phys_dim,alpha=3, phi=pi/6,theta=pi/6,N_interval=1000)
   save_to_disk(list_sites,"Store/list_sites")
   save_to_disk(list_inter,"Store/list_inter")
-  #list_sites=load_from_disk("Store/list_sites12")
-  #list_inter=load_from_disk("Store/list_inter12")
+  list_sites=load_from_disk("Store/list_sites8")
+  list_inter=load_from_disk("Store/list_inter8")
 
 
   #print (len( list_inter), len(list_sites) )
@@ -5248,9 +5339,9 @@ def  Tn_mera_build( chi=6, data_type='float64', dist_type="uniform", phys_dim=2 
             shared_U,
             list_scale,
             scale=0,
-            uni_h="off",
+            uni_h="on",
             uni_top="off",
-            uni_h_full="on",
+            uni_h_full="off",
             uni_h_Iso="off",
             last_bond="off",
             cycle="off",
@@ -5299,20 +5390,20 @@ def  Tn_mera_build( chi=6, data_type='float64', dist_type="uniform", phys_dim=2 
 
   
   #uni_xy_22_Iso( tn_U, N_x//16, N_y//16, chi, num_layer, list_tags_U,label_listU,shared_U,list_scale, scale=2,seed_val=10, cycle="off", data_type=data_type,dist_type=dist_type)
-  #Iso_22(tn_U, N_x//4, N_y//4,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=2,seed_val=10, last_bond="on",data_type=data_type, Iso=True,dist_type=dist_type)
+  Iso_22(tn_U, N_x//4, N_y//4,chi,num_layer, list_tags_I,label_list,shared_I,list_scale,scale=2,seed_val=10, last_bond="on",data_type=data_type, Iso=True,dist_type=dist_type)
 
 
 ########################
-  Iso_33_11(tn_U, N_x//4, N_y//4,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
-   scale=1,
-   uni_h="off",
-   uni_h_full="off",
-   last_bond="on",
-   cycle="off",
-   data_type=data_type, 
-   Iso=True,
-   Iso_apply="on",
-   dist_type=dist_type)
+#   Iso_33_11(tn_U, N_x//4, N_y//4,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
+#    scale=1,
+#    uni_h="off",
+#    uni_h_full="off",
+#    last_bond="on",
+#    cycle="off",
+#    data_type=data_type, 
+#    Iso=True,
+#    Iso_apply="on",
+#    dist_type=dist_type)
 # 
 #   Iso_33_11(tn_U, N_x//3, N_y//3,chi,num_layer,list_tags_U,list_tags_I,shared_I,shared_U,list_scale,
 #   scale=1,
@@ -5566,7 +5657,7 @@ def dMERA_build(phys_dim=2,chi=4,data_type="float64",dist_type="uniform"):
    N_y = 1
    N_z = 1
    list_sites, list_inter=Heis_local_Ham_open_3D_1D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2)
-   #list_sites, list_inter=Heis_local_Ham_open_3D_1D_P_long(N_x,N_y,N_z, data_type="float64", phys_dim=2)
+   list_sites, list_inter=Heis_local_Ham_open_3D_1D_P_long(N_x,N_y,N_z, data_type="float64", phys_dim=2)
 
    n_layer=[0,0]
    tn_mera = TN3DUni.empty( N_x, N_y, N_z, phys_dim=2 )
@@ -5667,12 +5758,12 @@ def MiniatureTN_build(phys_dim=2,chi=4,chi_p=4,chi_p_0=16,data_type="float64",di
    for depth in range( 0, int(np.log2(N_x_new))):
             N_x_l=N_x_new//2**depth
             for i in range(0,N_x_l,4):       
-                        where=[ ( (i+2)%N_x_l,0,0),( (i+3)%N_x_l,0,0) ]
-                        if depth<=int(np.log2(N_x_new))-2:            
-                              apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=depth+depth_init)
-                        where=[ ( (i+4)%N_x_l,0,0),( (i+5)%N_x_l,0,0) ]
-                        if depth<=int(np.log2(N_x_new))-2:            
-                              apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=depth+depth_init)
+                        #where=[ ( (i+2)%N_x_l,0,0),( (i+3)%N_x_l,0,0) ]
+                        #if depth<=int(np.log2(N_x_new))-2:            
+                        #      apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=depth+depth_init)
+                        #where=[ ( (i+4)%N_x_l,0,0),( (i+5)%N_x_l,0,0) ]
+                        #if depth<=int(np.log2(N_x_new))-2:            
+                        #      apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=depth+depth_init)
                         where=[ ( (i+3)%N_x_l,0,0),( (i+4)%N_x_l,0,0) ]
                         if depth<=int(np.log2(N_x_new))-2:            
                               apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=depth+depth_init)
@@ -5889,11 +5980,6 @@ def MiniatureTN_build_four(phys_dim=2,chi=4,chi_p=4,chi_pp=4,data_type="float64"
                      apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth+depth_init, chi_out=chi_out,seed_val=i)
                      #print ("I_f",depth,N_x_l, where_in)
                
-               
-               
-               
-               
-               
 
 
    list_scale=eliminate_dupl(list_scale)
@@ -5903,7 +5989,583 @@ def MiniatureTN_build_four(phys_dim=2,chi=4,chi_p=4,chi_pp=4,data_type="float64"
 
 
 
+def   T_x_universal(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,chi_pp=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off" ):
 
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+
+
+
+   if  N_x_l<8:
+       print ( f"warning, coarse-grainging need more site, curruntly it is {N_x_l}"  )
+
+   for k in range(0,N_z_l):   
+    for j in range(0,N_y_l):
+      for i in range(0,N_x_l,8):
+            index_map={}
+            where_in=[ (i,j,k),(i+1,j,k) ]
+            where_out=[ (-20,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i+2,j,k),(i+3,j,k) ]
+            where_out=[ (-40,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+            where_in=[ (i+4,j,k),(i+5,j,k) ]
+            where_out=[ (-60,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i+6,j,k),(i+7,j,k) ]
+            where_out=[ (-80,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (-20,j,k),(-40,j,k) ]
+
+            if last_bond=="off":
+                  where_out=[ (i,j,k),(-100,j,k) ]
+                  chi_out=[ chi,chi_pp ]
+            elif last_bond=="on":
+                  where_out=[ (-100,j,k) ]
+                  chi_out=[ chi_pp ]
+
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (-60,j,k),(-80,j,k) ]
+
+            if last_bond=="off":
+              where_out=[ (-200,j,k),(i+3,j,k) ]
+              chi_out=[ chi_pp, chi ]
+            elif last_bond=="on":
+              where_out=[ (-200,j,k) ]
+              chi_out=[ chi_pp ]
+
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+            
+            where_in=[ (-100,j,k),(-200,j,k) ]
+            if last_bond=="off":
+               where_out=[ (i+1,j,k),(i+2,j,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            index_map[f"l{i},{j},{k}"] =f"l{i-(i+1)//2},{j},{k}" 
+            index_map[f"l{i+1},{j},{k}"] =f"l{i+1-(i+1)//2},{j},{k}" 
+            index_map[f"l{i+2},{j},{k}"] =f"l{i+2-(i+1)//2},{j},{k}" 
+            index_map[f"l{i+3},{j},{k}"] =f"l{i+3-(i+1)//2},{j},{k}" 
+            tn_minat.reindex_(index_map)
+
+
+
+
+
+
+
+
+def   T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,chi_pp=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off"
+                       ,data_type="float64",dist_type="uniform",scale_init=1 ):
+
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+
+
+
+   if  N_x_l<4:
+       print ( f"warning, coarse-grainging need more site, curruntly it is {N_x_l}"  )
+
+   for k in range(0,N_z_l):   
+    for j in range(0,N_y_l,2):
+      for i in range(0,N_x_l,4):
+            #print (i,j,k)
+            index_map={}
+            where_in=[ (i,j,k),(i,j+1,k) ]
+            where_out=[ (-20,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,
+                    dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (i+1,j,k),(i+1,j+1,k) ]
+            where_out=[ (-40,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,
+                    dist_type=dist_type,data_type=data_type)
+            
+            where_in=[ (i+2,j,k),(i+2,j+1,k) ]
+            where_out=[ (-60,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (i+3,j,k),(i+3,j+1,k) ]
+            where_out=[ (-80,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (-20,j,k),(-40,j,k) ]
+
+            if last_bond=="off":
+                  where_out=[ (i,j,k),(-100,j,k) ]
+                  chi_out=[ chi,chi_pp ]
+            elif last_bond=="on":
+                  where_out=[ (-100,j,k) ]
+                  chi_out=[ chi_pp ]
+
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (-60,j,k),(-80,j,k) ]
+            if last_bond=="off":
+              where_out=[ (-200,j,k),(i+1,j,k) ]
+              chi_out=[ chi_pp, chi ]
+            elif last_bond=="on":
+              where_out=[ (-200,j,k) ]
+              chi_out=[ chi_pp ]
+
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+            
+            
+            where_in=[ (-100,j,k),(-200,j,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j+1,k),(i+1,j+1,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+            index_map[f"l{i},{j},{k}"] =f"l{i-i//2},{j},{k}" 
+            index_map[f"l{i+1},{j},{k}"] =f"l{i+1-i//2},{j},{k}" 
+            index_map[f"l{i},{j+1},{k}"] =f"l{i-i//2},{j+1},{k}" 
+            index_map[f"l{i+1},{j+1},{k}"] =f"l{i+1-i//2},{j+1},{k}" 
+            tn_minat.reindex_(index_map)
+            #print (index_map)
+
+
+
+
+
+def   T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,chi_pp=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off",
+                       data_type="float64",dist_type="uniform",scale_init=1):
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+
+   if  N_y_l<4:
+       print ( f"warning, coarse-grainging need more site, curruntly it is {N_y_l}"  )
+
+   for k in range(0,N_z_l):   
+    for i in range(0,N_x_l,2):
+     for j in range(0,N_y_l,4):
+            index_map={}
+            where_in=[ (i,j,k),(i,j+1,k) ]
+            where_out=[ (i,-20,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (i+1,j,k),(i+1,j+1,k) ]
+            where_out=[ (i,-40,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+            
+            where_in=[ (i,j+2,k),(i,j+3,k) ]
+            where_out=[ (i,-60,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (i+1,j+2,k),(i+1,j+3,k) ]
+            where_out=[ (i,-80,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+            where_in=[ (i,-20,k),(i,-40,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j,k),(i,-100,k) ]
+               chi_out=[ chi,chi_pp ]
+            elif last_bond=="on":
+               where_out=[ (i,-100,k) ]
+               chi_out=[ chi_pp ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+
+
+
+            where_in=[ (i,-60,k),(i,-80,k) ]
+            if last_bond=="off":
+             where_out=[ (i,-200,k),(i+1,j+1,k) ]
+             chi_out=[ chi_pp,chi ]
+            elif last_bond=="on":
+              where_out=[ (i,-200,k) ]
+              chi_out=[ chi_pp ]
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+            
+            
+            where_in=[ (i,-100,k),(i,-200,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j+1,k),(i+1,j,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y+scale_init, chi_out=chi_out,seed_val=i,dist_type=dist_type,data_type=data_type)
+            index_map[f"l{i},{j},{k}"] =f"l{i},{j-j//2},{k}" 
+            index_map[f"l{i},{j+1},{k}"] =f"l{i},{j+1-j//2},{k}" 
+            index_map[f"l{i+1},{j},{k}"] =f"l{i+1},{j-j//2},{k}" 
+            index_map[f"l{i+1},{j+1},{k}"] =f"l{i+1},{j+1-j//2},{k}" 
+
+            tn_minat.reindex_(index_map)
+            #print ("I",depth_x+depth_y,N_y_l, index_map)
+
+
+
+
+
+
+
+
+
+
+def   T_y_universal(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,chi_pp=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off"):
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+
+   if  N_y_l<8:
+       print ( f"warning, coarse-grainging need more site, curruntly it is {N_y_l}"  )
+
+   for k in range(0,N_z_l):   
+    for i in range(0,N_x_l):
+     for j in range(0,N_y_l,8):
+            index_map={}
+            where_in=[ (i,j,k),(i,j+1,k) ]
+            where_out=[ (i,-20,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i,j+2,k),(i,j+3,k) ]
+            where_out=[ (i,-40,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+            where_in=[ (i,j+4,k),(i,j+5,k) ]
+            where_out=[ (i,-60,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i,j+6,k),(i,j+7,k) ]
+            where_out=[ (i,-80,0) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i,-20,k),(i,-40,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j,k),(i,-100,k) ]
+               chi_out=[ chi,chi_pp ]
+            elif last_bond=="on":
+               where_out=[ (i,-100,k) ]
+               chi_out=[ chi_pp ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+
+
+            where_in=[ (i,-60,k),(i,-80,k) ]
+            if last_bond=="off":
+             where_out=[ (i,-200,k),(i,j+3,k) ]
+             chi_out=[ chi_pp,chi ]
+            elif last_bond=="on":
+              where_out=[ (i,-200,k) ]
+              chi_out=[ chi_pp ]
+
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+            
+            where_in=[ (i,-100,k),(i,-200,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j+1,k),(i,j+2,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            index_map[f"l{i},{j},{k}"] =f"l{i},{j-(j+1)//2},{k}" 
+            index_map[f"l{i},{j+1},{k}"] =f"l{i},{j+1-(j+1)//2},{k}" 
+            index_map[f"l{i},{j+2},{k}"] =f"l{i},{j+2-(j+1)//2},{k}" 
+            index_map[f"l{i},{j+3},{k}"] =f"l{i},{j+3-(j+1)//2},{k}" 
+
+            tn_minat.reindex_(index_map)
+            #print ("I",depth_x+depth_y,N_y_l, index_map)
+
+
+
+
+
+
+
+
+def   T_x_universal_s(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off" ):
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+
+   if  N_x_l<4:
+       print ( f"warning, coarse-grainging need more site, curruntly it is {N_x_l}"  )
+
+   for k in range(0,N_z_l):
+    for j in range(0,N_y_l):
+      for i in range(0,N_x_l,4):
+            index_map={}
+            where_in=[ (i,j,k),(i+1,j,k) ]
+            where_out=[ (-20,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i+2,j,k),(i+3,j,k) ]
+            where_out=[ (-40,j,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+
+            where_in=[ (-20,j,k),(-40,j,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j,k),(i+1,j,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            
+            
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            index_map[f"l{i},{j},{k}"] =f"l{i-(i+1)//2},{j},{k}" 
+            index_map[f"l{i+1},{j},{k}"] =f"l{i+1-(i+1)//2},{j},{k}" 
+            tn_minat.reindex_(index_map)
+            #print ("I",depth_x+depth_y,N_x_l, index_map)
+
+
+def   T_y_universal_s(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,chi_p=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off" ):
+   N_x_l=N_x//2**depth_x
+   N_y_l=N_y//2**depth_y
+   N_z_l=N_z//2**depth_z
+
+   print ("N_x,N_y,N_z",N_x_l, N_y_l, N_z_l)
+
+   if  N_y_l<4:
+      print ( f"warning, coarse-grainging need more site, curruntly it is {N_y_l}"  )
+
+   for k in range(0,N_z_l):
+    for i in range(0,N_x_l):
+      for j in range(0,N_y_l,4):
+            index_map={}
+            where_in=[ (i,j,k),(i,j+1,k) ]
+            where_out=[ (i,-20,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+
+            where_in=[ (i,j+2,k),(i,j+3,k) ]
+            where_out=[ (i,-40,k) ]
+            chi_out=[ chi_p ]
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I,list_scale,scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            
+
+            where_in=[ (i,-20,k),(i,-40,k) ]
+            if last_bond=="off":
+               where_out=[ (i,j,k),(i,j+1,k) ]
+               chi_out=[ chi,chi ]
+            elif last_bond=="on":
+               where_out=[]
+               chi_out=[]
+            
+            
+            apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth_x+depth_y, chi_out=chi_out,seed_val=i)
+            index_map[f"l{i},{j},{k}"] =f"l{i},{j-(j+1)//2},{k}" 
+            index_map[f"l{i},{j+1},{k}"] =f"l{i},{j+1-(j+1)//2},{k}" 
+            tn_minat.reindex_(index_map)
+            #print ("I",depth_x+depth_y,N_x_l, index_map)
+
+
+
+
+def   T_universal_f_2d(tn_mera, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off",
+                       dist_type="uniform",data_type="float64",scale_init=1 ):
+   N_y=N_y//2**depth_y
+   N_x=N_x//2**depth_x
+   N_z=N_z//2**depth_z
+   total_depth=int(np.log2(N_x))   
+   
+   print ("N_x,N_y,N_z",N_x, N_y, N_z)
+   
+   for depth in range( total_depth ):
+      N_x_l=N_x//2**depth
+      N_y_l=N_y//2**depth
+      #print (2**(2*depth+2*(depth_x+depth_y)+2),chi)
+      for i in range(0,N_x_l,2):
+           for j in range(N_y_l):
+                  index_map={}
+                  where_in=[ (i,j,0),(i+1,j,0) ]
+                  where_out=[ (i,j,0) ]
+                  chi_out=[ min(2**(4*depth+2*(depth_x+depth_y)+2),chi) ]
+                  apply_I(tn_mera,where_in,where_out, n_layer,tags_I, list_scale,scale=depth_x+depth_y+depth+scale_init,chi_out=chi_out,seed_val=i+10,dist_type=dist_type,data_type=data_type)
+                  index_map[f"l{i},{j},{0}"] =f"l{i-(i+1)//2},{j},{0}" 
+                  tn_mera.reindex_(index_map)
+
+      for j in range(0,N_y_l,2):
+           for i in range(N_x_l//2):
+
+                  index_map={}
+                  where_in=[ (i,j,0),(i,j+1,0) ]
+                  if depth<total_depth-1:
+                        where_out=[ (i,j,0) ]
+                        chi_out=[ min(2**(4*depth+2*(depth_x+depth_y)+4),chi) ]
+                  else:
+                        where_out=[]
+                        chi_out=[]
+
+                  apply_I(tn_mera,where_in,where_out, n_layer,tags_I, list_scale,scale=depth_x+depth_y+depth+scale_init,chi_out=chi_out,seed_val=i+10,dist_type=dist_type,data_type=data_type)
+                  index_map[f"l{i},{j},{0}"] =f"l{i},{j-(j+1)//2},{0}" 
+                  tn_mera.reindex_(index_map)
+
+
+
+def   T_universal_f_1d(tn_mera, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=2,depth_x=0,depth_y=0,depth_z=0,last_bond="off",dist_type="uniform",data_type="float64" ):
+   N_y=N_y//2**depth_y
+   N_x=N_x//2**depth_x
+   N_z=N_z//2**depth_z
+   total_depth=int(np.log2(N_x))   
+   
+   print ("N_x,N_y,N_z",N_x, N_y, N_z)
+   
+   for depth in range( total_depth ):
+      N_x_l=N_x//2**depth
+      for i in range(0,N_x_l,2):
+                  index_map={}
+                  where_in=[ (i,0,0),(i+1,0,0) ]
+                  if depth<total_depth-1:
+                        where_out=[ (i,0,0) ]
+                        chi_out=[ min(2**(2*depth+2),chi) ]
+                  else:
+                        where_out=[]
+                        chi_out=[]
+
+                  apply_I(tn_mera,where_in,where_out, n_layer,tags_I, list_scale,scale=depth_x+depth_y+depth,chi_out=chi_out,seed_val=i+10,dist_type=dist_type,data_type=data_type)
+                  index_map[f"l{i},{0},{0}"] =f"l{i-(i+1)//2},{0},{0}" 
+                  tn_mera.reindex_(index_map)
+
+
+
+
+def     T_unitary(tn_minat,N_x,N_y,N_z,n_layer,tags_U,list_scale,dist_type="uniform",data_type="float64", cycle="off"):   
+
+   if cycle=="on":
+      for i in range(0,N_x,4):
+         for j in range(0,N_y):
+            where=[ ( (i+3)%N_x,j,0),( (i+4)%N_x,j,0) ]
+            apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=0,dist_type=dist_type,data_type=data_type)
+
+      for j in range(0,N_y,4):
+         for i in range(0,N_x):
+            where=[ ( i,(j+3)%N_y,0),( i,(j+4)%N_y,0) ]
+            apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=0,dist_type=dist_type,data_type=data_type)
+   elif cycle=="off":
+      for i in range(0,N_x-4,4):
+         for j in range(0,N_y):
+            where=[ ( (i+3),j,0),( (i+4),j,0) ]
+            apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=0,dist_type=dist_type,data_type=data_type)
+
+      for j in range(0,N_y-4,4):
+         for i in range(0,N_x):
+            where=[ ( i,(j+3),0),( i,(j+4),0) ]
+            apply_U(tn_minat,where,where, n_layer,tags_U,list_scale,scale=0,dist_type=dist_type,data_type=data_type)
+
+
+
+
+
+
+
+
+
+
+
+
+def MiniatureTN_build_four_2d(phys_dim=2,chi=4,chi_p=4,chi_pp=4,data_type="float64",dist_type="uniform",cycle_u="False"):
+
+########################################Binary-MERA#################################
+   tags_U=[]
+   tags_I=[]
+   list_scale=[]
+   N_x = 16
+   N_y = 16
+   N_z = 1
+   list_sites, list_inter=Heis_local_Ham_open_3D_2D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2)
+   list_sites, list_inter=Heis_local_Ham_open_3D_2D_O(N_x,N_y,N_z, data_type="float64", phys_dim=2)
+   #list_sites, list_inter=Heis_local_Ham_open_3D_1D_P_long(N_x,N_y,N_z, data_type="float64", phys_dim=2)
+   #list_sites, list_inter=Heis_local_Ham_open_3D_1D_P(N_x,N_y,N_z, data_type="float64", phys_dim=2)
+
+
+
+   n_layer=[0,0]
+   tn_minat = TN3DUni.empty( N_x, N_y, N_z, phys_dim=2 )
+
+   total_depth=int(np.log2(N_x))
+   print ("N_x, N_y, N_z", N_x, N_y, N_z, "chi", chi, "chi_p", chi_p,"chi_pp", chi_pp)
+
+   
+   
+   T_unitary(tn_minat,N_x,N_y,N_z,n_layer,tags_U,list_scale,dist_type=dist_type,data_type=data_type, cycle="off")   
+
+
+
+
+   for i in range( int(np.log2(N_x))  ):
+     if i ==0:
+        print (i,i+1)
+        T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=4,chi_pp=4,depth_x=i,depth_y=i,
+                depth_z=0,data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+        T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
+                data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+     elif i <= int(np.log2(N_x))-2:
+        print (i,i+1)
+        T_x_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i,depth_y=i,
+                data_type=data_type,depth_z=0,last_bond="off",dist_type=dist_type,scale_init=1)
+        T_y_universal_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,chi_p=chi_p,chi_pp=chi_pp,depth_x=i+1,depth_y=i,depth_z=0,
+                  data_type=data_type,last_bond="off",dist_type=dist_type,scale_init=1)
+     elif i==int(np.log2(N_x))-1:
+        print (i,i+1)
+        T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=i,depth_y=i,depth_z=0,
+                         dist_type=dist_type,data_type=data_type,scale_init=1)
+               
+
+
+   #T_universal_f_2d(tn_minat, n_layer,tags_I,list_scale,N_x,N_y,N_z,chi=chi,depth_x=0,depth_y=0,depth_z=0,
+   #                      dist_type=dist_type,data_type=data_type,scale_init=1)
+
+   list_scale=eliminate_dupl(list_scale)
+   #tn_minat.unitize_(method=method_norm,allow_no_left_inds=True)
+
+   return  tn_minat,list_sites, list_inter,tags_I, tags_U,list_scale
 
 
 
@@ -6010,19 +6672,19 @@ cycle_u="False", depth_U=2):
 
                      where_in=[ (i+2,0,0),(-20,0,0) ]
                      where_out=[ (i,0,0),(-100,0,0) ]
-                     chi_out=[ 4,2 ]
+                     chi_out=[ 3,2 ]
                      apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth+depth_init, chi_out=chi_out,seed_val=i)
 
                      where_in=[ (i+3,0,0),(-60,0,0) ]
                      where_out=[ (-200,0,0),(i+2,0,0) ]
-                     chi_out=[ 2,4 ]
+                     chi_out=[ 2,3 ]
                      apply_I(tn_minat,where_in,where_out, n_layer,tags_I, list_scale, scale=depth+depth_init, chi_out=chi_out,seed_val=i)
                      
                      
                      where_in=[ (-100,0,0),(-200,0,0) ]
                      if depth<int(np.log2(N_x_new))-1:
                         where_out=[ (i+1,0,0) ]
-                        chi_out=[ 4 ]
+                        chi_out=[ 3 ]
                      else:
                         where_out=[]
                         chi_out=[]
